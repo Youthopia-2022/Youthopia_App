@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:youthopia_2022_app/screens/home.dart';
+import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: NavBarScreen(),
     );
   }
 }
