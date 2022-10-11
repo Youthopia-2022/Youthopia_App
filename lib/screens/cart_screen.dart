@@ -12,11 +12,14 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [
-          const Center(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Center(
             child: Text("CART SCREEN"),
           ),
-          Image.network("https://unsplash.com/photos/L8OnHwhCEE0")
+          FlutterLogo(
+            size: 50 ,
+          )
         ],
       ),
     );

@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:youthopia_2022_app/screens/login_screen.dart';
+import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset : false,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           // Positioned.fill(
@@ -102,7 +102,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   Container(
                     padding:
-                    const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+                        const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
                     decoration: const BoxDecoration(color: Colors.black54),
                     child: const TextField(
                       style: TextStyle(fontSize: 20, color: Colors.grey),
@@ -126,8 +126,8 @@ class _SignUpState extends State<SignUp> {
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Login()),
-                            (Route<dynamic> route) => false,
+                            builder: (context) => const NavBarScreen()),
+                        (Route<dynamic> route) => false,
                       );
                     },
                     minWidth: double.maxFinite,
