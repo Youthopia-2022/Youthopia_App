@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youthopia_2022_app/screens/login_screen.dart';
 import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: NavBarScreen(),
+      home: Login(),
     );
   }
 }
