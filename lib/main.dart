@@ -1,16 +1,17 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:youthopia_2022_app/screens/login_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    DevicePreview(
+
+      //! Uncomment to enable Device Preview
+/*     DevicePreview(
       enabled: !kReleaseMode,
       builder: (context) => const MyApp(), // Wrap your app
-    ),
-  );
+    ), */
+
+      const MyApp());
 }
 
 class MyApp extends StatelessWidget {
