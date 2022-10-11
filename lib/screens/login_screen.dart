@@ -42,7 +42,7 @@ class _LoginState extends State<Login> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
-                    height: 150,
+                    height: 100,
                   ),
                   const Text(
                     "Youthopia 2022",
