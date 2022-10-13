@@ -36,6 +36,7 @@ dependencies:
   font_awesome_flutter: ^10.2.1
   google_nav_bar: ^5.0.6
   line_icons: ^2.0.1
+  supabase: ^0.3.6
 
 dev_dependencies:
   flutter_lints: ^2.0.0
