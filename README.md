@@ -9,3 +9,4 @@
     Bottom NavBar for navigating Tabs
     Login Page
     Signup Page
+    Splash Screen
