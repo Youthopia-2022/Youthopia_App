@@ -90,8 +90,8 @@ class _SignUpState extends State<SignUp> {
                           validator: (String? value){
                             return value==null ||  value.isEmpty ? "Name can't be empty" : null;
                           },
-                          onSaved: (String? value){
-                            _name = value!;
+                          onChanged: (String value){
+                            _name = value;
                           },
                           style: const TextStyle(fontSize: 20, color: Colors.grey),
                           decoration: const InputDecoration(
@@ -121,8 +121,8 @@ class _SignUpState extends State<SignUp> {
                               return 'Enter valid Email';
                             }
                           },
-                          onSaved: (String? value){
-                            _email = value!;
+                          onChanged: (String value){
+                            _email = value;
                           },
                           style: const TextStyle(fontSize: 20, color: Colors.grey),
                           decoration: const InputDecoration(
@@ -152,8 +152,8 @@ class _SignUpState extends State<SignUp> {
                           }
                           return null;
                         },
-                        onSaved: (String? value){
-                          _password = value!;
+                        onChanged: (String value){
+                          _password = value;
                         },
                         style: const TextStyle(fontSize: 20, color: Colors.grey),
                         decoration: const InputDecoration(
@@ -202,6 +202,8 @@ class _SignUpState extends State<SignUp> {
                     ),
                     MaterialButton(
                       onPressed: () async {
+                        debugPrint(_password);
+                        debugPrint(_email);
                         if(_formKey.currentState!.validate())
                           {
                             final res = await supabaseHandler.createNewUser(
