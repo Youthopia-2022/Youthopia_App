@@ -37,6 +37,7 @@ dependencies:
   google_nav_bar: ^5.0.6
   line_icons: ^2.0.1
   supabase: ^0.3.6
+  email_validator: ^2.1.17
 
 dev_dependencies:
   flutter_lints: ^2.0.0
