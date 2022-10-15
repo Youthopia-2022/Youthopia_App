@@ -1,11 +1,12 @@
 import 'package:supabase/supabase.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class SupabaseHandler{
 
-  static String supabaseUrl = 'https://bwqibqbxbirzbyjqovco.supabase.co';
-  static String supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ3cWlicWJ4YmlyemJ5anFvdmNvIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjU2NDMxNTcsImV4cCI6MTk4MTIxOTE1N30.7TLUvzsw1-YI-G02oDJbsHHH7U5d1RS25-b-mLiXL6M';
+  static String? supabaseUrl = dotenv.env['SUPABASE_URL'];
+  static String? supabaseKey = dotenv.env['SUPABASE_KEY'];
 
-  final client = SupabaseClient(supabaseUrl, supabaseKey);
+  final client = SupabaseClient(supabaseUrl!, supabaseKey!);
 
   Future<GotrueSessionResponse> createNewUser(
       String email, String password) async  {
