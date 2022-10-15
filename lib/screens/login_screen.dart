@@ -3,6 +3,7 @@ import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
 import 'package:youthopia_2022_app/screens/signup_screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:youthopia_2022_app/services/supabase.dart';
+import '../widgets/alert_dialog.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -12,7 +13,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-
   SupabaseHandler supabaseHandler = SupabaseHandler();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset : false,
+      resizeToAvoidBottomInset: false,
       body: Form(
         key: _formKey,
         child: Stack(
@@ -78,17 +78,18 @@ class _LoginState extends State<Login> {
                             vertical: 7, horizontal: 10),
                         decoration: const BoxDecoration(color: Colors.black54),
                         child: TextFormField(
-                          validator: (String? value){
-                            if(EmailValidator.validate(value!)) {
+                          validator: (String? value) {
+                            if (EmailValidator.validate(value!)) {
                               return null;
                             } else {
                               return 'Enter valid Email';
                             }
                           },
-                          onChanged: (String value){
+                          onChanged: (String value) {
                             _email = value;
                           },
-                          style: const TextStyle(fontSize: 20, color: Colors.grey),
+                          style:
+                              const TextStyle(fontSize: 20, color: Colors.grey),
                           decoration: const InputDecoration(
                               border: InputBorder.none,
                               hintText: "Email",
@@ -104,21 +105,22 @@ class _LoginState extends State<Login> {
                       height: 20,
                     ),
                     Container(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 7, horizontal: 10),
                       decoration: const BoxDecoration(color: Colors.black54),
                       child: TextFormField(
                         obscureText: true,
-                        validator: (String? value){
-                          if(value!.length < 6) {
+                        validator: (String? value) {
+                          if (value!.length < 6) {
                             return 'Password must be at least 6 characters';
                           }
                           return null;
                         },
-                        onChanged: (String value){
+                        onChanged: (String value) {
                           _password = value;
                         },
-                        style: const TextStyle(fontSize: 20, color: Colors.grey),
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.grey),
                         decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: "Password",
@@ -149,31 +151,30 @@ class _LoginState extends State<Login> {
                     ),
                     MaterialButton(
                       onPressed: () async {
-                        if(_formKey.currentState!.validate())
-                        {
+                        if (_formKey.currentState!.validate()) {
                           final res = await supabaseHandler.signInExistingUser(
                               _email, _password);
                           debugPrint("Response code :$res");
-                          if(res.error == null)
-                          {
+                          if (res.error == null) {
                             debugPrint("Sign in Successful");
-                          }
-                          else
-                          {
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return const AlertUI('Invalid Credentials');
+                                });
                             debugPrint(res.error.toString());
+
+                            return;
                           }
-                          return;
+
                         }
-                        else
-                        {
-                          debugPrint("Validation Unsuccessful");
-                        }
-                        // Navigator.pushAndRemoveUntil(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const NavBarScreen()),
-                        //   (Route<dynamic> route) => false,
-                        // );
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NavBarScreen()),
+                          (Route<dynamic> route) => false,
+                        );
                       },
                       minWidth: double.maxFinite,
                       color: Colors.red[700],
