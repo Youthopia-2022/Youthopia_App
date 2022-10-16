@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:youthopia_2022_app/screens/login_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+
+Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(
 
+  await dotenv.load(fileName: ".env");
+
+  runApp(
       //! Uncomment to enable Device Preview
 /*     DevicePreview(
       enabled: !kReleaseMode,
