@@ -24,35 +24,33 @@ class _NavBarScreenState extends State<NavBarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currentPageIndex],
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: GNav(
-          gap: 8,
-          hoverColor: (Colors.grey[700])!,
-          haptic: true,
-          tabBorderRadius: 15,
-          curve: Curves.easeOutExpo,
-          duration: const Duration(milliseconds: 200),
-          color: Colors.grey[800],
-          activeColor: const Color.fromARGB(255, 10, 5, 0),
-          iconSize: 25,
-          tabBackgroundColor: const Color.fromARGB(228, 188, 218, 182),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-          tabs: const [
-            GButton(
-              icon: FontAwesomeIcons.houseUser,
-              text: "Home",
-            ),
-            GButton(icon: FontAwesomeIcons.cartShopping, text: "Cart"),
-            GButton(icon: FontAwesomeIcons.userCheck, text: "Profile"),
-          ],
-          selectedIndex: _currentPageIndex,
-          onTabChange: (index) {
-            setState(() {
-              _currentPageIndex = index;
-            });
-          },
-        ),
+      bottomNavigationBar: GNav(
+        gap: 8,
+        backgroundColor: const Color.fromARGB(255, 36, 38, 41),
+        hoverColor: (Colors.grey[700])!,
+        haptic: true,
+        tabBorderRadius: 15,
+        curve: Curves.easeOutExpo,
+        duration: const Duration(milliseconds: 200),
+        color: const Color.fromARGB(255, 223, 215, 215),
+        activeColor: const Color.fromARGB(255, 10, 5, 0),
+        iconSize: 25,
+        tabBackgroundColor: const Color.fromARGB(228, 188, 218, 182),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        tabs: const [
+          GButton(
+            icon: FontAwesomeIcons.houseUser,
+            text: "Home",
+          ),
+          GButton(icon: FontAwesomeIcons.cartShopping, text: "Cart"),
+          GButton(icon: FontAwesomeIcons.userCheck, text: "Profile"),
+        ],
+        selectedIndex: _currentPageIndex,
+        onTabChange: (index) {
+          setState(() {
+            _currentPageIndex = index;
+          });
+        },
       ),
     );
   }

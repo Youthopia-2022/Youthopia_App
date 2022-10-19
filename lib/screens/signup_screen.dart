@@ -316,7 +316,7 @@ class _SignUpState extends State<SignUp> {
                         // );
                       },
                       minWidth: double.maxFinite,
-                      color: Colors.red[700],
+                      color: Color(0xFFD32F2F),
                       child: const Padding(
                         padding: EdgeInsets.symmetric(vertical: 16),
                         child: Text("Create Account"),

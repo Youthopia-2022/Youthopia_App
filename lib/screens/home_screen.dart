@@ -62,19 +62,19 @@ class _HomeState extends State<Home> {
                                       RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(7.0),
                                   ))),
-                              child: const Text('New',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)))),
+                              child: const Text('ACM-DITU',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15)))),
                       const SizedBox(height: 20.0),
-                      const Text('Big double cheeseburger',
+                      const Text('Event Name',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 32.0,
                               fontWeight: FontWeight.bold)),
                       const SizedBox(height: 20.0),
-                      const Text(
-                          'Marble beef, cheddar cheese, jalapeno pepper, pickled cucumber, lettuce, red onion, BBQ sauce',
+                      const Text('Event Description',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Color(0xff454953),
@@ -85,35 +85,33 @@ class _HomeState extends State<Home> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          Container(
-                            child: Row(children: const <Widget>[
-                              Icon(Icons.tag_rounded, color: Colors.white),
-                              SizedBox(width: 5.0),
-                              Text(
-                                '\$5.42',
+                          Row(children: const <Widget>[
+                            Icon(Icons.currency_rupee, color: Colors.white),
+                            SizedBox(width: 5.0),
+                            Text(
+                              '30',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ]),
+                          const SizedBox(width: 30.0),
+                          Row(children: const <Widget>[
+                            Icon(Icons.location_on, color: Colors.white),
+                            SizedBox(width: 5.0),
+                            Text('VED 505',
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ]),
-                          ),
-                          const SizedBox(width: 30.0),
-                          Container(
-                            child: Row(children: const <Widget>[
-                              Icon(Icons.add_box_outlined, color: Colors.white),
-                              SizedBox(width: 5.0),
-                              Text('320 g',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold))
-                            ]),
-                          ),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold))
+                          ]),
                         ],
                       ),
                       const SizedBox(height: 50.0),
                       SizedBox(
-                        width: 380, // <-- Your width
-                        height: 60, // <-- match-parent
+                        width: 380,
+                        height: 60,
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.pushNamed(context, '/order_screen');
@@ -127,7 +125,7 @@ class _HomeState extends State<Home> {
                                 borderRadius: BorderRadius.circular(18.0),
                               ))),
                           child: const Text(
-                            'Taste it for \$5.42',
+                            'Register Yourself',
                             style: TextStyle(
                                 fontSize: 20.0, fontWeight: FontWeight.bold),
                           ),
@@ -143,65 +141,3 @@ class _HomeState extends State<Home> {
         ));
   }
 }
-
-/* class NewWidget extends StatelessWidget {
-  const NewWidget({
-    Key? key,
-    required int pageIndex,
-  })  : _currentPageIndex = pageIndex,
-        super(key: key);
-
-  final int _currentPageIndex;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(
-          blurRadius: 30,
-          color: Colors.black.withOpacity(.1),
-        )
-      ]),
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
-          child: GNav(
-            rippleColor: Colors.grey[300]!,
-            hoverColor: Colors.grey[100]!,
-            gap: 8,
-            activeColor: Colors.black,
-            iconSize: 24,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            duration: const Duration(milliseconds: 400),
-            tabs: const [
-              GButton(
-                icon: LineIcons.home,
-                text: 'Home',
-              ),
-              GButton(
-                icon: LineIcons.shoppingCart,
-                text: 'My Cart',
-              ),
-              GButton(
-                icon: LineIcons.user,
-                text: 'Profile',
-              )
-            ],
-            selectedIndex: _currentPageIndex,
-            onTabChange: (index) {
-              (index == 1)
-                  ? Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const MyCart()))
-                  : (index == 2)
-                      ? Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Profile()))
-                      : "";
-            },
-          ),
-        ),
-      ),
-    );
-  }
-} */
