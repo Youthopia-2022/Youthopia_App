@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:youthopia_2022_app/screens/home_screen.dart';
+import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
 import 'package:youthopia_2022_app/screens/signup_screen.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:youthopia_2022_app/services/supabase.dart';
-import '../widgets/alert_dialog.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 
 import '../widgets/snack_bar.dart';
@@ -71,61 +71,24 @@ class _LoginState extends State<Login> {
                           fontSize: 30,
                         ),
                       ),
-
-                      const SizedBox(
-                        height: 10,
-                      ),
-        Container(
-            height: 60,
-            padding: const EdgeInsets.symmetric(
-                vertical: 7, horizontal: 8),
-            child: TextFormField(
-              validator: (String? value) {
-                if (EmailValidator.validate(value!)) {
-                  return null;
-                } else {
-                  return 'Enter valid Email';
-                }
-              },
-              onChanged: (String value) {
-                _email = value;
-              },
-              style: TextStyle(
-                  fontSize: 20, color: ColourTheme.lightGrey),
-              decoration: InputDecoration(
-
-                  enabledBorder: UnderlineInputBorder(
-                      borderSide:
-                      BorderSide(color: ColourTheme.grey)),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: ColourTheme.pink),
-                  ),
-                  hintText: "Email",
-                  icon: Icon(
-                    Icons.mail_outline,
-                    color: ColourTheme.lightGrey,
-                  ),
-                  hintStyle: TextStyle(
-                    color: ColourTheme.lightGrey,
-                  )),
-            )),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
                         height: 60,
                         padding: const EdgeInsets.symmetric(
                             vertical: 7, horizontal: 8),
                         child: TextFormField(
                           validator: (String? value) {
-                            if (value!.length != 10) {
-                              return 'Enter valid Number';
+                            if (EmailValidator.validate(value!)) {
+                              return null;
+                            } else {
+                              return 'Enter valid Email';
                             }
-                            return null;
                           },
                           onChanged: (String value) {
-                            _phone = value;
+                            _email = value;
                           },
                           style: TextStyle(
                               fontSize: 20, color: ColourTheme.lightGrey),
@@ -134,11 +97,11 @@ class _LoginState extends State<Login> {
                                   borderSide:
                                       BorderSide(color: ColourTheme.grey)),
                               focusedBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: ColourTheme.pink)),
-                              hintText: "Phone number",
+                                borderSide: BorderSide(color: ColourTheme.pink),
+                              ),
+                              hintText: "Email",
                               icon: Icon(
-                                Icons.phone,
+                                Icons.mail_outline,
                                 color: ColourTheme.lightGrey,
                               ),
                               hintStyle: TextStyle(
@@ -194,47 +157,45 @@ class _LoginState extends State<Login> {
                           fontSize: 18,
                         ),
                       ),
-
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        width: double.maxFinite,
-                        child: TextButton(
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              final res = await supabaseHandler.signInExistingUser(
-                                  _email, _password);
-                              debugPrint("Response code :$res");
-                              if (res.error == null) {
-                                debugPrint("Sign in Successful");
-                                Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => const NavBarScreen()),
-                                      (Route<dynamic> route) => false,
-                                    );
-                              } else if(res.error.toString() == 'GotrueError(message: Invalid login credentials, statusCode: null)') {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(
-                                    snackBarLoginInvalidCredentials)
-                                    .toString();
-                                // showDialog(
-                                //     context: context,
-                                //     builder: (BuildContext context) {
-                                //       return const AlertUI('Invalid Credentials');
-                                //     });
-                              } else if(res.error.toString() == 'GotrueError(message: Email not confirmed, statusCode: null)'){
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(
-                                    snackBarLoginEmailNotConfirm)
-                                    .toString();
-                              }
-                                debugPrint(res.error.toString());
-
-                                return;
-
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      width: double.maxFinite,
+                      child: TextButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            final res = await supabaseHandler
+                                .signInExistingUser(_email, _password);
+                            debugPrint("Response code :$res");
+                            if (res.error == null) {
+                              debugPrint("Sign in Successful");
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const NavBarScreen()),
+                                (Route<dynamic> route) => false,
+                              );
+                            } else if (res.error.toString() ==
+                                'GotrueError(message: Invalid login credentials, statusCode: null)') {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBarLoginInvalidCredentials)
+                                  .toString();
+                              // showDialog(
+                              //     context: context,
+                              //     builder: (BuildContext context) {
+                              //       return const AlertUI('Invalid Credentials');
+                              //     });
+                            } else if (res.error.toString() ==
+                                'GotrueError(message: Email not confirmed, statusCode: null)') {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBarLoginEmailNotConfirm)
+                                  .toString();
                             }
+                            debugPrint(res.error.toString());
+
+                            return;
                           }
                           // Navigator.pushAndRemoveUntil(
                           //   context,
@@ -257,35 +218,6 @@ class _LoginState extends State<Login> {
                           child: Text("LOGIN"),
                         ),
                       ),
-
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: RichText(
-                          text: TextSpan(children: [
-                            TextSpan(
-                                style: TextStyle(
-                                    color: ColourTheme.lightGrey, fontSize: 18),
-                                text: "Don't have an account yet "),
-                            TextSpan(
-                                style: TextStyle(
-                                    color: ColourTheme.pink, fontSize: 18),
-                                text: "Sign up",
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => const SignUp()),
-                                          (Route<dynamic> route) => false,
-                                    );
-                                  }),
-                          ]),
-
-                        ),
-                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -301,7 +233,7 @@ class _LoginState extends State<Login> {
                           TextSpan(
                               style: TextStyle(
                                   color: ColourTheme.pink, fontSize: 18),
-                              text: "Sign in",
+                              text: "Sign up",
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
                                   Navigator.pushAndRemoveUntil(
