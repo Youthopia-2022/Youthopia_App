@@ -11,10 +11,12 @@ environment:
   sdk: ">=2.18.0 <3.0.0"
 
 dependencies:
+  extended_icon_button: ^1.0.0
   awesome_snackbar_content: ^0.0.8
   cupertino_icons: ^1.0.2
   device_preview: ^1.1.0
   email_validator: ^2.1.17
+
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.0.2
@@ -35,7 +37,6 @@ flutter_native_splash:
   image: assets/youthopia_splash.png
 
 flutter:
-
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
