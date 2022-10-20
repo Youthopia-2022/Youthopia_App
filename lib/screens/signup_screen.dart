@@ -25,7 +25,9 @@ class _SignUpState extends State<SignUp> {
   String _email = "";
   String _password = "";
   String _phone = "";
-
+  String _gender = "None";
+  String _college ="";
+  String _year = "None";
   @override
   void dispose() {
     _passwordController.dispose();
@@ -35,7 +37,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF252525),
+      backgroundColor: ColourTheme.background,
       resizeToAvoidBottomInset: false,
       body: Form(
         key: _formKey,
@@ -73,10 +75,10 @@ class _SignUpState extends State<SignUp> {
                       shaderCallback: (Rect rect) {
                         return ColourTheme.primaryGradient.createShader(rect);
                       },
-                      child: const Text(
+                      child: Text(
                         "Welcome to Youthopia !",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: ColourTheme.white,
                           fontSize: 30,
                         ),
                       ),
@@ -86,8 +88,9 @@ class _SignUpState extends State<SignUp> {
                     ),
                     RichText(
                       text: TextSpan(children: [
-                        const TextSpan(
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+                        TextSpan(
+                            style: TextStyle(
+                                color: ColourTheme.white, fontSize: 18),
                             text: "Already have an account "),
                         TextSpan(
                             style: TextStyle(
@@ -108,44 +111,43 @@ class _SignUpState extends State<SignUp> {
                       height: 30,
                     ),
                     Container(
+                        height: 60,
                         padding: const EdgeInsets.symmetric(
                             vertical: 7, horizontal: 8),
                         child: TextFormField(
                           validator: (String? value) {
                             String name = value!.trim();
-                            return name.isEmpty
-                                ? ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar)
-                                    .toString()
-                                : null;
+                            return (name.isEmpty) ? 'Name cannot be Empty' : null;
                           },
                           onChanged: (String value) {
                             _name = value;
                           },
-                          style:
-                              const TextStyle(fontSize: 20, color: Colors.grey),
-                          decoration: const InputDecoration(
+                          style: TextStyle(
+                              fontSize: 20, color: ColourTheme.lightGrey),
+                          decoration: InputDecoration(
+
                               enabledBorder: UnderlineInputBorder(
                                   borderSide:
-                                      BorderSide(color: Color(0xFF666666))),
+                                      BorderSide(color: ColourTheme.grey)),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
+                                borderSide: BorderSide(color: ColourTheme.pink),
                               ),
                               hintText: "Name",
                               icon: Icon(
                                 Icons.person,
-                                color: Colors.grey,
+                                color: ColourTheme.lightGrey,
                               ),
                               hintStyle: TextStyle(
-                                color: Colors.grey,
+                                color: ColourTheme.lightGrey,
                               )),
                         )),
                     const SizedBox(
                       height: 10,
                     ),
                     Container(
+                        height: 60,
                         padding: const EdgeInsets.symmetric(
-                            vertical: 7, horizontal: 10),
+                            vertical: 7, horizontal: 8),
                         child: TextFormField(
                           validator: (String? value) {
                             if (EmailValidator.validate(value!)) {
@@ -157,30 +159,32 @@ class _SignUpState extends State<SignUp> {
                           onChanged: (String value) {
                             _email = value;
                           },
-                          style:
-                              const TextStyle(fontSize: 20, color: Colors.grey),
-                          decoration: const InputDecoration(
+                          style: TextStyle(
+                              fontSize: 20, color: ColourTheme.lightGrey),
+                          decoration: InputDecoration(
+
                               enabledBorder: UnderlineInputBorder(
                                   borderSide:
-                                      BorderSide(color: Color(0xFF666666))),
+                                      BorderSide(color: ColourTheme.grey)),
                               focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
+                                borderSide: BorderSide(color: ColourTheme.pink),
                               ),
                               hintText: "Email",
                               icon: Icon(
                                 Icons.mail_outline,
-                                color: Colors.grey,
+                                color: ColourTheme.lightGrey,
                               ),
                               hintStyle: TextStyle(
-                                color: Colors.grey,
+                                color: ColourTheme.lightGrey,
                               )),
                         )),
                     const SizedBox(
                       height: 10,
                     ),
                     Container(
+                      height: 60,
                         padding: const EdgeInsets.symmetric(
-                            vertical: 7, horizontal: 10),
+                            vertical: 7, horizontal: 8),
                         child: TextFormField(
                           validator: (String? value) {
                             if (value!.length != 10) {
@@ -191,38 +195,177 @@ class _SignUpState extends State<SignUp> {
                           onChanged: (String value) {
                             _phone = value;
                           },
-                          style:
-                              const TextStyle(fontSize: 20, color: Colors.grey),
-                          decoration: const InputDecoration(
-                              /* enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color(0xFF666666)
-                                  )),*/
+                          style: TextStyle(
+                              fontSize: 20, color: ColourTheme.lightGrey),
+                          decoration: InputDecoration(
 
-                              /* focusedBorder: BoxDecoration(
-                                border: Border(
-                                    {BorderSide bottom = BorderSide(
-            
-                                    )}),
-                              ),*/
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: ColourTheme.grey)),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: ColourTheme.pink)),
                               hintText: "Phone number",
                               icon: Icon(
                                 Icons.phone,
-                                color: Colors.grey,
+                                color: ColourTheme.lightGrey,
                               ),
                               hintStyle: TextStyle(
-                                color: Colors.grey,
+                                color: ColourTheme.lightGrey,
                               )),
                         )),
                     const SizedBox(
                       height: 10,
                     ),
                     Container(
+                        height: 72,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 7, horizontal: 8),
+                        child: DropdownButtonFormField(
+                          value: _gender,
+                          onChanged: (String? value) {
+                            setState(() {
+                              _gender = value!;
+                            });
+                          },
+                          validator: (String? value) {
+                            if (value == "None") {
+                              return 'Enter Gender';
+                            }
+                            return null;
+                          },
+                          items: const [
+                            DropdownMenuItem(
+                                value: "None", child: Text("Gender")),
+                            DropdownMenuItem(
+                                value: "Male", child: Text("Male")),
+                            DropdownMenuItem(
+                                value: "Female", child: Text("Female")),
+                            DropdownMenuItem(
+                                value: "Others", child: Text("Others")),
+                          ],
+                          dropdownColor: ColourTheme.background,
+                          icon: Icon(
+                            Icons.arrow_drop_down,
+                            color: ColourTheme.lightGrey,
+                          ),
+                          style: TextStyle(
+                              fontSize: 20, color: ColourTheme.lightGrey),
+                          decoration: InputDecoration(
+
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: ColourTheme.grey)),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: ColourTheme.pink)),
+                              hintText: "Gender",
+                              icon: Icon(
+                                Icons.male,
+                                color: ColourTheme.lightGrey,
+                              ),
+                              hintStyle: TextStyle(
+                                color: ColourTheme.lightGrey,
+                              )),
+                        )),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                        height: 60,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 7, horizontal: 8),
+                        child: TextFormField(
+                          validator: (String? value) {
+                            return (value!.trim() == "")? 'College cannot be empty' : null;
+                          },
+                          onChanged: (String value) {
+                            _college = value;
+                          },
+                          style: TextStyle(
+                              fontSize: 20, color: ColourTheme.lightGrey),
+                          decoration: InputDecoration(
+
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: ColourTheme.grey)),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: ColourTheme.pink)),
+                              hintText: "College",
+                              icon: Icon(
+                                Icons.school,
+                                color: ColourTheme.lightGrey,
+                              ),
+                              hintStyle: TextStyle(
+                                color: ColourTheme.lightGrey,
+                              )),
+                        )),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                        height: 72,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 7, horizontal: 8),
+                        child: DropdownButtonFormField(
+                          value: _year,
+                          onChanged: (String? value) {
+                            setState(() {
+                              _year = value!;
+                            });
+                          },
+                          validator: (String? value) {
+                            if (value == "None") {
+                              return 'Enter Current year';
+                            }
+                            return null;
+                          },
+                          items: const [
+                            DropdownMenuItem(
+                                value: "None", child: Text("Year")),
+                            DropdownMenuItem(
+                                value: "one", child: Text("1st Year")),
+                            DropdownMenuItem(
+                                value: "two", child: Text("2nd Year")),
+                            DropdownMenuItem(
+                                value: "three", child: Text("3rd Year")),
+                            DropdownMenuItem(
+                                value: "four", child: Text("4th Year")),
+                          ],
+                          dropdownColor: ColourTheme.background,
+                          icon: Icon(
+                            Icons.arrow_drop_down,
+                            color: ColourTheme.lightGrey,
+                          ),
+                          style: TextStyle(
+                              fontSize: 20, color: ColourTheme.lightGrey),
+                          decoration: InputDecoration(
+
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: ColourTheme.grey)),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide:
+                                  BorderSide(color: ColourTheme.pink)),
+                              hintText: "Year",
+                              icon: Icon(
+                                Icons.ballot,
+                                color: ColourTheme.lightGrey,
+                              ),
+                              hintStyle: TextStyle(
+                                color: ColourTheme.lightGrey,
+                              )),
+                        )),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 60,
                       padding: const EdgeInsets.symmetric(
                           vertical: 7, horizontal: 10),
                       child: TextFormField(
                         obscureText: true,
-                        controller: _passwordController,
                         validator: (String? value) {
                           if (value!.length < 6) {
                             return 'Password must be at least 6 characters';
@@ -233,93 +376,103 @@ class _SignUpState extends State<SignUp> {
                           _password = value;
                         },
                         style:
-                            const TextStyle(fontSize: 20, color: Colors.grey),
-                        decoration: const InputDecoration(
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFF666666))),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
+                             TextStyle(fontSize: 20, color: ColourTheme.lightGrey),
+                        decoration: InputDecoration(
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide:
+                              BorderSide(color: ColourTheme.grey)),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide:
+                              BorderSide(color: ColourTheme.pink)),
                             hintText: "Password",
                             icon: Icon(
                               Icons.lock_outline,
-                              color: Colors.grey,
+                              color: ColourTheme.lightGrey,
                             ),
                             hintStyle: TextStyle(
-                              color: Colors.grey,
+                              color: ColourTheme.lightGrey,
                             )),
                       ),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 7, horizontal: 10),
-                      child: TextFormField(
-                        obscureText: true,
-                        controller: _confirmPasswordController,
-                        validator: (String? value) {
-                          if (_passwordController.text !=
-                              _confirmPasswordController.text) {
-                            return 'Password does not match';
-                          }
-                          return null;
-                        },
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.grey),
-                        decoration: const InputDecoration(
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFF666666))),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
-                            hintText: "Confirm Password",
-                            icon: Icon(
-                              Icons.lock_outline,
-                              color: Colors.grey,
-                            ),
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                            )),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    MaterialButton(
-                      onPressed: () async {
-                        debugPrint(_password);
-                        debugPrint(_email);
-                        if (_formKey.currentState!.validate()) {
-                          final res = await supabaseHandler.createNewUser(
-                              _email, _password);
-                          debugPrint("Response code :$res");
-                          if (res.error == null) {
-                            debugPrint("Signup Successful");
+                    // Container(
+                    //   padding: const EdgeInsets.symmetric(
+                    //       vertical: 7, horizontal: 10),
+                    //   child: TextFormField(
+                    //     obscureText: true,
+                    //     controller: _confirmPasswordController,
+                    //     validator: (String? value) {
+                    //       if (_passwordController.text !=
+                    //           _confirmPasswordController.text) {
+                    //         return 'Password does not match';
+                    //       }
+                    //       return null;
+                    //     },
+                    //     style:
+                    //          TextStyle(fontSize: 20, color: ColourTheme.lightGrey),
+                    //     decoration: InputDecoration(
+                    //         enabledBorder: UnderlineInputBorder(
+                    //             borderSide:
+                    //             BorderSide(color: ColourTheme.grey)),
+                    //         focusedBorder: UnderlineInputBorder(
+                    //             borderSide:
+                    //             BorderSide(color: ColourTheme.pink)),
+                    //         hintText: "Confirm Password",
+                    //         icon: Icon(
+                    //           Icons.lock_outline,
+                    //           color: ColourTheme.lightGrey,
+                    //         ),
+                    //         hintStyle: TextStyle(
+                    //           color: ColourTheme.lightGrey,
+                    //         )),
+                    //   ),
+                    // ),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
+                    SizedBox(
+                      width: double.maxFinite,
+                      child: TextButton(
+                        onPressed: () async {
+                          debugPrint(_password);
+                          debugPrint(_email);
+                          if (_formKey.currentState!.validate()) {
+                            final res = await supabaseHandler.createNewUser(
+                                _phone, _password);
+                            debugPrint("Response code :$res");
+                            if (res.error == null) {
+                              debugPrint("Signup Successful");
+                            } else {
+                              debugPrint(res.error.toString());
+                            }
+                            return;
                           } else {
-                            debugPrint(res.error.toString());
+                            debugPrint("Unsuccessful");
+                            //ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }
-                          return;
-                        } else {
-                          debugPrint("Unsuccessful");
-                          //ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        }
 
-                        // Navigator.pushAndRemoveUntil(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => const NavBarScreen()),
-                        //   (Route<dynamic> route) => false,
-                        // );
-                      },
-                      minWidth: double.maxFinite,
-                      color: Color(0xFFD32F2F),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        child: Text("Create Account"),
+                          // Navigator.pushAndRemoveUntil(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => const NavBarScreen()),
+                          //   (Route<dynamic> route) => false,
+                          // );
+                        },
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(40)
+                                )
+                            ),
+                            backgroundColor: MaterialStateProperty.all<Color>(ColourTheme.blue),
+                            foregroundColor: MaterialStateProperty.all<Color>(ColourTheme.black)
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 16),
+                          child: Text("SUBMIT"),
+                        ),
                       ),
                     )
                     // Container
