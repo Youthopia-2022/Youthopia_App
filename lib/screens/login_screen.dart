@@ -7,6 +7,8 @@ import 'package:youthopia_2022_app/services/supabase.dart';
 import '../widgets/alert_dialog.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 
+import '../widgets/snack_bar.dart';
+
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
@@ -19,7 +21,7 @@ class _LoginState extends State<Login> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String _phone = "";
+  String _email = "";
   String _password = "";
 
   @override
@@ -74,39 +76,40 @@ class _LoginState extends State<Login> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Container(
-                          height: 60,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 7, horizontal: 8),
-                          child: TextFormField(
-                            validator: (String? value) {
-                              if (value!.length != 10) {
-                                return 'Enter valid Number';
-                              }
-                              return null;
-                            },
-                            onChanged: (String value) {
-                              _phone = value;
-                            },
-                            style: TextStyle(
-                                fontSize: 20, color: ColourTheme.lightGrey),
-                            decoration: InputDecoration(
+        Container(
+            height: 60,
+            padding: const EdgeInsets.symmetric(
+                vertical: 7, horizontal: 8),
+            child: TextFormField(
+              validator: (String? value) {
+                if (EmailValidator.validate(value!)) {
+                  return null;
+                } else {
+                  return 'Enter valid Email';
+                }
+              },
+              onChanged: (String value) {
+                _email = value;
+              },
+              style: TextStyle(
+                  fontSize: 20, color: ColourTheme.lightGrey),
+              decoration: InputDecoration(
 
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                    BorderSide(color: ColourTheme.grey)),
-                                focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                    BorderSide(color: ColourTheme.pink)),
-                                hintText: "Phone number",
-                                icon: Icon(
-                                  Icons.phone,
-                                  color: ColourTheme.lightGrey,
-                                ),
-                                hintStyle: TextStyle(
-                                  color: ColourTheme.lightGrey,
-                                )),
-                          )),
+                  enabledBorder: UnderlineInputBorder(
+                      borderSide:
+                      BorderSide(color: ColourTheme.grey)),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: ColourTheme.pink),
+                  ),
+                  hintText: "Email",
+                  icon: Icon(
+                    Icons.mail_outline,
+                    color: ColourTheme.lightGrey,
+                  ),
+                  hintStyle: TextStyle(
+                    color: ColourTheme.lightGrey,
+                  )),
+            )),
                       const SizedBox(
                         height: 20,
                       ),
@@ -166,20 +169,36 @@ class _LoginState extends State<Login> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               final res = await supabaseHandler.signInExistingUser(
-                                  _phone, _password);
+                                  _email, _password);
                               debugPrint("Response code :$res");
                               if (res.error == null) {
                                 debugPrint("Sign in Successful");
-                              } else {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return const AlertUI('Invalid Credentials');
-                                    });
+                                Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => const NavBarScreen()),
+                                      (Route<dynamic> route) => false,
+                                    );
+                              } else if(res.error.toString() == 'GotrueError(message: Invalid login credentials, statusCode: null)') {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(
+                                    snackBarLoginInvalidCredentials)
+                                    .toString();
+                                // showDialog(
+                                //     context: context,
+                                //     builder: (BuildContext context) {
+                                //       return const AlertUI('Invalid Credentials');
+                                //     });
+                              } else if(res.error.toString() == 'GotrueError(message: Email not confirmed, statusCode: null)'){
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(
+                                    snackBarLoginEmailNotConfirm)
+                                    .toString();
+                              }
                                 debugPrint(res.error.toString());
 
                                 return;
-                              }
+
                             }
                             // Navigator.pushAndRemoveUntil(
                             //   context,
@@ -217,7 +236,7 @@ class _LoginState extends State<Login> {
                             TextSpan(
                                 style: TextStyle(
                                     color: ColourTheme.pink, fontSize: 18),
-                                text: "Sign in",
+                                text: "Sign up",
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     Navigator.pushAndRemoveUntil(

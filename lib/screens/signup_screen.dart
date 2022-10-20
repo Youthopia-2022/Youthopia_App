@@ -440,10 +440,19 @@ class _SignUpState extends State<SignUp> {
                           debugPrint(_email);
                           if (_formKey.currentState!.validate()) {
                             final res = await supabaseHandler.createNewUser(
-                                _phone, _password);
+                                _email, _password);
                             debugPrint("Response code :$res");
                             if (res.error == null) {
                               debugPrint("Signup Successful");
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBarSignupSuccess)
+                                  .toString();
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Login()),
+                                (Route<dynamic> route) => false,
+                              );
                             } else {
                               debugPrint(res.error.toString());
                             }
