@@ -38,7 +38,7 @@ class _NavBarScreenState extends State<NavBarScreen> {
         tabBackgroundColor: const Color(0xFF222222),
         tabMargin: const EdgeInsets.symmetric(
             horizontal: 20, vertical: 15), // tab button border
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         tabs: const [
           GButton(icon: Icons.home, text: "Home"),
           GButton(icon: Icons.dataset, text: "Category"),
