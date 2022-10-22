@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/screens/home_screen.dart';
 import 'package:youthopia_2022_app/screens/profile_screen.dart';
 
@@ -25,25 +25,24 @@ class _NavBarScreenState extends State<NavBarScreen> {
     return Scaffold(
       body: _pages[_currentPageIndex],
       bottomNavigationBar: GNav(
-        gap: 8,
-        backgroundColor: const Color.fromARGB(255, 36, 38, 41),
-        hoverColor: (Colors.grey[700])!,
+        gap: 10,
+        backgroundColor: const Color(0xFF0f0f0f),
+        hoverColor: const Color(0xFF222222),
         haptic: true,
         tabBorderRadius: 15,
         curve: Curves.easeOutExpo,
-        duration: const Duration(milliseconds: 200),
-        color: const Color.fromARGB(255, 223, 215, 215),
-        activeColor: const Color.fromARGB(255, 10, 5, 0),
+        duration: const Duration(milliseconds: 100),
+        color: ColourTheme.white,
+        activeColor: ColourTheme.pink,
         iconSize: 25,
-        tabBackgroundColor: const Color.fromARGB(228, 188, 218, 182),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        tabBackgroundColor: const Color(0xFF222222),
+        tabMargin: const EdgeInsets.symmetric(
+            horizontal: 20, vertical: 15), // tab button border
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         tabs: const [
-          GButton(
-            icon: FontAwesomeIcons.houseUser,
-            text: "Home",
-          ),
-          GButton(icon: FontAwesomeIcons.cartShopping, text: "Cart"),
-          GButton(icon: FontAwesomeIcons.userCheck, text: "Profile"),
+          GButton(icon: Icons.home, text: "Home"),
+          GButton(icon: Icons.dataset, text: "Category"),
+          GButton(icon: Icons.settings, text: "Settings"),
         ],
         selectedIndex: _currentPageIndex,
         onTabChange: (index) {
