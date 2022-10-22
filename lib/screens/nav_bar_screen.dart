@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/screens/home_screen.dart';
+import 'package:youthopia_2022_app/screens/main_screen.dart';
 import 'package:youthopia_2022_app/screens/profile_screen.dart';
 
 import 'cart_screen.dart';
@@ -16,7 +17,7 @@ class NavBarScreen extends StatefulWidget {
 class _NavBarScreenState extends State<NavBarScreen> {
   int _currentPageIndex = 0;
   final List<Widget> _pages = [
-    const Home(),
+    const MainScreen(),
     const CartScreen(),
     const ProfileScreen(),
   ];

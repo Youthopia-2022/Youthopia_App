@@ -13,10 +13,10 @@ environment:
 dependencies:
   extended_icon_button: ^1.0.0
   awesome_snackbar_content: ^0.0.8
+  carousel_slider: ^4.1.1
   cupertino_icons: ^1.0.2
   device_preview: ^1.1.0
   email_validator: ^2.1.17
-
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.0.2
