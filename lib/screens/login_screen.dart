@@ -236,9 +236,9 @@ class _LoginState extends State<Login> {
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 ColourTheme.blue),
                             foregroundColor: MaterialStateProperty.all<Color>(
-                                ColourTheme.black)),
+                                ColourTheme.white)),
                         child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 16),
+                          padding: EdgeInsets.symmetric(vertical: 3),
                           child: Text("LOGIN",
                             style: TextStyle(
                               fontFamily: 'IBM Plex',
