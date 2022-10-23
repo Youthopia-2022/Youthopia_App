@@ -11,16 +11,17 @@ environment:
   sdk: ">=2.18.0 <3.0.0"
 
 dependencies:
-  extended_icon_button: ^1.0.0
   awesome_snackbar_content: ^0.0.8
   carousel_slider: ^4.1.1
   cupertino_icons: ^1.0.2
   device_preview: ^1.1.0
   email_validator: ^2.1.17
+  extended_icon_button: ^1.0.0
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.0.2
   font_awesome_flutter: ^10.2.1
+  google_fonts: ^3.0.1
   google_nav_bar: ^5.0.6
   line_icons: ^2.0.1
   sizer: ^2.0.15

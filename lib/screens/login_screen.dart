@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:youthopia_2022_app/screens/about_us_screen.dart';
@@ -73,10 +74,9 @@ class _LoginState extends State<Login> {
                             child: Text(
                               "Welcome back to \nYouthopia !",
                               style: TextStyle(
-                                color: ColourTheme.white,
-                                fontSize: 30,
-                                fontFamily: 'IBM Plex'
-                              ),
+                                  color: ColourTheme.white,
+                                  fontSize: 30,
+                                  fontFamily: 'IBM Plex'),
                             ),
                           ),
                         ),
@@ -165,7 +165,12 @@ class _LoginState extends State<Login> {
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) => const NavBarScreen()));
+                        },
                         child: Text(
                           "Forgot Password?",
                           style: TextStyle(
@@ -182,9 +187,7 @@ class _LoginState extends State<Login> {
                       width: double.maxFinite,
                       child: TextButton(
                         onPressed: () async {
-
-                          if(!_loginClicked){
-
+                          if (!_loginClicked) {
                             setState(() {
                               _loginClicked = true;
                             });
@@ -197,13 +200,15 @@ class _LoginState extends State<Login> {
                                 Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const NavBarScreen()),
-                                      (Route<dynamic> route) => false,
+                                      builder: (context) =>
+                                          const NavBarScreen()),
+                                  (Route<dynamic> route) => false,
                                 );
                               } else if (res.error.toString() ==
                                   'GotrueError(message: Invalid login credentials, statusCode: null)') {
                                 ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBarLoginInvalidCredentials)
+                                    .showSnackBar(
+                                        snackBarLoginInvalidCredentials)
                                     .toString();
                                 // showDialog(
                                 //     context: context,
@@ -239,11 +244,11 @@ class _LoginState extends State<Login> {
                                 ColourTheme.white)),
                         child: const Padding(
                           padding: EdgeInsets.symmetric(vertical: 3),
-                          child: Text("LOGIN",
+                          child: Text(
+                            "LOGIN",
                             style: TextStyle(
-                              fontFamily: 'IBM Plex',
-                              fontWeight: FontWeight.bold
-                            ),
+                                fontFamily: 'IBM Plex',
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
@@ -257,14 +262,16 @@ class _LoginState extends State<Login> {
                         text: TextSpan(children: [
                           TextSpan(
                               style: TextStyle(
-                                  color: ColourTheme.lightGrey, fontSize: 18, fontFamily: 'IBM Plex'),
+                                  color: ColourTheme.lightGrey,
+                                  fontSize: 18,
+                                  fontFamily: 'IBM Plex'),
                               text: "Don't have an account yet ? "),
                           TextSpan(
                               style: TextStyle(
                                   color: ColourTheme.secondary,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              fontFamily: 'IBM Plex'),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'IBM Plex'),
                               text: "Sign up",
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
@@ -280,28 +287,28 @@ class _LoginState extends State<Login> {
                     ),
                     Expanded(
                         child: Container(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: Align(
-                            alignment: FractionalOffset.bottomCenter,
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) => const AboutUsScreen()
-                                    ));
-                              },
-                              child: Text(
-                                'About Us',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontFamily: 'IBM Plex',
-                                  fontWeight: FontWeight.bold,
-                                  color: ColourTheme.secondary
-                                ),
-                              ),
-                            ),
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Align(
+                        alignment: FractionalOffset.bottomCenter,
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const AboutUsScreen()));
+                          },
+                          child: Text(
+                            'About Us',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontFamily: 'IBM Plex',
+                                fontWeight: FontWeight.bold,
+                                color: ColourTheme.secondary),
                           ),
-                        )
-                    )
+                        ),
+                      ),
+                    ))
                   ],
                 ),
               ),
