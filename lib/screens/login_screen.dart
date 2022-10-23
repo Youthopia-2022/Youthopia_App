@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:youthopia_2022_app/screens/about_us_screen.dart';
 import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
 import 'package:youthopia_2022_app/screens/signup_screen.dart';
 import 'package:email_validator/email_validator.dart';
@@ -22,6 +23,7 @@ class _LoginState extends State<Login> {
 
   String _email = "";
   String _password = "";
+  bool _loginClicked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -60,17 +62,32 @@ class _LoginState extends State<Login> {
                     const SizedBox(
                       height: 80,
                     ),
-                    ShaderMask(
-                      shaderCallback: (Rect rect) {
-                        return ColourTheme.primaryGradient.createShader(rect);
-                      },
-                      child: Text(
-                        "Welcome back to \nYouthopia !",
-                        style: TextStyle(
-                          color: ColourTheme.white,
-                          fontSize: 30,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ShaderMask(
+                            shaderCallback: (Rect rect) {
+                              return ColourTheme.primaryGradient
+                                  .createShader(rect);
+                            },
+                            child: Text(
+                              "Welcome back to \nYouthopia !",
+                              style: TextStyle(
+                                color: ColourTheme.white,
+                                fontSize: 30,
+                                fontFamily: 'IBM Plex'
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                        Container(
+                          padding: const EdgeInsets.only(top: 20, right: 10),
+                          child: const Image(
+                              image: AssetImage('assets/youthopia_face.png'),
+                              color: Color.fromRGBO(255, 255, 255, 0.15),
+                              colorBlendMode: BlendMode.modulate),
+                        )
+                      ],
                     ),
                     const SizedBox(
                       height: 10,
@@ -145,57 +162,64 @@ class _LoginState extends State<Login> {
                             )),
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: Text(
-                        "Forgot Password?",
-                        style: TextStyle(
-                          color: ColourTheme.pink,
-                          fontSize: 18,
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Forgot Password?",
+                          style: TextStyle(
+                            color: ColourTheme.secondary,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     SizedBox(
                       width: double.maxFinite,
                       child: TextButton(
                         onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            final res = await supabaseHandler
-                                .signInExistingUser(_email, _password);
-                            debugPrint("Response code :$res");
-                            if (res.error == null) {
-                              debugPrint("Sign in Successful");
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const NavBarScreen()),
-                                (Route<dynamic> route) => false,
-                              );
-                            } else if (res.error.toString() ==
-                                'GotrueError(message: Invalid login credentials, statusCode: null)') {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBarLoginInvalidCredentials)
-                                  .toString();
-                              // showDialog(
-                              //     context: context,
-                              //     builder: (BuildContext context) {
-                              //       return const AlertUI('Invalid Credentials');
-                              //     });
-                            } else if (res.error.toString() ==
-                                'GotrueError(message: Email not confirmed, statusCode: null)') {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBarLoginEmailNotConfirm)
-                                  .toString();
-                            }
-                            debugPrint(res.error.toString());
 
-                            return;
+                          if(!_loginClicked){
+
+                            setState(() {
+                              _loginClicked = true;
+                            });
+                            if (_formKey.currentState!.validate()) {
+                              final res = await supabaseHandler
+                                  .signInExistingUser(_email, _password);
+                              debugPrint("Response code :$res");
+                              if (res.error == null) {
+                                debugPrint("Sign in Successful");
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const NavBarScreen()),
+                                      (Route<dynamic> route) => false,
+                                );
+                              } else if (res.error.toString() ==
+                                  'GotrueError(message: Invalid login credentials, statusCode: null)') {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBarLoginInvalidCredentials)
+                                    .toString();
+                                // showDialog(
+                                //     context: context,
+                                //     builder: (BuildContext context) {
+                                //       return const AlertUI('Invalid Credentials');
+                                //     });
+                              } else if (res.error.toString() ==
+                                  'GotrueError(message: Email not confirmed, statusCode: null)') {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBarLoginEmailNotConfirm)
+                                    .toString();
+                              }
+                              debugPrint(res.error.toString());
+                              return;
+                            }
+                            _loginClicked = false;
                           }
                           // Navigator.pushAndRemoveUntil(
                           //   context,
@@ -212,10 +236,15 @@ class _LoginState extends State<Login> {
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 ColourTheme.blue),
                             foregroundColor: MaterialStateProperty.all<Color>(
-                                ColourTheme.black)),
+                                ColourTheme.white)),
                         child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                          child: Text("LOGIN"),
+                          padding: EdgeInsets.symmetric(vertical: 3),
+                          child: Text("LOGIN",
+                            style: TextStyle(
+                              fontFamily: 'IBM Plex',
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -228,11 +257,14 @@ class _LoginState extends State<Login> {
                         text: TextSpan(children: [
                           TextSpan(
                               style: TextStyle(
-                                  color: ColourTheme.lightGrey, fontSize: 18),
-                              text: "Don't have an account yet "),
+                                  color: ColourTheme.lightGrey, fontSize: 18, fontFamily: 'IBM Plex'),
+                              text: "Don't have an account yet ? "),
                           TextSpan(
                               style: TextStyle(
-                                  color: ColourTheme.pink, fontSize: 18),
+                                  color: ColourTheme.secondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              fontFamily: 'IBM Plex'),
                               text: "Sign up",
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
@@ -246,7 +278,30 @@ class _LoginState extends State<Login> {
                         ]),
                       ),
                     ),
-                    // Container
+                    Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: Align(
+                            alignment: FractionalOffset.bottomCenter,
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => const AboutUsScreen()
+                                    ));
+                              },
+                              child: Text(
+                                'About Us',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontFamily: 'IBM Plex',
+                                  fontWeight: FontWeight.bold,
+                                  color: ColourTheme.secondary
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                    )
                   ],
                 ),
               ),

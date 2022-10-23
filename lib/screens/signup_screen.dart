@@ -17,7 +17,6 @@ class _SignUpState extends State<SignUp> {
   SupabaseHandler supabaseHandler = SupabaseHandler();
 
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -28,6 +27,7 @@ class _SignUpState extends State<SignUp> {
   String _gender = "None";
   String _college = "";
   String _year = "None";
+
   @override
   void dispose() {
     _passwordController.dispose();
@@ -44,27 +44,7 @@ class _SignUpState extends State<SignUp> {
         child: SingleChildScrollView(
           child: Stack(
             children: [
-              // Positioned.fill(
-              //   child: Image.asset(
-              //     "assets/bg.jpg",
-              //     fit: BoxFit.cover,
-              //     color: Colors.black38,
-              //     colorBlendMode: BlendMode.darken,
-              //   ),
-              // ),
-              // Positioned(
-              //   top: 60,
-              //   left: 15,
-              //   child: IconButton(
-              //     onPressed: () {},
-              //     icon: const Icon(
-              //       Icons.arrow_back_ios_new,
-              //       color: Colors.black,
-              //     ),
-              //   ),
-              // ),
-              // ignore: sized_box_for_whitespace
-              Container(
+              SizedBox(
                 height: 1000,
                 child: Positioned.fill(
                   child: Padding(
@@ -85,6 +65,7 @@ class _SignUpState extends State<SignUp> {
                             style: TextStyle(
                               color: ColourTheme.white,
                               fontSize: 30,
+                              fontFamily: 'IBM Plex'
                             ),
                           ),
                         ),
@@ -95,11 +76,11 @@ class _SignUpState extends State<SignUp> {
                           text: TextSpan(children: [
                             TextSpan(
                                 style: TextStyle(
-                                    color: ColourTheme.white, fontSize: 18),
+                                    color: ColourTheme.white, fontSize: 18, fontFamily: 'IBM Plex'),
                                 text: "Already have an account "),
                             TextSpan(
                                 style: TextStyle(
-                                    color: ColourTheme.pink, fontSize: 18),
+                                    color: ColourTheme.secondary, fontSize: 18, fontFamily: 'IBM Plex', fontWeight: FontWeight.bold),
                                 text: "Log in",
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
@@ -122,15 +103,15 @@ class _SignUpState extends State<SignUp> {
                             child: TextFormField(
                               validator: (String? value) {
                                 String name = value!.trim();
-                                return (name.isEmpty)
-                                    ? 'Name cannot be Empty'
+                                return (name.isEmpty || !RegExp(r'^[A-Za-z]+$').hasMatch(name))
+                                    ? 'Enter valid Name'
                                     : null;
                               },
                               onChanged: (String value) {
                                 _name = value;
                               },
                               style: TextStyle(
-                                  fontSize: 20, color: ColourTheme.lightGrey),
+                                  fontSize: 20, color: ColourTheme.white, fontFamily: 'IBM Plex'),
                               decoration: InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide:
@@ -145,6 +126,7 @@ class _SignUpState extends State<SignUp> {
                                     color: ColourTheme.lightGrey,
                                   ),
                                   hintStyle: TextStyle(
+                                    fontFamily: 'IBM Plex',
                                     color: ColourTheme.lightGrey,
                                   )),
                             )),
@@ -167,7 +149,7 @@ class _SignUpState extends State<SignUp> {
                                 _email = value;
                               },
                               style: TextStyle(
-                                  fontSize: 20, color: ColourTheme.lightGrey),
+                                  fontSize: 20, color: ColourTheme.white, fontFamily: 'IBM Plex'),
                               decoration: InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide:
@@ -182,6 +164,7 @@ class _SignUpState extends State<SignUp> {
                                     color: ColourTheme.lightGrey,
                                   ),
                                   hintStyle: TextStyle(
+                                    fontFamily: 'IBM Plex',
                                     color: ColourTheme.lightGrey,
                                   )),
                             )),
@@ -194,7 +177,7 @@ class _SignUpState extends State<SignUp> {
                                 vertical: 7, horizontal: 8),
                             child: TextFormField(
                               validator: (String? value) {
-                                if (value!.length != 10) {
+                                if (value!.length != 10 || !RegExp(r'^[0-9]+$').hasMatch(value)) {
                                   return 'Enter valid Number';
                                 }
                                 return null;
@@ -203,7 +186,7 @@ class _SignUpState extends State<SignUp> {
                                 _phone = value;
                               },
                               style: TextStyle(
-                                  fontSize: 20, color: ColourTheme.lightGrey),
+                                  fontSize: 20, color: ColourTheme.white),
                               decoration: InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide:
@@ -217,6 +200,7 @@ class _SignUpState extends State<SignUp> {
                                     color: ColourTheme.lightGrey,
                                   ),
                                   hintStyle: TextStyle(
+                                    fontFamily: 'IBM Plex',
                                     color: ColourTheme.lightGrey,
                                   )),
                             )),
@@ -240,14 +224,14 @@ class _SignUpState extends State<SignUp> {
                                 }
                                 return null;
                               },
-                              items: const [
+                              items: [
                                 DropdownMenuItem(
-                                    value: "None", child: Text("Gender")),
-                                DropdownMenuItem(
+                                    value: "None", child: Text("Gender", style: TextStyle(color: ColourTheme.lightGrey),)),
+                                const DropdownMenuItem(
                                     value: "Male", child: Text("Male")),
-                                DropdownMenuItem(
+                                const DropdownMenuItem(
                                     value: "Female", child: Text("Female")),
-                                DropdownMenuItem(
+                                const DropdownMenuItem(
                                     value: "Others", child: Text("Others")),
                               ],
                               dropdownColor: ColourTheme.background,
@@ -256,7 +240,7 @@ class _SignUpState extends State<SignUp> {
                                 color: ColourTheme.lightGrey,
                               ),
                               style: TextStyle(
-                                  fontSize: 20, color: ColourTheme.lightGrey),
+                                  fontSize: 20, color: ColourTheme.white),
                               decoration: InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide:
@@ -290,7 +274,7 @@ class _SignUpState extends State<SignUp> {
                                 _college = value;
                               },
                               style: TextStyle(
-                                  fontSize: 20, color: ColourTheme.lightGrey),
+                                  fontSize: 20, color: ColourTheme.white),
                               decoration: InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide:
@@ -327,16 +311,16 @@ class _SignUpState extends State<SignUp> {
                                 }
                                 return null;
                               },
-                              items: const [
+                              items: [
                                 DropdownMenuItem(
-                                    value: "None", child: Text("Year")),
-                                DropdownMenuItem(
+                                    value: "None", child: Text("Year", style: TextStyle(color: ColourTheme.lightGrey),)),
+                                const DropdownMenuItem(
                                     value: "one", child: Text("1st Year")),
-                                DropdownMenuItem(
+                                const DropdownMenuItem(
                                     value: "two", child: Text("2nd Year")),
-                                DropdownMenuItem(
+                                const DropdownMenuItem(
                                     value: "three", child: Text("3rd Year")),
-                                DropdownMenuItem(
+                                const DropdownMenuItem(
                                     value: "four", child: Text("4th Year")),
                               ],
                               dropdownColor: ColourTheme.background,
@@ -345,7 +329,7 @@ class _SignUpState extends State<SignUp> {
                                 color: ColourTheme.lightGrey,
                               ),
                               style: TextStyle(
-                                  fontSize: 20, color: ColourTheme.lightGrey),
+                                  fontSize: 20, color: ColourTheme.white),
                               decoration: InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide:
@@ -368,7 +352,7 @@ class _SignUpState extends State<SignUp> {
                         Container(
                           height: 60,
                           padding: const EdgeInsets.symmetric(
-                              vertical: 7, horizontal: 10),
+                              vertical: 7, horizontal: 8),
                           child: TextFormField(
                             obscureText: true,
                             validator: (String? value) {
@@ -381,7 +365,7 @@ class _SignUpState extends State<SignUp> {
                               _password = value;
                             },
                             style: TextStyle(
-                                fontSize: 20, color: ColourTheme.lightGrey),
+                                fontSize: 20, color: ColourTheme.white),
                             decoration: InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide:
@@ -400,43 +384,8 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
-                        // Container(
-                        //   padding: const EdgeInsets.symmetric(
-                        //       vertical: 7, horizontal: 10),
-                        //   child: TextFormField(
-                        //     obscureText: true,
-                        //     controller: _confirmPasswordController,
-                        //     validator: (String? value) {
-                        //       if (_passwordController.text !=
-                        //           _confirmPasswordController.text) {
-                        //         return 'Password does not match';
-                        //       }
-                        //       return null;
-                        //     },
-                        //     style:
-                        //          TextStyle(fontSize: 20, color: ColourTheme.lightGrey),
-                        //     decoration: InputDecoration(
-                        //         enabledBorder: UnderlineInputBorder(
-                        //             borderSide:
-                        //             BorderSide(color: ColourTheme.grey)),
-                        //         focusedBorder: UnderlineInputBorder(
-                        //             borderSide:
-                        //             BorderSide(color: ColourTheme.pink)),
-                        //         hintText: "Confirm Password",
-                        //         icon: Icon(
-                        //           Icons.lock_outline,
-                        //           color: ColourTheme.lightGrey,
-                        //         ),
-                        //         hintStyle: TextStyle(
-                        //           color: ColourTheme.lightGrey,
-                        //         )),
-                        //   ),
-                        // ),
-                        // const SizedBox(
-                        //   height: 20,
-                        // ),
                         SizedBox(
                           width: double.maxFinite,
                           child: TextButton(
@@ -464,15 +413,7 @@ class _SignUpState extends State<SignUp> {
                                 return;
                               } else {
                                 debugPrint("Unsuccessful");
-                                //ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               }
-
-                              // Navigator.pushAndRemoveUntil(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) => const NavBarScreen()),
-                              //   (Route<dynamic> route) => false,
-                              // );
                             },
                             style: ButtonStyle(
                                 shape: MaterialStateProperty.all<
@@ -485,10 +426,15 @@ class _SignUpState extends State<SignUp> {
                                         ColourTheme.blue),
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        ColourTheme.black)),
+                                        ColourTheme.white)),
                             child: const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 16),
-                              child: Text("SUBMIT"),
+                              padding: EdgeInsets.symmetric(vertical: 3),
+                              child: Text(
+                                "SUBMIT",
+                                style: TextStyle(
+                                  fontFamily: 'IBM Plex',
+                                  fontWeight: FontWeight.bold
+                                ),),
                             ),
                           ),
                         )

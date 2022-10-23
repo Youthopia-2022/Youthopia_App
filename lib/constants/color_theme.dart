@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ColourTheme{
 
+  static Color secondary = const Color(0xFFfc0160);
   static Color pink = const Color(0xFFff6da0);
   static Color blue = const Color(0xFF1bbee9);
   static Color white = const Color(0xFFffffff);
