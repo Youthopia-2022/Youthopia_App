@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icon.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:youthopia_2022_app/screens/login_screen.dart';
 
 import '../constants/color_theme.dart';
+import '../services/supabase.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -133,7 +137,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           TextButton.icon(
-            onPressed: () {},
+            onPressed: () async {
+              try{
+                await supabase.auth.signOut();
+              } on AuthException catch (error) {
+                debugPrint(error.toString());
+              }
+
+              if(mounted) {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                      const Login()),
+                      (Route<dynamic> route) => false,
+                );
+              }
+            },
             icon: Icon(
               Icons.logout,
               color: ColourTheme.white,

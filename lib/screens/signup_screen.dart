@@ -14,7 +14,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  SupabaseHandler supabaseHandler = SupabaseHandler();
+  // SupabaseHandler supabaseHandler = SupabaseHandler();
 
   final _passwordController = TextEditingController();
 
@@ -399,30 +399,30 @@ class _SignUpState extends State<SignUp> {
                     width: double.maxFinite,
                     child: TextButton(
                       onPressed: () async {
-                        debugPrint(_password);
-                        debugPrint(_email);
-                        if (_formKey.currentState!.validate()) {
-                          final res = await supabaseHandler.createNewUser(
-                              _email, _password);
-                          debugPrint("Response code :$res");
-                          if (res.error == null) {
-                            debugPrint("Signup Successful");
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBarSignupSuccess)
-                                .toString();
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Login()),
-                              (Route<dynamic> route) => false,
-                            );
-                          } else {
-                            debugPrint(res.error.toString());
-                          }
-                          return;
-                        } else {
-                          debugPrint("Unsuccessful");
-                        }
+                        // debugPrint(_password);
+                        // debugPrint(_email);
+                        // if (_formKey.currentState!.validate()) {
+                        //   final res = await supabaseHandler.createNewUser(
+                        //       _email, _password);
+                        //   debugPrint("Response code :$res");
+                        //   if (res.error == null) {
+                        //     debugPrint("Signup Successful");
+                        //     ScaffoldMessenger.of(context)
+                        //         .showSnackBar(snackBarSignupSuccess)
+                        //         .toString();
+                        //     Navigator.pushAndRemoveUntil(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //           builder: (context) => const Login()),
+                        //       (Route<dynamic> route) => false,
+                        //     );
+                        //   } else {
+                        //     debugPrint(res.error.toString());
+                        //   }
+                        //   return;
+                        // } else {
+                        //   debugPrint("Unsuccessful");
+                        // }
                       },
                       style: ButtonStyle(
                           shape:

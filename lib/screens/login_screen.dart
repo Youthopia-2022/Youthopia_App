@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/about_us_screen.dart';
 import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
 import 'package:youthopia_2022_app/screens/signup_screen.dart';
@@ -18,42 +21,43 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  SupabaseHandler supabaseHandler = SupabaseHandler();
+  // SupabaseHandler supabaseHandler = SupabaseHandler();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String _email = "";
   String _password = "";
   bool _loginClicked = false;
+  bool _redirecting = false;
+  late final StreamSubscription<AuthState> _authStateSubscription;
+
+  @override
+  void initState(){
+    _authStateSubscription = supabase.auth.onAuthStateChange.listen((data) {
+      if (_redirecting) return;
+      final session = data.session;
+      if (session != null) {
+        _redirecting = true;
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+              const NavBarScreen()),
+              (Route<dynamic> route) => false,
+        );
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColourTheme.background,
-      //resizeToAvoidBottomInset: false,
       body: Form(
         key: _formKey,
         child: Stack(
           children: [
-            // Positioned.fill(
-            //   child: Image.asset(
-            //     "assets/bg.jpg",
-            //     fit: BoxFit.cover,
-            //     color: Colors.black38,
-            //     colorBlendMode: BlendMode.darken,
-            //   ),
-            // ),
-            // Positioned(
-            //   top: 60,
-            //   left: 15,
-            //   child: IconButton(
-            //     onPressed: () {},
-            //     icon: const Icon(
-            //       Icons.arrow_back_ios_new,
-            //       color: Colors.black,
-            //     ),
-            //   ),
-            // ),
             Positioned.fill(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18.0),
@@ -187,7 +191,29 @@ class _LoginState extends State<Login> {
                       width: double.maxFinite,
                       child: TextButton(
                         onPressed: () async {
-                          if (!_loginClicked) {
+                          _formKey.currentState!.validate();
+                          try {
+                            await Supabase.instance.client.auth
+                                .signInWithPassword(
+                              email: _email,
+                              password: _password,);
+                          } on AuthException catch(error) {
+                            debugPrint(error.message.toString());
+
+                            if(error.message == "Invalid login credentials") {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(
+                                  snackBarLoginInvalidCredentials)
+                                  .toString();
+                            }
+                            if(error.message == "Email not confirmed") {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBarLoginEmailNotConfirm)
+                                  .toString();
+                            }
+
+                          }
+                          /*if (!_loginClicked) {
                             setState(() {
                               _loginClicked = true;
                             });
@@ -231,7 +257,7 @@ class _LoginState extends State<Login> {
                           //   MaterialPageRoute(
                           //       builder: (context) => const NavBarScreen()),
                           //   (Route<dynamic> route) => false,
-                          // );
+                          // );*/
                         },
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<
