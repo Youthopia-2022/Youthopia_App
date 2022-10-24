@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import "package:flutter/material.dart";
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/login_screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:youthopia_2022_app/services/supabase.dart';
@@ -16,8 +17,6 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   // SupabaseHandler supabaseHandler = SupabaseHandler();
 
-  final _passwordController = TextEditingController();
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String _name = "";
@@ -27,12 +26,6 @@ class _SignUpState extends State<SignUp> {
   String _gender = "None";
   String _college = "";
   String _year = "None";
-
-  @override
-  void dispose() {
-    _passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -399,6 +392,31 @@ class _SignUpState extends State<SignUp> {
                     width: double.maxFinite,
                     child: TextButton(
                       onPressed: () async {
+                        _formKey.currentState!.validate();
+                        try {
+                          final res = await Supabase.instance.client.auth
+                              .signUp(email: _email,
+                              password: _password,
+                              data: {
+                                'name': _name,
+                                'phone': _phone,
+                                'gender': _gender,
+                                'college': _college,
+                                'year': _year,
+                              });
+                          ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBarSignupSuccess)
+                                  .toString();
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Login()),
+                                (Route<dynamic> route) => false,
+                              );
+
+                        } on AuthException catch(error) {
+                          debugPrint(error.message.toString());
+                        }
                         // debugPrint(_password);
                         // debugPrint(_email);
                         // if (_formKey.currentState!.validate()) {

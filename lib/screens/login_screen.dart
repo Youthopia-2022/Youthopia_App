@@ -214,53 +214,7 @@ class _LoginState extends State<Login> {
                                       .showSnackBar(snackBarLoginEmailNotConfirm)
                                       .toString();
                                 }
-
                               }
-                              /*if (!_loginClicked) {
-                                setState(() {
-                                  _loginClicked = true;
-                                });
-                                if (_formKey.currentState!.validate()) {
-                                  final res = await supabaseHandler
-                                      .signInExistingUser(_email, _password);
-                                  debugPrint("Response code :$res");
-                                  if (res.error == null) {
-                                    debugPrint("Sign in Successful");
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const NavBarScreen()),
-                                      (Route<dynamic> route) => false,
-                                    );
-                                  } else if (res.error.toString() ==
-                                      'GotrueError(message: Invalid login credentials, statusCode: null)') {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(
-                                            snackBarLoginInvalidCredentials)
-                                        .toString();
-                                    // showDialog(
-                                    //     context: context,
-                                    //     builder: (BuildContext context) {
-                                    //       return const AlertUI('Invalid Credentials');
-                                    //     });
-                                  } else if (res.error.toString() ==
-                                      'GotrueError(message: Email not confirmed, statusCode: null)') {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(snackBarLoginEmailNotConfirm)
-                                        .toString();
-                                  }
-                                  debugPrint(res.error.toString());
-                                  return;
-                                }
-                                _loginClicked = false;
-                              }
-                              // Navigator.pushAndRemoveUntil(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) => const NavBarScreen()),
-                              //   (Route<dynamic> route) => false,
-                              // );*/
                             },
                             style: ButtonStyle(
                                 shape: MaterialStateProperty.all<

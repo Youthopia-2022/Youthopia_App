@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icon.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/login_screen.dart';
 
@@ -14,6 +13,42 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+
+  String _name = 'None';
+  String _email = 'None';
+  String _phone = 'None';
+  String _year = 'None';
+  String _college = 'None';
+  String _gender = 'None';
+
+  @override
+  void initState() {
+    _getProfile();
+    super.initState();
+  }
+
+
+  Future<void> _getProfile() async {
+      try{
+        final userId = supabase.auth.currentUser!.id;
+        final data = await supabase
+            .from('profiles')
+            .select()
+            .eq('id', userId)
+            .single() as Map;
+        setState (() {
+          _name = data['name'].toString();
+          _email = data['email'].toString();
+          _phone = data['phone'].toString();
+          _year = data['year'].toString();
+          _college = data['college'].toString();
+          _gender = data['gender'].toString();
+        });
+      } on PostgrestException catch (error) {
+        debugPrint(error.toString());
+      }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,13 +83,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           Center(
             child: Text(
-              'Vijayant Singh',
+              _name,
               style: TextStyle(fontSize: 22, color: ColourTheme.white),
             ),
           ),
           Center(
             child: Text(
-              'vijayant.singh003@gmail.com',
+              _email,
               style: TextStyle(fontSize: 18, color: ColourTheme.lightGrey),
             ),
           ),
@@ -74,7 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Container(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              '7318470477',
+              _phone,
               style: TextStyle(fontSize: 18, color: ColourTheme.white),
             ),
           ),
@@ -94,7 +129,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Container(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              '2nd Year',
+              _year,
               style: TextStyle(fontSize: 18, color: ColourTheme.white),
             ),
           ),
@@ -114,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Container(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              'DIT University',
+              _college,
               style: TextStyle(fontSize: 18, color: ColourTheme.white),
             ),
           ),
