@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:youthopia_2022_app/constants/gradient_color.dart';
 import 'package:youthopia_2022_app/widgets/horizontal_carousel.dart';
 
@@ -96,11 +95,11 @@ class _MainScreenState extends State<MainScreen> {
           //   carouselController: _controller,
           // ),
           Carousel(
-              imgList,
-              auto: true,
-              enlarge: true,
-              loop: true,
-              height: 200,
+            imgList,
+            auto: true,
+            enlarge: true,
+            loop: true,
+            height: 200,
           ),
           const SizedBox(
             height: 30,
@@ -111,34 +110,23 @@ class _MainScreenState extends State<MainScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                    'Technical',
-                  style: TextStyle(
-                    color: ColourTheme.white,
-                    fontSize: 26
-                  ),
+                  'Technical',
+                  style: TextStyle(color: ColourTheme.white, fontSize: 26),
                 ),
                 TextButton(
-                  onPressed: () {  },
-                  child: GradientText(
-                    'See More',
-                    gradient: ColourTheme.primaryGradient,
-                    style: const TextStyle(
-                      fontSize: 20
-                    )
-                  ),)
+                  onPressed: () {},
+                  child: GradientText('See More',
+                      //gradient: ColourTheme.primaryGradient,
+                      style: const TextStyle(fontSize: 20)),
+                )
               ],
             ),
           ),
           const SizedBox(
             height: 30,
           ),
-          Carousel(
-            imgList,
-            auto: false,
-            enlarge: false,
-            loop: false,
-            height: 150
-          ),
+          Carousel(imgList,
+              auto: false, enlarge: false, loop: false, height: 150),
           const SizedBox(
             height: 30,
           ),
@@ -149,33 +137,22 @@ class _MainScreenState extends State<MainScreen> {
               children: <Widget>[
                 Text(
                   'Cultural',
-                  style: TextStyle(
-                      color: ColourTheme.white,
-                      fontSize: 26
-                  ),
+                  style: TextStyle(color: ColourTheme.white, fontSize: 26),
                 ),
                 TextButton(
-                  onPressed: () {  },
-                  child: GradientText(
-                      'See More',
-                      gradient: ColourTheme.primaryGradient,
-                      style: const TextStyle(
-                          fontSize: 20
-                      )
-                  ),)
+                  onPressed: () {},
+                  child: GradientText('See More',
+                      //gradient: ColourTheme.primaryGradient,
+                      style: const TextStyle(fontSize: 20)),
+                )
               ],
             ),
           ),
           const SizedBox(
             height: 30,
           ),
-          Carousel(
-            imgList,
-            auto: false,
-            enlarge: false,
-            loop: false,
-              height: 150
-          ),
+          Carousel(imgList,
+              auto: false, enlarge: false, loop: false, height: 150),
           const SizedBox(
             height: 30,
           ),
@@ -186,33 +163,22 @@ class _MainScreenState extends State<MainScreen> {
               children: <Widget>[
                 Text(
                   'Informal',
-                  style: TextStyle(
-                      color: ColourTheme.white,
-                      fontSize: 26
-                  ),
+                  style: TextStyle(color: ColourTheme.white, fontSize: 26),
                 ),
                 TextButton(
-                  onPressed: () {  },
-                  child: GradientText(
-                      'See More',
-                      gradient: ColourTheme.primaryGradient,
-                      style: const TextStyle(
-                          fontSize: 20
-                      )
-                  ),)
+                  onPressed: () {},
+                  child: GradientText('See More',
+                      //gradient: ColourTheme.primaryGradient,
+                      style: const TextStyle(fontSize: 20)),
+                )
               ],
             ),
           ),
           const SizedBox(
             height: 30,
           ),
-          Carousel(
-            imgList,
-            auto: false,
-            enlarge: false,
-            loop: false,
-              height: 150
-          ),
+          Carousel(imgList,
+              auto: false, enlarge: false, loop: false, height: 150),
           const SizedBox(
             height: 30,
           ),
@@ -223,33 +189,22 @@ class _MainScreenState extends State<MainScreen> {
               children: <Widget>[
                 Text(
                   'Debate',
-                  style: TextStyle(
-                      color: ColourTheme.white,
-                      fontSize: 26
-                  ),
+                  style: TextStyle(color: ColourTheme.white, fontSize: 26),
                 ),
                 TextButton(
-                  onPressed: () {  },
-                  child: GradientText(
-                      'See More',
-                      gradient: ColourTheme.primaryGradient,
-                      style: const TextStyle(
-                          fontSize: 20
-                      )
-                  ),)
+                  onPressed: () {},
+                  child: GradientText('See More',
+                      //gradient: ColourTheme.primaryGradient,
+                      style: const TextStyle(fontSize: 20)),
+                )
               ],
             ),
           ),
           const SizedBox(
             height: 30,
           ),
-          Carousel(
-            imgList,
-            auto: false,
-            enlarge: false,
-            loop: false,
-              height: 150
-          ),
+          Carousel(imgList,
+              auto: false, enlarge: false, loop: false, height: 150),
         ],
       ),
     );
