@@ -29,6 +29,8 @@ class _LoginState extends State<Login> {
   bool _redirecting = false;
   late final StreamSubscription<AuthState> _authStateSubscription;
 
+  Supa supa = Supa();
+
   @override
   void initState(){
     _authStateSubscription = supabase.auth.onAuthStateChange.listen((data) {
@@ -43,6 +45,7 @@ class _LoginState extends State<Login> {
               const NavBarScreen()),
               (Route<dynamic> route) => false,
         );
+        supa.getUserData();
       }
     });
     super.initState();
@@ -196,10 +199,7 @@ class _LoginState extends State<Login> {
                             onPressed: () async {
                               _formKey.currentState!.validate();
                               try {
-                                await Supabase.instance.client.auth
-                                    .signInWithPassword(
-                                  email: _email,
-                                  password: _password,);
+                                await supa.login(_email, _password);
                               } on AuthException catch(error) {
                                 debugPrint(error.message.toString());
 

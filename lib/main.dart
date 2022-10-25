@@ -32,9 +32,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (BuildContext context, Orientation orientation, deviceType) {
-        return const MaterialApp(
+        return MaterialApp(
+          theme: ThemeData(
+            fontFamily: 'IBM Plex'
+          ),
           debugShowCheckedModeBanner: false,
-          home: LoadingScreen(),
+          home: const LoadingScreen(),
         );
       },
     );
