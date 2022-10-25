@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/login_screen.dart';
+import 'package:youthopia_2022_app/screens/registered_events_screen.dart';
 
 import '../constants/color_theme.dart';
 import '../services/supabase.dart';
@@ -188,7 +189,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: SizedBox(
                         width: 300,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const RegisteredEvents()));
+                          },
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(
