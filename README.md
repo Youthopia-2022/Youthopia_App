@@ -3,10 +3,10 @@
     Official App for registration of events in Youthopia 2022.
 
 ## Currently At
-    Initialise Supabase
+    Integrating Events Backend
     
 ## Completed
-    Bottom NavBar for navigating Tabs
-    Login Page
-    Signup Page
+    Login Signup backend Integration
+    Profile Screen Backend Integration 
+    Home Screen, Events screen UI
     Splash Screen
