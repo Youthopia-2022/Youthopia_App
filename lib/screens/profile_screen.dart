@@ -48,7 +48,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _genderImage = (_gender == "Female")
             ? 'assets/profile_female.jpg'
             : 'assets/profile_male.jpg';
-
       });
     } on PostgrestException catch (error) {
       debugPrint(error.toString());

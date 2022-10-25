@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
-import 'package:youthopia_2022_app/screens/login_screen.dart';
 
 import '../constants/gradient_color.dart';
 

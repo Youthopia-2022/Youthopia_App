@@ -21,7 +21,6 @@ final List<String> imgList = [
 ];
 
 class _MainScreenState extends State<MainScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,11 +39,11 @@ class _MainScreenState extends State<MainScreen> {
       body: ListView(
         children: <Widget>[
           Carousel(
-              imgList,
-              auto: true,
-              enlarge: true,
-              loop: true,
-              height: 200,
+            imgList,
+            auto: true,
+            enlarge: true,
+            loop: true,
+            height: 200,
           ),
           const SizedBox(
             height: 30,
@@ -55,21 +54,15 @@ class _MainScreenState extends State<MainScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                    'Technical',
-                  style: TextStyle(
-                    color: ColourTheme.white,
-                    fontSize: 26
-                  ),
+                  'Technical',
+                  style: TextStyle(color: ColourTheme.white, fontSize: 26),
                 ),
                 TextButton(
-                  onPressed: () {  },
-                  child: GradientText(
-                    'See More',
-                    //gradient: ColourTheme.primaryGradient,
-                    style: const TextStyle(
-                      fontSize: 20
-                    )
-                  ),)
+                  onPressed: () {},
+                  child: const GradientText('See More',
+                      //gradient: ColourTheme.primaryGradient,
+                      style: TextStyle(fontSize: 20)),
+                )
               ],
             ),
           ),
@@ -86,106 +79,75 @@ class _MainScreenState extends State<MainScreen> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 1.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 1.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
                 GestureDetector(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 2.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 2.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
                 GestureDetector(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 3.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 3.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
                 GestureDetector(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 4.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 4.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
                 GestureDetector(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 5.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 5.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
               ],
             ),
           ),
-
           const SizedBox(
             height: 30,
           ),
@@ -196,20 +158,14 @@ class _MainScreenState extends State<MainScreen> {
               children: <Widget>[
                 Text(
                   'Cultural',
-                  style: TextStyle(
-                      color: ColourTheme.white,
-                      fontSize: 26
-                  ),
+                  style: TextStyle(color: ColourTheme.white, fontSize: 26),
                 ),
                 TextButton(
-                  onPressed: () {  },
-                  child: GradientText(
-                      'See More',
+                  onPressed: () {},
+                  child: const GradientText('See More',
                       //gradient: ColourTheme.primaryGradient,
-                      style: const TextStyle(
-                          fontSize: 20
-                      )
-                  ),)
+                      style: TextStyle(fontSize: 20)),
+                )
               ],
             ),
           ),
@@ -226,60 +182,42 @@ class _MainScreenState extends State<MainScreen> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 1.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 1.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
                 GestureDetector(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 2.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 2.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
                 GestureDetector(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 3.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 3.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
               ],
@@ -295,20 +233,14 @@ class _MainScreenState extends State<MainScreen> {
               children: <Widget>[
                 Text(
                   'Informal',
-                  style: TextStyle(
-                      color: ColourTheme.white,
-                      fontSize: 26
-                  ),
+                  style: TextStyle(color: ColourTheme.white, fontSize: 26),
                 ),
                 TextButton(
-                  onPressed: () {  },
-                  child: GradientText(
-                      'See More',
+                  onPressed: () {},
+                  child: const GradientText('See More',
                       //gradient: ColourTheme.primaryGradient,
-                      style: const TextStyle(
-                          fontSize: 20
-                      )
-                  ),)
+                      style: TextStyle(fontSize: 20)),
+                )
               ],
             ),
           ),
@@ -325,100 +257,70 @@ class _MainScreenState extends State<MainScreen> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 1.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 1.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
                 GestureDetector(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 2.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 2.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
                 GestureDetector(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 3.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 3.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
                 GestureDetector(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 4.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 4.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
                 GestureDetector(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 5.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 5.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
               ],
@@ -434,20 +336,14 @@ class _MainScreenState extends State<MainScreen> {
               children: <Widget>[
                 Text(
                   'Debate',
-                  style: TextStyle(
-                      color: ColourTheme.white,
-                      fontSize: 26
-                  ),
+                  style: TextStyle(color: ColourTheme.white, fontSize: 26),
                 ),
                 TextButton(
-                  onPressed: () {  },
-                  child: GradientText(
-                      'See More',
+                  onPressed: () {},
+                  child: const GradientText('See More',
                       //gradient: ColourTheme.primaryGradient,
-                      style: const TextStyle(
-                          fontSize: 20
-                      )
-                  ),)
+                      style: TextStyle(fontSize: 20)),
+                )
               ],
             ),
           ),
@@ -464,60 +360,42 @@ class _MainScreenState extends State<MainScreen> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 1.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 1.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
                 GestureDetector(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 2.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 2.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
                 GestureDetector(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                            'assets/sample 3.jpg',
-                            fit: BoxFit.cover,
-                            width: 300.0
-                        )
-                    ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(5)),
+                        child: Image.asset('assets/sample 3.jpg',
+                            fit: BoxFit.cover, width: 300.0)),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                            const Home()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
                   },
                 ),
               ],
