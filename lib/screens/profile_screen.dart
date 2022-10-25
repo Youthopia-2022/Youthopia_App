@@ -35,15 +35,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
       final data = await supabase
           .from('profiles')
           .select()
-          .eq('id', userId)
+          .eq('user_id', userId)
           .single() as Map;
       setState(() {
-        _name = data['name'].toString();
-        _email = data['email'].toString();
-        _phone = data['phone'].toString();
-        _year = data['year'].toString();
-        _college = data['college'].toString();
-        _gender = data['gender'].toString();
+        _name = data['user_name'].toString();
+        _email = data['user_email'].toString();
+        _phone = data['user_phone'].toString();
+        _year = data['user_year'].toString();
+        _college = data['user_college'].toString();
+        _gender = data['user_gender'].toString();
 
         _genderImage = (_gender == "Female")
             ? 'assets/profile_female.jpg'
