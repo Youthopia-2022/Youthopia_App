@@ -3,7 +3,6 @@ import "package:flutter/material.dart";
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/login_screen.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:youthopia_2022_app/services/supabase.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/widgets/snack_bar.dart';
 
@@ -26,6 +25,13 @@ class _SignUpState extends State<SignUp> {
   String _gender = "None";
   String _college = "";
   String _year = "None";
+  late bool _isPasswordVisible;
+
+  @override
+  void initState() {
+    super.initState();
+    _isPasswordVisible = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -359,7 +365,7 @@ class _SignUpState extends State<SignUp> {
                     padding:
                         const EdgeInsets.symmetric(vertical: 7, horizontal: 8),
                     child: TextFormField(
-                      obscureText: true,
+                      obscureText: !_isPasswordVisible,
                       validator: (String? value) {
                         if (value!.length < 6) {
                           return 'Password must be at least 6 characters';
@@ -371,6 +377,21 @@ class _SignUpState extends State<SignUp> {
                       },
                       style: TextStyle(fontSize: 20, color: ColourTheme.white),
                       decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              // Based on passwordVisible state choose the icon
+                              _isPasswordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              // Update the state i.e. toogle the state of passwordVisible variable
+                              setState(() {
+                                _isPasswordVisible = !_isPasswordVisible;
+                              });
+                            },
+                          ),
                           enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: ColourTheme.grey)),
                           focusedBorder: UnderlineInputBorder(
@@ -395,9 +416,10 @@ class _SignUpState extends State<SignUp> {
                         _formKey.currentState!.validate();
                         try {
                           final res = await Supabase.instance.client.auth
-                              .signUp(email: _email,
-                              password: _password,
-                              data: {
+                              .signUp(
+                                  email: _email,
+                                  password: _password,
+                                  data: {
                                 'name': _name,
                                 'phone': _phone,
                                 'gender': _gender,
@@ -405,16 +427,15 @@ class _SignUpState extends State<SignUp> {
                                 'year': _year,
                               });
                           ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBarSignupSuccess)
-                                  .toString();
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Login()),
-                                (Route<dynamic> route) => false,
-                              );
-
-                        } on AuthException catch(error) {
+                              .showSnackBar(snackBarSignupSuccess)
+                              .toString();
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Login()),
+                            (Route<dynamic> route) => false,
+                          );
+                        } on AuthException catch (error) {
                           debugPrint(error.message.toString());
                         }
                         // debugPrint(_password);
