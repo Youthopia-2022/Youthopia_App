@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +29,8 @@ class _LoginState extends State<Login> {
   bool _redirecting = false;
   late final StreamSubscription<AuthState> _authStateSubscription;
   late bool _isPasswordVisible;
-
   Supa supa = Supa();
+
 
   @override
   void initState() {
@@ -48,7 +49,10 @@ class _LoginState extends State<Login> {
     });
     super.initState();
     _isPasswordVisible = false;
+    
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -158,21 +162,21 @@ class _LoginState extends State<Login> {
                             style: TextStyle(
                                 fontSize: 20, color: ColourTheme.white),
                             decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                            icon: Icon(
-                              // Based on passwordVisible state choose the icon
-                              _isPasswordVisible
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {
-                              // Update the state i.e. toogle the state of passwordVisible variable
-                              setState(() {
-                                _isPasswordVisible = !_isPasswordVisible;
-                              });
-                            },
-                          ),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    // Based on passwordVisible state choose the icon
+                                    _isPasswordVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    // Update the state i.e. toogle the state of passwordVisible variable
+                                    setState(() {
+                                      _isPasswordVisible = !_isPasswordVisible;
+                                    });
+                                  },
+                                ),
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: ColourTheme.grey)),
@@ -220,6 +224,7 @@ class _LoginState extends State<Login> {
                                 await supa.login(_email, _password);
                               } on AuthException catch (error) {
                                 debugPrint(error.message.toString());
+                                debugPrint(error.statusCode.toString());
 
                                 if (error.message ==
                                     "Invalid login credentials") {
@@ -234,6 +239,11 @@ class _LoginState extends State<Login> {
                                           snackBarLoginEmailNotConfirm)
                                       .toString();
                                 }
+                                /* if () {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBarNoInternet)
+                                      .toString();
+                                } */
                               }
                             },
                             style: ButtonStyle(

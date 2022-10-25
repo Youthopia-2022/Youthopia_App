@@ -435,8 +435,10 @@ class _SignUpState extends State<SignUp> {
                                 builder: (context) => const Login()),
                             (Route<dynamic> route) => false,
                           );
-                        } on AuthException catch (error) {
-                          debugPrint(error.message.toString());
+                        } on AuthException {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(snackBarNoInternet)
+                              .toString();
                         }
                         // debugPrint(_password);
                         // debugPrint(_email);

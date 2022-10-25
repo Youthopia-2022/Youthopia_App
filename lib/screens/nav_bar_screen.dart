@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
-import 'package:youthopia_2022_app/screens/home_screen.dart';
 import 'package:youthopia_2022_app/screens/main_screen.dart';
 import 'package:youthopia_2022_app/screens/profile_screen.dart';
 
@@ -43,7 +42,7 @@ class _NavBarScreenState extends State<NavBarScreen> {
         tabs: const [
           GButton(icon: Icons.home, text: "Home"),
           GButton(icon: Icons.dataset, text: "Category"),
-          GButton(icon: Icons.settings, text: "Settings"),
+          GButton(icon: Icons.person, text: "Profile"),
         ],
         selectedIndex: _currentPageIndex,
         onTabChange: (index) {
