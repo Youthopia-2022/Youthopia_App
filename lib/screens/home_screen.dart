@@ -47,11 +47,7 @@ class _HomeState extends State<Home> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (context) => const Login()),
-                            );
+                            Navigator.pop(context);
                           },
                           icon: const Icon(
                             Icons.arrow_back,
