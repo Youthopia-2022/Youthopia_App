@@ -69,11 +69,6 @@ class _HomeState extends State<Home> {
                         GradientText(
                           'Robo Soccer',
                           style: TextStyle(fontSize: 38),
-                          gradient: LinearGradient(colors: [
-                            Color(0xFFF7797D),
-                            Color(0xFFC471ED),
-                            Color(0xFF12C2E9),
-                          ]),
                         ),
                         Image(
                           image: AssetImage(

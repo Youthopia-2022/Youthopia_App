@@ -65,7 +65,7 @@ class _MainScreenState extends State<MainScreen> {
                   onPressed: () {  },
                   child: GradientText(
                     'See More',
-                    gradient: ColourTheme.primaryGradient,
+                    //gradient: ColourTheme.primaryGradient,
                     style: const TextStyle(
                       fontSize: 20
                     )
@@ -205,7 +205,7 @@ class _MainScreenState extends State<MainScreen> {
                   onPressed: () {  },
                   child: GradientText(
                       'See More',
-                      gradient: ColourTheme.primaryGradient,
+                      //gradient: ColourTheme.primaryGradient,
                       style: const TextStyle(
                           fontSize: 20
                       )
@@ -304,7 +304,7 @@ class _MainScreenState extends State<MainScreen> {
                   onPressed: () {  },
                   child: GradientText(
                       'See More',
-                      gradient: ColourTheme.primaryGradient,
+                      //gradient: ColourTheme.primaryGradient,
                       style: const TextStyle(
                           fontSize: 20
                       )
@@ -443,7 +443,7 @@ class _MainScreenState extends State<MainScreen> {
                   onPressed: () {  },
                   child: GradientText(
                       'See More',
-                      gradient: ColourTheme.primaryGradient,
+                      //gradient: ColourTheme.primaryGradient,
                       style: const TextStyle(
                           fontSize: 20
                       )
