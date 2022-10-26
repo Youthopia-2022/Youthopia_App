@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/constants/gradient_color.dart';
+import 'package:youthopia_2022_app/screens/out_registration_form_screen.dart';
 import 'package:youthopia_2022_app/screens/see_more_screen.dart';
 import 'package:youthopia_2022_app/widgets/horizontal_carousel.dart';
 
@@ -107,7 +108,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   onTap: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Home()));
+                        MaterialPageRoute(builder: (context) => const OUTRegistrationForm()));
                   },
                 ),
                 GestureDetector(

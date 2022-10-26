@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 
 import '../constants/gradient_color.dart';
+import 'dit_registration_form_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -177,7 +178,13 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                  const DITRegistrationForm()));
+                        },
                         icon: const Icon(
                           Icons.edit,
                           size: 24.0,
