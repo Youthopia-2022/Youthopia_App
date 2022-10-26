@@ -13,6 +13,8 @@ environment:
 dependencies:
   awesome_snackbar_content: ^0.0.8
   carousel_slider: ^4.1.1
+  connectivity: ^3.0.6
+  connectivity_plus: ^3.0.2
   cupertino_icons: ^1.0.2
   device_preview: ^1.1.0
   email_validator: ^2.1.17

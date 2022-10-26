@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -21,18 +22,18 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String _email = "";
   String _password = "";
   bool _redirecting = false;
   late final StreamSubscription<AuthState> _authStateSubscription;
-
+  late bool _isPasswordVisible;
   Supa supa = Supa();
 
+
   @override
-  void initState(){
+  void initState() {
     _authStateSubscription = supabase.auth.onAuthStateChange.listen((data) {
       if (_redirecting) return;
       final session = data.session;
@@ -40,16 +41,18 @@ class _LoginState extends State<Login> {
         _redirecting = true;
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-              const NavBarScreen()),
-              (Route<dynamic> route) => false,
+          MaterialPageRoute(builder: (context) => const NavBarScreen()),
+          (Route<dynamic> route) => false,
         );
         supa.getUserData();
       }
     });
     super.initState();
+    _isPasswordVisible = false;
+    
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +92,11 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.only(top: 20, right: 10),
+                              padding:
+                                  const EdgeInsets.only(top: 20, right: 10),
                               child: const Image(
-                                  image: AssetImage('assets/youthopia_face.png'),
+                                  image:
+                                      AssetImage('assets/youthopia_face.png'),
                                   color: Color.fromRGBO(255, 255, 255, 0.15),
                                   colorBlendMode: BlendMode.modulate),
                             )
@@ -123,7 +128,8 @@ class _LoginState extends State<Login> {
                                       borderSide:
                                           BorderSide(color: ColourTheme.grey)),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(color: ColourTheme.pink),
+                                    borderSide:
+                                        BorderSide(color: ColourTheme.pink),
                                   ),
                                   hintText: "Email",
                                   icon: Icon(
@@ -143,7 +149,7 @@ class _LoginState extends State<Login> {
                               vertical: 7, horizontal: 10),
                           child: TextFormField(
                             keyboardType: TextInputType.text,
-                            obscureText: true,
+                            obscureText: !_isPasswordVisible,
                             validator: (String? value) {
                               if (value!.length < 6) {
                                 return 'Password must be at least 6 characters';
@@ -156,6 +162,21 @@ class _LoginState extends State<Login> {
                             style: TextStyle(
                                 fontSize: 20, color: ColourTheme.white),
                             decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    // Based on passwordVisible state choose the icon
+                                    _isPasswordVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    // Update the state i.e. toogle the state of passwordVisible variable
+                                    setState(() {
+                                      _isPasswordVisible = !_isPasswordVisible;
+                                    });
+                                  },
+                                ),
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide:
                                         BorderSide(color: ColourTheme.grey)),
@@ -179,7 +200,8 @@ class _LoginState extends State<Login> {
                               Navigator.push(
                                   context,
                                   CupertinoPageRoute(
-                                      builder: (context) => const NavBarScreen()));
+                                      builder: (context) =>
+                                          const NavBarScreen()));
                             },
                             child: Text(
                               "Forgot Password?",
@@ -200,31 +222,42 @@ class _LoginState extends State<Login> {
                               _formKey.currentState!.validate();
                               try {
                                 await supa.login(_email, _password);
-                              } on AuthException catch(error) {
+                              } on AuthException catch (error) {
                                 debugPrint(error.message.toString());
+                                debugPrint(error.statusCode.toString());
 
-                                if(error.message == "Invalid login credentials") {
+                                if (error.message ==
+                                    "Invalid login credentials") {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(
-                                      snackBarLoginInvalidCredentials)
+                                          snackBarLoginInvalidCredentials)
                                       .toString();
                                 }
-                                if(error.message == "Email not confirmed") {
+                                if (error.message == "Email not confirmed") {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBarLoginEmailNotConfirm)
+                                      .showSnackBar(
+                                          snackBarLoginEmailNotConfirm)
                                       .toString();
                                 }
+                                /* if () {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBarNoInternet)
+                                      .toString();
+                                } */
                               }
                             },
                             style: ButtonStyle(
                                 shape: MaterialStateProperty.all<
                                         RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(40))),
-                                backgroundColor: MaterialStateProperty.all<Color>(
-                                    ColourTheme.blue),
-                                foregroundColor: MaterialStateProperty.all<Color>(
-                                    ColourTheme.white)),
+                                        borderRadius:
+                                            BorderRadius.circular(40))),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        ColourTheme.blue),
+                                foregroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        ColourTheme.white)),
                             child: const Padding(
                               padding: EdgeInsets.symmetric(vertical: 3),
                               child: Text(
@@ -261,7 +294,8 @@ class _LoginState extends State<Login> {
                                       Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => const SignUp()),
+                                            builder: (context) =>
+                                                const SignUp()),
                                         (Route<dynamic> route) => false,
                                       );
                                     }),

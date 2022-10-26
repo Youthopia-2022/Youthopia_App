@@ -12,6 +12,17 @@ var snackBarSignupSuccess = SnackBar(
   ),
 );
 
+var snackBarNoInternet = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  content: AwesomeSnackbarContent(
+    title: 'Oh No!',
+    message: '  ⚡  Please Check your Internet Connection and Try Again',
+    contentType: ContentType.failure,
+  ),
+);
+
 var snackBarLoginInvalidCredentials = SnackBar(
   elevation: 0,
   behavior: SnackBarBehavior.floating,
