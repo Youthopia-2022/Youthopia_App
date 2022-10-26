@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/constants/gradient_color.dart';
+import 'package:youthopia_2022_app/screens/see_more_screen.dart';
 import 'package:youthopia_2022_app/widgets/horizontal_carousel.dart';
 
 import 'home_screen.dart';
@@ -58,7 +59,13 @@ class _MainScreenState extends State<MainScreen> {
                   style: TextStyle(color: ColourTheme.white, fontSize: 26),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const SeeMoreScreen()));
+                  },
                   child: const GradientText('See More',
                       //gradient: ColourTheme.primaryGradient,
                       style: TextStyle(fontSize: 20)),
@@ -161,7 +168,13 @@ class _MainScreenState extends State<MainScreen> {
                   style: TextStyle(color: ColourTheme.white, fontSize: 26),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const SeeMoreScreen()));
+                  },
                   child: const GradientText('See More',
                       //gradient: ColourTheme.primaryGradient,
                       style: TextStyle(fontSize: 20)),
@@ -236,7 +249,13 @@ class _MainScreenState extends State<MainScreen> {
                   style: TextStyle(color: ColourTheme.white, fontSize: 26),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const SeeMoreScreen()));
+                  },
                   child: const GradientText('See More',
                       //gradient: ColourTheme.primaryGradient,
                       style: TextStyle(fontSize: 20)),
@@ -339,7 +358,13 @@ class _MainScreenState extends State<MainScreen> {
                   style: TextStyle(color: ColourTheme.white, fontSize: 26),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const SeeMoreScreen()));
+                  },
                   child: const GradientText('See More',
                       //gradient: ColourTheme.primaryGradient,
                       style: TextStyle(fontSize: 20)),
