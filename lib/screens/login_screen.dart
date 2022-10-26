@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -12,6 +10,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:youthopia_2022_app/services/supabase.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 
+import '../constants/gradient_color.dart';
 import '../widgets/snack_bar.dart';
 
 class Login extends StatefulWidget {
@@ -31,7 +30,6 @@ class _LoginState extends State<Login> {
   late bool _isPasswordVisible;
   Supa supa = Supa();
 
-
   @override
   void initState() {
     _authStateSubscription = supabase.auth.onAuthStateChange.listen((data) {
@@ -49,10 +47,7 @@ class _LoginState extends State<Login> {
     });
     super.initState();
     _isPasswordVisible = false;
-    
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -197,13 +192,9 @@ class _LoginState extends State<Login> {
                           alignment: Alignment.centerRight,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(
-                                      builder: (context) =>
-                                          const NavBarScreen()));
+                              //Forgot Password Connectivity with Supabase
                             },
-                            child: Text(
+                            child: GradientText(
                               "Forgot Password?",
                               style: TextStyle(
                                 color: ColourTheme.secondary,
@@ -315,10 +306,10 @@ class _LoginState extends State<Login> {
                                         builder: (context) =>
                                             const AboutUsScreen()));
                               },
-                              child: Text(
+                              child: GradientText(
                                 'About Us',
                                 style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 25,
                                     fontFamily: 'IBM Plex',
                                     fontWeight: FontWeight.bold,
                                     color: ColourTheme.secondary),
