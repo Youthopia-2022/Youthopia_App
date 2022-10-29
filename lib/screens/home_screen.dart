@@ -20,37 +20,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  bool _isLoaded = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _getEventData();
-  }
-
-  Future<void> _getEventData() async {
-
-    debugPrint(widget.event.eventId);
-    debugPrint(widget.event.clubId);
-    debugPrint(widget.event.eventName);
-    debugPrint(widget.event.eventVenue);
-    debugPrint(widget.event.eventTime.toString());
-    debugPrint(widget.event.eventDate.toString());
-    debugPrint(widget.event.eventfees.toString());
-    debugPrint(widget.event.eventDescription);
-
-
-    setState(() {
-      _isLoaded = true;
-    });
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
-    return (!_isLoaded) ? const Center(child: CircularProgressIndicator()) :
-    Scaffold(
+    return Scaffold(
       backgroundColor: const Color(0xFF161515),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -185,7 +157,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               Text(
-                                widget.event.eventfees.toString(),
+                                widget.event.eventFees.toString(),
                                 style: const TextStyle(
                                   color: Color.fromARGB(255, 225, 235, 238),
                                   fontSize: 18,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/constants/gradient_color.dart';
-import 'package:youthopia_2022_app/screens/out_registration_form_screen.dart';
 import 'package:youthopia_2022_app/screens/see_more_screen.dart';
 import 'package:youthopia_2022_app/widgets/horizontal_carousel.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -44,22 +43,19 @@ class _MainScreenState extends State<MainScreen> {
     final String eventPosterUrl = Supabase.instance.client
         .storage
         .from('event-posters')
-        .getPublicUrl(result['club_event_id']);
+        .getPublicUrl(result['event_id']);
 
-    int hr = int.parse(result['club_event_time'].substring(0,2));
-    int min = int.parse(result['club_event_time'].substring(3,5));
-
-
-
+    int hr = int.parse(result['event_time'].substring(0,2));
+    int min = int.parse(result['event_time'].substring(3,5));
     return Event(
-      result['club_event_id'],
-      result['club_id'],
-      result['club_event_name'],
-      result['club_event_venue'],
+      result['event_id'],
+      result['event_name'],
+      result['event_venue'],
         TimeOfDay(hour: hr, minute: min),
-      DateTime.parse(result['club_event_date']),
-      result['club_event_fees'],
-      result['club_event_description'],
+      DateTime.parse(result['event_date']),
+      result['event_fees'],
+      result['event_description'],
+      result['event_isTeam'],
       eventPosterUrl
     );
   }
@@ -67,28 +63,33 @@ class _MainScreenState extends State<MainScreen> {
   Future<void> _getData() async {
     try {
       final technical = await Supabase.instance.client
-          .from('technical_events')
-          .select();
+          .from('events')
+          .select()
+          .eq('event_category', 'Technical');
       techEvents = technical.map((e) => toEvent(e)).toList();
 
       final cultural = await Supabase.instance.client
-          .from('cultural_events')
-          .select();
+          .from('events')
+          .select()
+          .eq('event_category', 'Cultural');
       culturalEvents = cultural.map((e) => toEvent(e)).toList();
 
       final informal = await Supabase.instance.client
-          .from('informal_events')
-          .select();
+          .from('events')
+          .select()
+          .eq('event_category', 'Informal');
       informalEvents = informal.map((e) => toEvent(e)).toList();
 
       final debate = await Supabase.instance.client
-          .from('debate_events')
-          .select();
+          .from('events')
+          .select()
+          .eq('event_category', 'Debate');
       debateEvents = debate.map((e) => toEvent(e)).toList();
 
       final arts = await Supabase.instance.client
-          .from('fine_arts_events')
-          .select();
+          .from('events')
+          .select()
+          .eq('event_category', 'Fine Arts');
       artsEvents = arts.map((e) => toEvent(e)).toList();
 
     } on PostgrestException catch (error) {
@@ -142,8 +143,7 @@ class _MainScreenState extends State<MainScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                            const SeeMoreScreen()));
+                            builder: (context) => SeeMoreScreen(techEvents!)));
                   },
                   child: const GradientText('See More',
                       //gradient: ColourTheme.primaryGradient,
@@ -196,8 +196,7 @@ class _MainScreenState extends State<MainScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                            const SeeMoreScreen()));
+                            builder: (context) => SeeMoreScreen(culturalEvents!)));
                   },
                   child: const GradientText('See More',
                       //gradient: ColourTheme.primaryGradient,
@@ -250,8 +249,7 @@ class _MainScreenState extends State<MainScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                            const SeeMoreScreen()));
+                            builder: (context) => SeeMoreScreen(informalEvents!)));
                   },
                   child: const GradientText('See More',
                       //gradient: ColourTheme.primaryGradient,
@@ -304,8 +302,7 @@ class _MainScreenState extends State<MainScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                            const SeeMoreScreen()));
+                            builder: (context) => SeeMoreScreen(debateEvents!)));
                   },
                   child: const GradientText('See More',
                       //gradient: ColourTheme.primaryGradient,
@@ -358,8 +355,7 @@ class _MainScreenState extends State<MainScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                            const SeeMoreScreen()));
+                            builder: (context) => SeeMoreScreen(artsEvents!)));
                   },
                   child: const GradientText('See More',
                       //gradient: ColourTheme.primaryGradient,
