@@ -46,8 +46,8 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                       child: Image.asset('assets/sample 1.jpg')),
                 ),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Home()));
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) => const Home()));
                 },
               ),
               Positioned(
@@ -85,8 +85,8 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                       child: Image.asset('assets/sample 2.jpg')),
                 ),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Home()));
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) => const Home()));
                 },
               ),
               Positioned(
@@ -124,8 +124,8 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                       child: Image.asset('assets/sample 3.jpg')),
                 ),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Home()));
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) => const Home()));
                 },
               ),
               Positioned(
@@ -163,8 +163,8 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                       child: Image.asset('assets/sample 4.jpg')),
                 ),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Home()));
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) => const Home()));
                 },
               ),
               Positioned(
@@ -202,8 +202,8 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                       child: Image.asset('assets/sample 5.jpg')),
                 ),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Home()));
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) => const Home()));
                 },
               ),
               Positioned(

@@ -1,19 +1,56 @@
 import "package:flutter/material.dart";
-
+import 'package:youthopia_2022_app/services/events.dart';
+import 'package:intl/intl.dart';
+import '../constants/color_theme.dart';
 import '../constants/gradient_color.dart';
 import 'dit_registration_form_screen.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home(
+      this.event,
+      {super.key});
+
+  final Event event;
+
 
   @override
   State<Home> createState() => _HomeState();
 }
 
+
 class _HomeState extends State<Home> {
+
+  bool _isLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _getEventData();
+  }
+
+  Future<void> _getEventData() async {
+
+    debugPrint(widget.event.eventId);
+    debugPrint(widget.event.clubId);
+    debugPrint(widget.event.eventName);
+    debugPrint(widget.event.eventVenue);
+    debugPrint(widget.event.eventTime.toString());
+    debugPrint(widget.event.eventDate.toString());
+    debugPrint(widget.event.eventfees.toString());
+    debugPrint(widget.event.eventDescription);
+
+
+    setState(() {
+      _isLoaded = true;
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return (!_isLoaded) ? const Center(child: CircularProgressIndicator()) :
+    Scaffold(
       backgroundColor: const Color(0xFF161515),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -64,27 +101,15 @@ class _HomeState extends State<Home> {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         GradientText(
-                          'Robo Soccer',
-                          style: TextStyle(fontSize: 38),
+                          widget.event.eventName,
+                          style: const TextStyle(fontSize: 38),
                         ),
-                        Image(
+                        const Image(
                           image: AssetImage(
                             'assets/CodeGenX-logo-W 1.png',
                           ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      //mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Text(
-                          "Chanakya Lawn",
-                          style: TextStyle(
-                              color: Color(0xFF1BBEE9),
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -92,20 +117,38 @@ class _HomeState extends State<Home> {
                       padding: const EdgeInsets.all(15.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
+                        children: [Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Venue",
+                              style: TextStyle(
+                                color: ColourTheme.blue,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Text(
+                              widget.event.eventVenue,
+                              style: const TextStyle(
+                                color: Color.fromARGB(255, 225, 235, 238),
+                                fontSize: 18,
+                              ),
+                            ),
+                          ],
+                        ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
+                            children: [
                               Text(
                                 "Date",
                                 style: TextStyle(
-                                  color: Color(0xFF1BBEE9),
+                                  color: ColourTheme.blue,
                                   fontSize: 18,
                                 ),
                               ),
                               Text(
-                                "22/09/2022",
-                                style: TextStyle(
+                                  DateFormat('dd-MM-yyyy').format(widget.event.eventDate).toString(),
+                                style: const TextStyle(
                                   color: Color.fromARGB(255, 225, 235, 238),
                                   fontSize: 18,
                                 ),
@@ -114,17 +157,17 @@ class _HomeState extends State<Home> {
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
+                            children: [
                               Text(
                                 "Time",
                                 style: TextStyle(
-                                  color: Color(0xFF1BBEE9),
+                                  color: ColourTheme.blue,
                                   fontSize: 18,
                                 ),
                               ),
                               Text(
-                                "10:45 am",
-                                style: TextStyle(
+                                widget.event.eventTime.toString().substring(10,15),
+                                style: const TextStyle(
                                   color: Color.fromARGB(255, 225, 235, 238),
                                   fontSize: 18,
                                 ),
@@ -133,41 +176,41 @@ class _HomeState extends State<Home> {
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
+                            children: [
                               Text(
                                 "Price",
                                 style: TextStyle(
-                                  color: Color(0xFF1bbee9),
+                                  color: ColourTheme.blue,
                                   fontSize: 18,
                                 ),
                               ),
                               Text(
-                                "₹ 10",
-                                style: TextStyle(
+                                widget.event.eventfees.toString(),
+                                style: const TextStyle(
                                   color: Color.fromARGB(255, 225, 235, 238),
                                   fontSize: 18,
                                 ),
                               ),
                             ],
                           ),
-                          Row(
-                            //mainAxisAlignment: MainAxisAlignment.start,
-                            children: const [
-                              Text(
-                                "GPF",
-                                style: TextStyle(
-                                  color: Color(0xFF1BBEE9),
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ],
-                          ),
+                          // Row(
+                          //   //mainAxisAlignment: MainAxisAlignment.start,
+                          //   children: const [
+                          //     Text(
+                          //       "GPF",
+                          //       style: TextStyle(
+                          //         color: Color(0xFF1BBEE9),
+                          //         fontSize: 18,
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text(
-                                "Description",
-                                style: TextStyle(
+                                widget.event.eventDescription,
+                                style: const TextStyle(
                                   color: Color.fromARGB(255, 225, 235, 238),
                                   fontSize: 18,
                                 ),
@@ -196,9 +239,9 @@ class _HomeState extends State<Home> {
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40.0),
-                        ))) // <-- Text
-                        ),
+                              borderRadius: BorderRadius.circular(40.0),
+                            ))) // <-- Text
+                    ),
                   ],
                 ),
               ),
