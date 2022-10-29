@@ -4,7 +4,9 @@ import '../constants/color_theme.dart';
 import 'home_screen.dart';
 
 class SeeMoreScreen extends StatefulWidget {
-  const SeeMoreScreen({Key? key}) : super(key: key);
+  const SeeMoreScreen(this.events, {super.key});
+
+  final List events;
 
   @override
   State<SeeMoreScreen> createState() => _SeeMoreScreenState();
@@ -31,208 +33,57 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
           ),
         ),
       ),
-      body: ListView(
-        children: <Widget>[
-          const SizedBox(
-            height: 50,
-          ),
-          Stack(
-            children: [
-              GestureDetector(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(15)),
-                      child: Image.asset('assets/sample 1.jpg')),
-                ),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Home()));
-                },
-              ),
-              Positioned(
-                bottom: 00,
-                left: 0,
-                child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 30.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'Event Name',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+      body: ListView.builder(
+          itemCount: widget.events.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Column(
+              children: [
+                const SizedBox(height: 30,),
+                Stack(
+                  children: [
+                    GestureDetector(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(15)),
+                            child: Image.network(
+                                widget.events[index].eventPosterUrl,
+                              height: 200,
+                              width: 320,
+                            )
                         ),
-                      ],
-                    )),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Stack(
-            children: [
-              GestureDetector(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(15)),
-                      child: Image.asset('assets/sample 2.jpg')),
+                      ),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Home(widget.events[index])));
+                      },
+                    ),
+                    Positioned(
+                      bottom: 00,
+                      left: 0,
+                      child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 20.0, horizontal: 30.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.events[index].eventName,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          )),
+                    ),
+                  ],
                 ),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Home()));
-                },
-              ),
-              Positioned(
-                bottom: 00,
-                left: 0,
-                child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 30.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'Event Name',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    )),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Stack(
-            children: [
-              GestureDetector(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(15)),
-                      child: Image.asset('assets/sample 3.jpg')),
-                ),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Home()));
-                },
-              ),
-              Positioned(
-                bottom: 00,
-                left: 0,
-                child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 30.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'Event Name',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    )),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Stack(
-            children: [
-              GestureDetector(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(15)),
-                      child: Image.asset('assets/sample 4.jpg')),
-                ),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Home()));
-                },
-              ),
-              Positioned(
-                bottom: 00,
-                left: 0,
-                child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 30.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'Event Name',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    )),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Stack(
-            children: [
-              GestureDetector(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(15)),
-                      child: Image.asset('assets/sample 5.jpg')),
-                ),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Home()));
-                },
-              ),
-              Positioned(
-                bottom: 00,
-                left: 0,
-                child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 30.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'Event Name',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    )),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-        ],
-      ),
+              ],
+            );
+          }),
     );
   }
 }
