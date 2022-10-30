@@ -69,8 +69,13 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 420,
+                      child: Image.network(
+                        widget.event.eventPosterUrl,
+                        height: 200,
+                        width: 320,
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
