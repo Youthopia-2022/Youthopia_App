@@ -32,12 +32,13 @@ class _LoginState extends State<Login> {
 
   @override
   void initState() {
-    _authStateSubscription = supabase.auth.onAuthStateChange.listen((data) {
+    _authStateSubscription = supabase.auth.onAuthStateChange.listen((data) async {
       if (_redirecting) return;
       final session = data.session;
       if (session != null) {
         _redirecting = true;
-        supa.getCurrentProfile();
+        await supa.getCurrentProfile();
+        await supa.getEventData();
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const NavBarScreen()),

@@ -12,6 +12,12 @@ class Event {
   final int eventMembers;
   final String eventPosterUrl;
 
+  static List? techEvents;
+  static List? culturalEvents;
+  static List? informalEvents;
+  static List? debateEvents;
+  static List? artsEvents;
+
   Event(this.eventId,
       this.eventName,
       this.eventVenue,

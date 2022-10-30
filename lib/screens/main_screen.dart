@@ -35,69 +35,13 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    _getData();
-  }
-
-  Event toEvent(Map<String, dynamic> result) {
-
-    final String eventPosterUrl = Supabase.instance.client
-        .storage
-        .from('event-posters')
-        .getPublicUrl(result['event_id']);
-
-    int hr = int.parse(result['event_time'].substring(0,2));
-    int min = int.parse(result['event_time'].substring(3,5));
-    return Event(
-      result['event_id'],
-      result['event_name'],
-      result['event_venue'],
-        TimeOfDay(hour: hr, minute: min),
-      DateTime.parse(result['event_date']),
-      result['event_fees'],
-      result['event_description'],
-      result['event_isTeam'],
-      result['event_members'],
-      eventPosterUrl
-    );
-  }
-
-  Future<void> _getData() async {
-    try {
-      final technical = await Supabase.instance.client
-          .from('events')
-          .select()
-          .eq('event_category', 'Technical');
-      techEvents = technical.map((e) => toEvent(e)).toList();
-
-      final cultural = await Supabase.instance.client
-          .from('events')
-          .select()
-          .eq('event_category', 'Cultural');
-      culturalEvents = cultural.map((e) => toEvent(e)).toList();
-
-      final informal = await Supabase.instance.client
-          .from('events')
-          .select()
-          .eq('event_category', 'Informal');
-      informalEvents = informal.map((e) => toEvent(e)).toList();
-
-      final debate = await Supabase.instance.client
-          .from('events')
-          .select()
-          .eq('event_category', 'Debate');
-      debateEvents = debate.map((e) => toEvent(e)).toList();
-
-      final arts = await Supabase.instance.client
-          .from('events')
-          .select()
-          .eq('event_category', 'Fine Arts');
-      artsEvents = arts.map((e) => toEvent(e)).toList();
-
-    } on PostgrestException catch (error) {
-      debugPrint(error.toString());
-    }
 
     setState(() {
+      techEvents = Event.techEvents;
+      culturalEvents = Event.culturalEvents;
+      informalEvents = Event.informalEvents;
+      debateEvents = Event.debateEvents;
+      artsEvents = Event.artsEvents;
       isLoaded = true;
     });
   }

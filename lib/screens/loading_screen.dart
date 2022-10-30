@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:youthopia_2022_app/services/supabase.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
 
@@ -15,6 +15,7 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   bool _redirectCalled = false;
+  Supa supa = Supa();
 
   @override
   void didChangeDependencies(){
@@ -31,6 +32,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
     _redirectCalled = true;
     final session = supabase.auth.currentSession;
     if(session != null){
+     await supa.getCurrentProfile();
+     await supa.getEventData();
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -49,13 +53,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColourTheme.background,
-      body: const Center(
-        child: Image(
-          image: AssetImage(
-            'assets/youthopia_splash.png'
-          ),
-        )
-      ),
+      body: const Center(child: CircularProgressIndicator())
     );
   }
 }
