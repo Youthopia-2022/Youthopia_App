@@ -34,6 +34,28 @@ var snackBarLoginInvalidCredentials = SnackBar(
   ),
 );
 
+var snackBarInvalidCredentials = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  content: AwesomeSnackbarContent(
+    title: 'Oh Uh!',
+    message: 'Invalid Credentials!',
+    contentType: ContentType.failure,
+  ),
+);
+
+var snackBarRegistrationSuccess = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  content: AwesomeSnackbarContent(
+    title: 'Success!',
+    message: 'Successfully registered!',
+    contentType: ContentType.success,
+  ),
+);
+
 var snackBarLoginEmailNotConfirm = SnackBar(
   elevation: 0,
   behavior: SnackBarBehavior.floating,

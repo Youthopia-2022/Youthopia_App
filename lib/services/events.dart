@@ -9,7 +9,14 @@ class Event {
   final int eventFees;
   final String eventDescription;
   final bool isTeamEvent;
+  final int eventMembers;
   final String eventPosterUrl;
+
+  static List? techEvents;
+  static List? culturalEvents;
+  static List? informalEvents;
+  static List? debateEvents;
+  static List? artsEvents;
 
   Event(this.eventId,
       this.eventName,
@@ -19,5 +26,7 @@ class Event {
       this.eventFees,
       this.eventDescription,
       this.isTeamEvent,
-      this.eventPosterUrl );
+      this.eventMembers,
+      this.eventPosterUrl,
+      );
 }

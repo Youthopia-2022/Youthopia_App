@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/login_screen.dart';
 import 'package:youthopia_2022_app/screens/registered_events_screen.dart';
-import 'package:youthopia_2022_app/widgets/snack_bar.dart';
-
+import 'package:youthopia_2022_app/services/users.dart';
 import '../constants/color_theme.dart';
 import '../services/supabase.dart';
 
@@ -32,28 +31,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _getProfile() async {
-    try {
-      final userId = supabase.auth.currentUser!.id;
-      final data = await supabase
-          .from('profiles')
-          .select()
-          .eq('user_id', userId)
-          .single() as Map;
       setState(() {
-        _name = data['user_name'].toString();
-        _email = data['user_email'].toString();
-        _phone = data['user_phone'].toString();
-        _year = data['user_year'].toString();
-        _college = data['user_college'].toString();
-        _gender = data['user_gender'].toString();
-
+        _name = UserProfile.currentUser!.userName;
+        _email = UserProfile.currentUser!.userEmail;
+        _phone = UserProfile.currentUser!.userPhone;
+        _year = UserProfile.currentUser!.userYear;
+        _college = UserProfile.currentUser!.userCollege;
+        _gender = UserProfile.currentUser!.userGender;
         _genderImage = (_gender == "Female")
             ? 'assets/profile_female.jpg'
             : 'assets/profile_male.jpg';
       });
-    } on PostgrestException catch (error) {
-      debugPrint(error.toString());
-    }
   }
 
   @override

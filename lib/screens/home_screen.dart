@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../constants/color_theme.dart';
 import '../constants/gradient_color.dart';
 import 'dit_registration_form_screen.dart';
+import 'dit_individual_reg_form_screen.dart';
 
 class Home extends StatefulWidget {
   const Home(
@@ -68,8 +69,13 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 420,
+                      child: Image.network(
+                        widget.event.eventPosterUrl,
+                        height: 200,
+                        width: 320,
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -193,12 +199,17 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     ElevatedButton.icon(
+
                         onPressed: () {
+
+                          (!widget.event.isTeamEvent)? Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DITIndividualRegFormScreen(widget.event))) :
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                  const DITRegistrationForm()));
+                                  builder: (context) => DITRegistrationForm(widget.event.isTeamEvent)));
                         },
                         icon: const Icon(
                           Icons.edit,
