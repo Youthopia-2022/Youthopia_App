@@ -4,7 +4,13 @@ import '../constants/color_theme.dart';
 import '../constants/gradient_color.dart';
 
 class DITRegistrationForm extends StatefulWidget {
-  const DITRegistrationForm({Key? key}) : super(key: key);
+
+  const DITRegistrationForm(
+      this.isTeamEvent,
+      {super.key});
+
+  final bool isTeamEvent;
+
 
   @override
   State<DITRegistrationForm> createState() => _DITRegistrationFormState();
@@ -12,13 +18,43 @@ class DITRegistrationForm extends StatefulWidget {
 
 class _DITRegistrationFormState extends State<DITRegistrationForm>
     with TickerProviderStateMixin {
-  late TabController? _tabController;
+  late TabController _tabController;
   @override
   void initState() {
     super.initState();
+    debugPrint(widget.isTeamEvent.toString());
     setState(() {
-      _tabController = TabController(length: 2, vsync: this);
+      _tabController = TabController(length: 2, vsync: this, initialIndex:(widget.isTeamEvent)? 0:1);
+      _tabController.addListener(onTap);
     });
+  }
+
+  List<bool> _isDisabled = [true, false];
+
+  final List<Tab> tabs = <Tab>[
+    const Tab(
+      child: GradientText('Team',
+          //gradient: ColourTheme.primaryGradient,
+          style: TextStyle(fontSize: 20)),
+    ),
+    const Tab(
+      child: GradientText('Individual',
+          //gradient: ColourTheme.primaryGradient,
+          style: TextStyle(fontSize: 20)),
+    ),
+  ];
+
+  onTap() {
+      int index = _tabController.previousIndex;
+      setState(() {
+        _tabController.index = index;
+      });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -43,22 +79,9 @@ class _DITRegistrationFormState extends State<DITRegistrationForm>
           bottom: TabBar(
               controller: _tabController,
               indicatorColor: ColourTheme.pink,
-              tabs: const [
-                Tab(
-                  child: GradientText('Team',
-                      //gradient: ColourTheme.primaryGradient,
-                      style: TextStyle(fontSize: 20)),
-                ),
-                Tab(
-                  child: GradientText('Individual',
-                      //gradient: ColourTheme.primaryGradient,
-                      style: TextStyle(fontSize: 20)),
-                ),
-              ]),
+              tabs: tabs),
         ),
-        body: (_tabController == null)
-            ? const Center(child: CircularProgressIndicator())
-            : TabBarView(
+        body:  TabBarView(
             physics: const NeverScrollableScrollPhysics(),
             controller: _tabController,
             children: <Widget>[

@@ -9,6 +9,7 @@ class Event {
   final int eventFees;
   final String eventDescription;
   final bool isTeamEvent;
+  final int eventMembers;
   final String eventPosterUrl;
 
   Event(this.eventId,
@@ -19,5 +20,7 @@ class Event {
       this.eventFees,
       this.eventDescription,
       this.isTeamEvent,
-      this.eventPosterUrl );
+      this.eventMembers,
+      this.eventPosterUrl,
+      );
 }

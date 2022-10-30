@@ -56,6 +56,7 @@ class _MainScreenState extends State<MainScreen> {
       result['event_fees'],
       result['event_description'],
       result['event_isTeam'],
+      result['event_members'],
       eventPosterUrl
     );
   }

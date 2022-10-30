@@ -37,12 +37,12 @@ class _LoginState extends State<Login> {
       final session = data.session;
       if (session != null) {
         _redirecting = true;
+        supa.getCurrentProfile();
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const NavBarScreen()),
           (Route<dynamic> route) => false,
         );
-        supa.getUserData();
       }
     });
     super.initState();
