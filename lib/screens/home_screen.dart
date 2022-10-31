@@ -5,6 +5,7 @@ import '../constants/color_theme.dart';
 import '../constants/gradient_color.dart';
 import 'dit_registration_form_screen.dart';
 import 'dit_individual_reg_form_screen.dart';
+import 'dit_team_reg_form_screen.dart';
 
 class Home extends StatefulWidget {
   const Home(
@@ -209,7 +210,7 @@ class _HomeState extends State<Home> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => DITRegistrationForm(widget.event.isTeamEvent)));
+                                  builder: (context) => DITTeamRegFormScreen(widget.event)));
                         },
                         icon: const Icon(
                           Icons.edit,

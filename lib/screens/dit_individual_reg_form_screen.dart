@@ -75,7 +75,7 @@ class _DITIndividualRegFormScreenState
                       name = value;
                     },
                     decoration: InputDecoration(
-                      disabledBorder:  OutlineInputBorder(
+                      focusedBorder:  OutlineInputBorder(
                           borderSide: BorderSide(
                               width: 2, color: ColourTheme.lightGrey),
                           borderRadius: BorderRadius.circular(5)),
@@ -93,7 +93,7 @@ class _DITIndividualRegFormScreenState
                   Text(
                     'SAP ID',
                     style:
-                    TextStyle(fontSize: 18, color: ColourTheme.white),
+                    TextStyle(fontSize: 24, color: ColourTheme.white),
                   ),
                   TextFormField(
                     onChanged: (String value) {
@@ -101,16 +101,24 @@ class _DITIndividualRegFormScreenState
                     },
                     validator: (String? value) {
                       if (value!.length != 10 ||
-                          !RegExp(r'^[0-9]+$').hasMatch(value)) {
-                        return 'Enter valid Number';
+                          !RegExp(r'^[0-9]+$').hasMatch(value) ||
+                          value.substring(0,5) != "10000") {
+                        return 'Enter valid SAP ID';
                       }
                       return null;
                     },
                     decoration: InputDecoration(
+                        focusedBorder:  OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 2, color: ColourTheme.lightGrey),
+                            borderRadius: BorderRadius.circular(5)),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
                             borderRadius: BorderRadius.circular(5))),
+                    style: const TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
                   const SizedBox(
                     height: 30,
@@ -118,7 +126,7 @@ class _DITIndividualRegFormScreenState
                   Text(
                     'Phone Number',
                     style:
-                    TextStyle(fontSize: 18, color: ColourTheme.white),
+                    TextStyle(fontSize: 24, color: ColourTheme.white),
                   ),
                   TextFormField(
                     initialValue: phone,
@@ -133,7 +141,7 @@ class _DITIndividualRegFormScreenState
                         return null;
                       },
                     decoration: InputDecoration(
-                        disabledBorder:  OutlineInputBorder(
+                        focusedBorder:  OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
                             borderRadius: BorderRadius.circular(5)),
@@ -141,6 +149,9 @@ class _DITIndividualRegFormScreenState
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
                             borderRadius: BorderRadius.circular(5))),
+                    style: const TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
                   const SizedBox(
                     height: 50,
