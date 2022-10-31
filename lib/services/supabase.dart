@@ -40,8 +40,8 @@ class Supa {
          .from('event-posters')
          .getPublicUrl(result['event_id']);
 
-     int hr = int.parse(result['event_time'].substring(0,2));
-     int min = int.parse(result['event_time'].substring(3,5));
+     int hr = int.parse(result['event_startTime'].substring(0,2));
+     int min = int.parse(result['event_startTime'].substring(3,5));
      return Event(
          result['event_id'],
          result['event_name'],
@@ -52,7 +52,7 @@ class Supa {
          result['event_description'],
          result['event_isTeam'],
          result['event_members'],
-         eventPosterUrl
+         '$eventPosterUrl.png'
      );
    }
 
@@ -63,7 +63,6 @@ class Supa {
            .select()
            .eq('event_category', 'Technical');
        Event.techEvents = technical.map((e) => toEvent(e)).toList();
-       debugPrint(Event.techEvents.toString());
        final cultural = await Supabase.instance.client
            .from('events')
            .select()
@@ -79,7 +78,7 @@ class Supa {
        final debate = await Supabase.instance.client
            .from('events')
            .select()
-           .eq('event_category', 'Debate');
+           .eq('event_category', 'Literary');
        Event.debateEvents = debate.map((e) => toEvent(e)).toList();
 
        final arts = await Supabase.instance.client
