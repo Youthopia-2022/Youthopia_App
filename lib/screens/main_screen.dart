@@ -239,7 +239,7 @@ class _MainScreenState extends State<MainScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  'Debate',
+                  'Literary',
                   style: TextStyle(color: ColourTheme.white, fontSize: 26),
                 ),
                 TextButton(
