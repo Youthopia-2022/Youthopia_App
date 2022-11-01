@@ -12,6 +12,7 @@ import 'package:youthopia_2022_app/constants/color_theme.dart';
 
 import '../constants/gradient_color.dart';
 import '../widgets/snack_bar.dart';
+import 'college_screen.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -167,7 +168,7 @@ class _LoginState extends State<Login> {
                                     color: Colors.white,
                                   ),
                                   onPressed: () {
-                                    // Update the state i.e. toogle the state of passwordVisible variable
+                                    // Update the state i.e. toggle the state of passwordVisible variable
                                     setState(() {
                                       _isPasswordVisible = !_isPasswordVisible;
                                     });
@@ -189,21 +190,21 @@ class _LoginState extends State<Login> {
                                 )),
                           ),
                         ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            onPressed: () {
-                              //Forgot Password Connectivity with Supabase
-                            },
-                            child: GradientText(
-                              "Forgot Password?",
-                              style: TextStyle(
-                                color: ColourTheme.secondary,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                        ),
+                        // Align(
+                        //   alignment: Alignment.centerRight,
+                        //   child: TextButton(
+                        //     onPressed: () {
+                        //       //Forgot Password Connectivity with Supabase
+                        //     },
+                        //     child: GradientText(
+                        //       "Forgot Password?",
+                        //       style: TextStyle(
+                        //         color: ColourTheme.secondary,
+                        //         fontSize: 18,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         const SizedBox(
                           height: 15,
                         ),
@@ -287,7 +288,7 @@ class _LoginState extends State<Login> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const SignUp()),
+                                                const CollegeScreen()),
                                         (Route<dynamic> route) => false,
                                       );
                                     }),

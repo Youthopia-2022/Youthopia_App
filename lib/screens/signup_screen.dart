@@ -7,7 +7,12 @@ import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/widgets/snack_bar.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+
+  const SignUp(
+      this.collegeIsDIT, {
+        super.key,
+      });
+  final bool collegeIsDIT ;
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -30,6 +35,7 @@ class _SignUpState extends State<SignUp> {
   @override
   void initState() {
     super.initState();
+    _college = (widget.collegeIsDIT) ? "DIT University" : "";
     _isPasswordVisible = false;
   }
 
@@ -272,6 +278,8 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 7, horizontal: 8),
                       child: TextFormField(
+                        enabled: !widget.collegeIsDIT,
+                        initialValue: _college,
                         validator: (String? value) {
                           return (value!.trim() == "")
                               ? 'College cannot be empty'
