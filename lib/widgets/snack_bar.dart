@@ -6,9 +6,20 @@ var snackBarSignupSuccess = SnackBar(
   behavior: SnackBarBehavior.floating,
   backgroundColor: Colors.transparent,
   content: AwesomeSnackbarContent(
-    title: 'Registration Successful',
+    title: 'Success !! ',
     message: 'Verify your email and login again',
     contentType: ContentType.success,
+  ),
+);
+
+var snackBarEmailExists = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  content: AwesomeSnackbarContent(
+    title: 'Error !! ',
+    message: 'This Email already exists! ',
+    contentType: ContentType.failure,
   ),
 );
 

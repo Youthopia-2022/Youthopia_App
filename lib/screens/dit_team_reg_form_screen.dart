@@ -26,6 +26,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
   String leaderId = "";
   String teamName = "";
   late List members;
+  bool isDIT = (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false ;
 
   @override
   void initState() {
@@ -135,7 +136,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                     height: 30,
                   ),
                   Text(
-                    'Leader SAP ID',
+                    (isDIT) ?'Leader SAP ID' : 'Aadhaar card number',
                     style: TextStyle(fontSize: 24, color: ColourTheme.white),
                   ),
                   TextFormField(
@@ -143,12 +144,19 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                       leaderId = value;
                     },
                     validator: (String? value) {
-                      if (value!.length != 10 ||
-                          !RegExp(r'^[0-9]+$').hasMatch(value) ||
-                          value.substring(0, 5) != "10000") {
-                        return 'Enter valid SAP ID';
+                      if(isDIT) {
+                        if (value!.length != 10 ||
+                            !RegExp(r'^[0-9]+$').hasMatch(value) ||
+                            value.substring(0, 5) != "10000") {
+                          return 'Enter valid SAP ID';
+                        }
+                        return null;
+                      } else {
+                        if(value!.length != 12) {
+                          return 'Enter valid Aadhaar number';
+                        }
+                        return null;
                       }
-                      return null;
                     },
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
