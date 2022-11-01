@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/about_us_screen.dart';
 import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
-import 'package:youthopia_2022_app/screens/signup_screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:youthopia_2022_app/services/supabase.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
@@ -34,7 +33,8 @@ class _LoginState extends State<Login> {
 
   @override
   void initState() {
-    _authStateSubscription = supabase.auth.onAuthStateChange.listen((data) async {
+    _authStateSubscription =
+        supabase.auth.onAuthStateChange.listen((data) async {
       if (_redirecting) return;
       final session = data.session;
       if (session != null) {
@@ -103,48 +103,48 @@ class _LoginState extends State<Login> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Expanded(
-                          child: Container(
-                              height: 60,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 7, horizontal: 8),
-                              child: TextFormField(
-                                keyboardType: TextInputType.emailAddress,
-                                validator: (String? value) {
-                                  if (EmailValidator.validate(value!)) {
-                                    return null;
-                                  } else {
-                                    return 'Enter valid Email';
-                                  }
-                                },
-                                onChanged: (String value) {
-                                  _email = value;
-                                },
-                                style: TextStyle(
-                                    fontSize: 20, color: ColourTheme.white),
-                                decoration: InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: ColourTheme.grey)),
-                                    focusedBorder: UnderlineInputBorder(
+                        Container(
+                            // height: 60,
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 7, horizontal: 8),
+                            child: TextFormField(
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (String? value) {
+                                if (EmailValidator.validate(value!)) {
+                                  return null;
+                                } else {
+                                  return 'Enter valid Email';
+                                }
+                              },
+                              onChanged: (String value) {
+                                _email = value;
+                              },
+                              style: TextStyle(
+                                  fontSize: 20, color: ColourTheme.white),
+                              decoration: InputDecoration(
+                                  enabledBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: ColourTheme.pink),
-                                    ),
-                                    hintText: "Email",
-                                    icon: Icon(
-                                      Icons.mail_outline,
-                                      color: ColourTheme.lightGrey,
-                                    ),
-                                    hintStyle: TextStyle(
-                                      color: ColourTheme.lightGrey,
-                                    )),
-                              )),
-                        ),
-                        const SizedBox(
-                          height: 20,
+                                          BorderSide(color: ColourTheme.grey)),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: ColourTheme.pink),
+                                  ),
+                                  hintText: "Email",
+                                  icon: Icon(
+                                    Icons.mail_outline,
+                                    color: ColourTheme.lightGrey,
+                                  ),
+                                  hintStyle: TextStyle(
+                                    color: ColourTheme.lightGrey,
+                                  )),
+                            )),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.03,
                         ),
                         Container(
-                          height: 60,
+                          //height: 60,
+                          width: double.infinity,
                           padding: const EdgeInsets.symmetric(
                               vertical: 7, horizontal: 10),
                           child: TextFormField(
@@ -215,28 +215,29 @@ class _LoginState extends State<Login> {
                           width: double.maxFinite,
                           child: TextButton(
                             onPressed: () async {
-                              SystemChannels.textInput.invokeMethod('TextInput.hide');
-                              if(_formKey.currentState!.validate()) {
-                                try{
+                              SystemChannels.textInput
+                                  .invokeMethod('TextInput.hide');
+                              if (_formKey.currentState!.validate()) {
+                                try {
                                   await supa.login(_email, _password);
                                 } on AuthException catch (error) {
                                   debugPrint(error.message.toString());
                                   debugPrint(error.statusCode.toString());
 
-                                  if (error.message == "Invalid login credentials") {
+                                  if (error.message ==
+                                      "Invalid login credentials") {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(
-                                        snackBarLoginInvalidCredentials)
+                                            snackBarLoginInvalidCredentials)
                                         .toString();
                                   }
                                   if (error.message == "Email not confirmed") {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(
-                                        snackBarLoginEmailNotConfirm)
+                                            snackBarLoginEmailNotConfirm)
                                         .toString();
                                   }
-
-                              }
+                                }
                                 /* if () {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBarNoInternet)
