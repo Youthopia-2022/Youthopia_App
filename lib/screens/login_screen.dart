@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/about_us_screen.dart';
 import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
@@ -102,41 +103,43 @@ class _LoginState extends State<Login> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Container(
-                            height: 60,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 7, horizontal: 8),
-                            child: TextFormField(
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (String? value) {
-                                if (EmailValidator.validate(value!)) {
-                                  return null;
-                                } else {
-                                  return 'Enter valid Email';
-                                }
-                              },
-                              onChanged: (String value) {
-                                _email = value;
-                              },
-                              style: TextStyle(
-                                  fontSize: 20, color: ColourTheme.white),
-                              decoration: InputDecoration(
-                                  enabledBorder: UnderlineInputBorder(
+                        Expanded(
+                          child: Container(
+                              height: 60,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 7, horizontal: 8),
+                              child: TextFormField(
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (String? value) {
+                                  if (EmailValidator.validate(value!)) {
+                                    return null;
+                                  } else {
+                                    return 'Enter valid Email';
+                                  }
+                                },
+                                onChanged: (String value) {
+                                  _email = value;
+                                },
+                                style: TextStyle(
+                                    fontSize: 20, color: ColourTheme.white),
+                                decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: ColourTheme.grey)),
+                                    focusedBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: ColourTheme.grey)),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: ColourTheme.pink),
-                                  ),
-                                  hintText: "Email",
-                                  icon: Icon(
-                                    Icons.mail_outline,
-                                    color: ColourTheme.lightGrey,
-                                  ),
-                                  hintStyle: TextStyle(
-                                    color: ColourTheme.lightGrey,
-                                  )),
-                            )),
+                                          BorderSide(color: ColourTheme.pink),
+                                    ),
+                                    hintText: "Email",
+                                    icon: Icon(
+                                      Icons.mail_outline,
+                                      color: ColourTheme.lightGrey,
+                                    ),
+                                    hintStyle: TextStyle(
+                                      color: ColourTheme.lightGrey,
+                                    )),
+                              )),
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -212,26 +215,28 @@ class _LoginState extends State<Login> {
                           width: double.maxFinite,
                           child: TextButton(
                             onPressed: () async {
-                              _formKey.currentState!.validate();
-                              try {
-                                await supa.login(_email, _password);
-                              } on AuthException catch (error) {
-                                debugPrint(error.message.toString());
-                                debugPrint(error.statusCode.toString());
+                              SystemChannels.textInput.invokeMethod('TextInput.hide');
+                              if(_formKey.currentState!.validate()) {
+                                try{
+                                  await supa.login(_email, _password);
+                                } on AuthException catch (error) {
+                                  debugPrint(error.message.toString());
+                                  debugPrint(error.statusCode.toString());
 
-                                if (error.message ==
-                                    "Invalid login credentials") {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(
-                                          snackBarLoginInvalidCredentials)
-                                      .toString();
-                                }
-                                if (error.message == "Email not confirmed") {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(
-                                          snackBarLoginEmailNotConfirm)
-                                      .toString();
-                                }
+                                  if (error.message == "Invalid login credentials") {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(
+                                        snackBarLoginInvalidCredentials)
+                                        .toString();
+                                  }
+                                  if (error.message == "Email not confirmed") {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(
+                                        snackBarLoginEmailNotConfirm)
+                                        .toString();
+                                  }
+
+                              }
                                 /* if () {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBarNoInternet)
