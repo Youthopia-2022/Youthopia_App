@@ -23,14 +23,16 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
   String leaderName = UserProfile.currentUser!.userName;
   String leaderPhone = UserProfile.currentUser!.userPhone;
   String uuid = UserProfile.currentUser!.userId;
+  String leaderEmail = UserProfile.currentUser!.userEmail;
   String leaderId = "";
   String teamName = "";
+  String eventId = "";
   late List members;
   bool isDIT = (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false ;
 
   @override
   void initState() {
-    debugPrint(widget.event.eventMembers.toString());
+    eventId = widget.event.eventId;
     members = List.filled(widget.event.eventMembers - 1, null);
     super.initState();
   }
@@ -112,7 +114,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                     validator: (String? value) {
                       String name = value!.trim();
                       return (name.isEmpty ||
-                              !RegExp(r'^[A-Za-z]+$').hasMatch(name))
+                              !RegExp(r'^[A-Za-z ]+$').hasMatch(name))
                           ? 'Enter valid Name'
                           : null;
                     },
@@ -236,17 +238,8 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                               TextFormField(
                                 validator: (String? value) {
                                   String name = value!.trim();
-                                  // bool flag = false;
-                                  // for(int i = 0; i < index; i++) {
-
-                                  //   if(members[i] == null || members[i] == '') {
-                                  //     flag = true ;
-                                  //   }
-                                  //   if(flag == true && members[i] != null)
-                                  //     return 'Eeee';
-                                  // }
                                   return (name.isEmpty ||
-                                          !RegExp(r'^[A-Za-z]+$')
+                                          !RegExp(r'^[A-Za-z ]+$')
                                               .hasMatch(name))
                                       ? (name.isEmpty)
                                           ? null
@@ -279,24 +272,6 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                           );
                         }),
                   ),
-                  /*Text(
-                        'Add Team members',
-                        style: TextStyle(
-                            fontSize: 18, color: ColourTheme.white),
-                      ),
-                      QuantityInput(
-                          value: _teamMembers,
-                          onChanged: (value) => setState(() => _teamMembers = int.parse(value.replaceAll(',', ''))),
-                        buttonColor: ColourTheme.grey,
-                        iconColor: ColourTheme.white,
-                        type: QuantityInputType.int,
-                          decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 2, color: ColourTheme.lightGrey),
-                                  borderRadius: BorderRadius.circular(5))),
-
-                      ),*/
                   const SizedBox(
                     height: 50,
                   ),
@@ -316,46 +291,75 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                             debugPrint(leaderPhone);
                             debugPrint(members.toString());
 
+                            String orderId = '$eventId-$leaderId';
 
-                            try {
-                              final resParticipants = await supabase
-                                  .from('events')
-                                  .select('registered_participants')
-                                  .eq('event_id', widget.event.eventId);
+                            try{
+                              final check = await supabase
+                                  .from('registrations')
+                                  .select('order_id')
+                                  .eq('order_id', orderId);
 
-                              List participants =
-                                  resParticipants[0]['registered_participants'];
-                              participants.add(uuid);
-                              await supabase.from('events').update({
-                                'registered_participants': participants
-                              }).eq('event_id', widget.event.eventId);
-                              final resEvents = await supabase
-                                  .from('profiles')
-                                  .select('events_registered')
-                                  .eq('user_id', uuid);
+                              if(check.toString() == '[]') {
+                                final data = await supabase
+                                    .from('registrations')
+                                    .insert({
+                                  'order_id': orderId,
+                                  'event_id': eventId,
+                                  'participant_email': leaderEmail,
+                                  'participant_name': leaderName,
+                                  'participant_phone': leaderPhone,
+                                  'participant_identity': leaderId,
+                                  'event_isTeamEvent': true,
+                                  'team_name':teamName,
+                                  'team_members_name':members
+                                });
 
-                              List events = resEvents[0]['events_registered'];
-                              events.add(widget.event.eventId);
-                              await supabase
-                                  .from('profiles')
-                                  .update({'events_registered': events})
-                                  .eq('user_id', uuid);
+                                final resParticipants = await supabase
+                                    .from('events')
+                                    .select('registered_participant')
+                                    .eq('event_id', widget.event.eventId);
 
-                              // final data = await supabase
-                              //     .from('registrations')
-                              //     .upsert({ 'event_id': widget.event.eventId,
-                              //   'message': 'foo', 'username': 'supabot' });
+                                List participants = resParticipants[0]['registered_participant'];
+                                participants.add(uuid);
+                                await supabase
+                                    .from('events')
+                                    .update({'registered_participant' : participants})
+                                    .eq('event_id', widget.event.eventId);
 
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBarRegistrationSuccess)
-                                  .toString();
+                                debugPrint("added in events");
 
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const NavBarScreen()),
-                                (Route<dynamic> route) => false,
-                              );
+                                final resEvents = await supabase
+                                    .from('profiles')
+                                    .select('events_registered')
+                                    .eq('user_id', uuid);
+
+                                List events = resEvents[0]['events_registered'];
+                                events.add(widget.event.eventId);
+                                await supabase
+                                    .from('profiles')
+                                    .update({'events_registered' : events})
+                                    .eq('user_id', uuid);
+
+                                debugPrint("added in profiles");
+
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(
+                                    snackBarRegistrationSuccess)
+                                    .toString();
+
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                      const NavBarScreen()),
+                                      (Route<dynamic> route) => false,
+                                );
+
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBarAlreadyRegistered)
+                                    .toString();
+                              }
                             } on PostgrestException catch (error) {
                               debugPrint(error.toString());
                             }

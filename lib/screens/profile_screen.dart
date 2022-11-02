@@ -173,42 +173,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(
                       height: 30,
                     ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: SizedBox(
-                        width: 300,
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                    const RegisteredEvents()));
-                           
-                          },
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(40))),
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  ColourTheme.blue),
-                              foregroundColor: MaterialStateProperty.all<Color>(
-                                  ColourTheme.white)),
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 6),
-                            child: Text(
-                              "Registered Events",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+
                     Expanded(
                       child: Container(
                         padding: const EdgeInsets.only(bottom: 20),

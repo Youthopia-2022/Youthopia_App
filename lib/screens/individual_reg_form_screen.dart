@@ -25,9 +25,17 @@ class _DITIndividualRegFormScreenState
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String name = UserProfile.currentUser!.userName;
   String phone = UserProfile.currentUser!.userPhone;
+  String email = UserProfile.currentUser!.userEmail;
   String uuid = UserProfile.currentUser!.userId;
-  String id = "";
+  String identity = "";
   bool isDIT = (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false ;
+  String eventId = "";
+  
+  @override
+  void initState() {
+    super.initState();
+    eventId = widget.event.eventId;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +76,7 @@ class _DITIndividualRegFormScreenState
                     validator: (String? value) {
                       String name = value!.trim();
                       return (name.isEmpty ||
-                          !RegExp(r'^[A-Za-z]+$').hasMatch(name))
+                          !RegExp(r'^[A-Za-z ]+$').hasMatch(name))
                           ? 'Enter valid Name'
                           : null;
                     },
@@ -98,7 +106,7 @@ class _DITIndividualRegFormScreenState
                   ),
                   TextFormField(
                     onChanged: (String value) {
-                      id = value;
+                      identity = value;
                     },
                     validator: (String? value) {
                       if(isDIT) {
@@ -171,53 +179,81 @@ class _DITIndividualRegFormScreenState
                       child: TextButton(
                         onPressed: () async {
                           if(_formKey.currentState!.validate()) {
-                            debugPrint(id);
+                            debugPrint(identity);
                             debugPrint(phone);
                             debugPrint(name);
-                            debugPrint(uuid);
+                            debugPrint(email);
                             debugPrint(widget.event.eventId);
+                            
+                            String orderId = '$eventId-$identity';
+                            
+                            try{
+                              final check = await supabase
+                                  .from('registrations')
+                                  .select('order_id')
+                                  .eq('order_id', orderId);
 
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(
-                                snackBarRegistrationSuccess)
-                                .toString();
-                            try {
-                              final resParticipants = await supabase
-                                  .from('events')
-                                  .select('registered_participants')
-                                  .eq('event_id', widget.event.eventId);
+                              if(check.toString() == '[]') {
+                                await supabase
+                                    .from('registrations')
+                                    .insert({
+                                  'order_id': orderId,
+                                  'event_id': eventId,
+                                  'participant_email': email,
+                                  'participant_name': name,
+                                  'participant_phone': phone,
+                                  'participant_identity': identity,
+                                  'event_isTeamEvent': false,
+                                  'team_name':null,
+                                  'team_members_name':null
+                                });
 
-                              List participants = resParticipants[0]['registered_participants'];
-                              participants.add(uuid);
-                              await supabase
-                                  .from('events')
-                                  .update({'registered_participants' : participants})
-                                  .eq('event_id', widget.event.eventId);
-                              final resEvents = await supabase
-                                  .from('profiles')
-                                  .select('events_registered')
-                                  .eq('user_id', uuid);
+                                final resParticipants = await supabase
+                                    .from('events')
+                                    .select('registered_participant')
+                                    .eq('event_id', widget.event.eventId);
 
-                              List events = resEvents[0]['events_registered'];
-                              events.add(widget.event.eventId);
-                              await supabase
-                                  .from('profiles')
-                                  .update({'events_registered' : events})
-                                  .eq('user_id', uuid);
+                                List participants = resParticipants[0]['registered_participant'];
+                                participants.add(uuid);
+                                await supabase
+                                    .from('events')
+                                    .update({'registered_participant' : participants})
+                                    .eq('event_id', widget.event.eventId);
 
-                              // final data = await supabase
-                              //     .from('registrations')
-                              //     .upsert({ 'event_id': widget.event.eventId,
-                              //   'message': 'foo', 'username': 'supabot' });
+                                debugPrint("added in events");
 
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                    const NavBarScreen()),
-                                    (Route<dynamic> route) => false,
-                              );
-                          } on PostgrestException catch (error) {
+                                final resEvents = await supabase
+                                    .from('profiles')
+                                    .select('events_registered')
+                                    .eq('user_id', uuid);
+
+                                List events = resEvents[0]['events_registered'];
+                                events.add(widget.event.eventId);
+                                await supabase
+                                    .from('profiles')
+                                    .update({'events_registered' : events})
+                                    .eq('user_id', uuid);
+
+                                debugPrint("added in profiles");
+
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(
+                                    snackBarRegistrationSuccess)
+                                    .toString();
+
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                      const NavBarScreen()),
+                                      (Route<dynamic> route) => false,
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBarAlreadyRegistered)
+                                    .toString();
+                              }
+                            } on PostgrestException catch (error) {
                               debugPrint(error.toString());
                             }
                           } else {

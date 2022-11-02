@@ -3,9 +3,8 @@ import 'package:youthopia_2022_app/services/events.dart';
 import 'package:intl/intl.dart';
 import '../constants/color_theme.dart';
 import '../constants/gradient_color.dart';
-import 'dit_registration_form_screen.dart';
-import 'dit_individual_reg_form_screen.dart';
-import 'dit_team_reg_form_screen.dart';
+import 'individual_reg_form_screen.dart';
+import 'team_reg_form_screen.dart';
 
 class Home extends StatefulWidget {
   const Home(
