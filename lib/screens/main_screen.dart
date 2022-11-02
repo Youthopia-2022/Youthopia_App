@@ -3,7 +3,6 @@ import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/constants/gradient_color.dart';
 import 'package:youthopia_2022_app/screens/see_more_screen.dart';
 import 'package:youthopia_2022_app/widgets/horizontal_carousel.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/services/events.dart';
 
 import 'home_screen.dart';

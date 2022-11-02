@@ -51,442 +51,425 @@ class _SignUpState extends State<SignUp> {
           key: _formKey,
           child: ListView(
             children: [
-                const SizedBox(
-                  height: 40,
+              const SizedBox(
+                height: 40,
+              ),
+              ShaderMask(
+                shaderCallback: (Rect rect) {
+                  return ColourTheme.primaryGradient.createShader(rect);
+                },
+                child: Text(
+                  "Welcome to Youthopia !",
+                  style: TextStyle(
+                      color: ColourTheme.white,
+                      fontSize: 30,
+                      fontFamily: 'IBM Plex'),
                 ),
-                ShaderMask(
-                  shaderCallback: (Rect rect) {
-                    return ColourTheme.primaryGradient.createShader(rect);
-                  },
-                  child: Text(
-                    "Welcome to Youthopia !",
-                    style: TextStyle(
-                        color: ColourTheme.white,
-                        fontSize: 30,
-                        fontFamily: 'IBM Plex'),
-                  ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                RichText(
-                  text: TextSpan(children: [
-                    TextSpan(
-                        style: TextStyle(
-                            color: ColourTheme.white,
-                            fontSize: 18,
-                            fontFamily: 'IBM Plex'),
-                        text: "Already have an account "),
-                    TextSpan(
-                        style: TextStyle(
-                            color: ColourTheme.secondary,
-                            fontSize: 18,
-                            fontFamily: 'IBM Plex',
-                            fontWeight: FontWeight.bold),
-                        text: "Log in",
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Login()),
-                                  (Route<dynamic> route) => false,
-                            );
-                          }),
-                  ]),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Container(
-                    height: 60,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 7, horizontal: 8),
-                    child: TextFormField(
-                      keyboardType: TextInputType.text,
-                      validator: (String? value) {
-                        String name = value!.trim();
-                        return (name.isEmpty ||
-                            !RegExp(r'^[A-Za-z ]+$').hasMatch(name))
-                            ? 'Enter valid Name'
-                            : null;
-                      },
-                      onChanged: (String value) {
-                        _name = value;
-                      },
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              RichText(
+                text: TextSpan(children: [
+                  TextSpan(
                       style: TextStyle(
-                          fontSize: 20,
                           color: ColourTheme.white,
+                          fontSize: 18,
                           fontFamily: 'IBM Plex'),
-                      decoration: InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                              BorderSide(color: ColourTheme.grey)),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: ColourTheme.pink),
-                          ),
-                          hintText: "Name",
-                          icon: Icon(
-                            Icons.person,
-                            color: ColourTheme.lightGrey,
-                          ),
-                          hintStyle: TextStyle(
-                            fontFamily: 'IBM Plex',
-                            color: ColourTheme.lightGrey,
-                          )),
-                    )),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    height: 60,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 7, horizontal: 8),
-                    child: TextFormField(
-                      validator: (String? value) {
-                        if (EmailValidator.validate(value!)) {
-                          return null;
-                        } else {
-                          return 'Enter valid Email';
-                        }
-                      },
-                      onChanged: (String value) {
-                        _email = value;
-                      },
+                      text: "Already have an account "),
+                  TextSpan(
                       style: TextStyle(
-                          fontSize: 20,
-                          color: ColourTheme.white,
-                          fontFamily: 'IBM Plex'),
-                      decoration: InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                              BorderSide(color: ColourTheme.grey)),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: ColourTheme.pink),
-                          ),
-                          hintText: "Email",
-                          icon: Icon(
-                            Icons.mail_outline,
-                            color: ColourTheme.lightGrey,
-                          ),
-                          hintStyle: TextStyle(
-                            fontFamily: 'IBM Plex',
-                            color: ColourTheme.lightGrey,
-                          )),
-                    )),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    height: 60,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 7, horizontal: 8),
-                    child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      validator: (String? value) {
-                        if (value!.length != 10 ||
-                            !RegExp(r'^[0-9]+$').hasMatch(value)) {
-                          return 'Enter valid Number';
-                        }
-                        return null;
-                      },
-                      onChanged: (String value) {
-                        _phone = value;
-                      },
-                      style:
-                      TextStyle(fontSize: 20, color: ColourTheme.white),
-                      decoration: InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                              BorderSide(color: ColourTheme.grey)),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                              BorderSide(color: ColourTheme.pink)),
-                          hintText: "Phone number",
-                          icon: Icon(
-                            Icons.phone,
-                            color: ColourTheme.lightGrey,
-                          ),
-                          hintStyle: TextStyle(
-                            fontFamily: 'IBM Plex',
-                            color: ColourTheme.lightGrey,
-                          )),
-                    )),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    height: 72,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 7, horizontal: 8),
-                    child: DropdownButtonFormField(
-                      value: _gender,
-                      onChanged: (String? value) {
-                        setState(() {
-                          _gender = value!;
-                        });
-                      },
-                      validator: (String? value) {
-                        if (value == "None") {
-                          return 'Enter Gender';
-                        }
-                        return null;
-                      },
-                      items: [
-                        DropdownMenuItem(
-                            value: "None",
-                            child: Text(
-                              "Gender",
-                              style: TextStyle(color: ColourTheme.lightGrey),
-                            )),
-                        const DropdownMenuItem(
-                            value: "Male", child: Text("Male")),
-                        const DropdownMenuItem(
-                            value: "Female", child: Text("Female")),
-                        const DropdownMenuItem(
-                            value: "Others", child: Text("Others")),
-                      ],
-                      dropdownColor: ColourTheme.background,
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        color: ColourTheme.lightGrey,
-                      ),
-                      style:
-                      TextStyle(fontSize: 20, color: ColourTheme.white),
-                      decoration: InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                              BorderSide(color: ColourTheme.grey)),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                              BorderSide(color: ColourTheme.pink)),
-                          hintText: "Gender",
-                          icon: Icon(
-                            Icons.male,
-                            color: ColourTheme.lightGrey,
-                          ),
-                          hintStyle: TextStyle(
-                            color: ColourTheme.lightGrey,
-                          )),
-                    )),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    height: 60,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 7, horizontal: 8),
-                    child: TextFormField(
-                      keyboardType: TextInputType.text,
-                      enabled: !widget.collegeIsDIT,
-                      initialValue: _college,
-                      validator: (String? value) {
-                        return (value!.trim() == "")
-                            ? 'College cannot be empty'
-                            : null;
-                      },
-                      onChanged: (String value) {
-                        _college = value;
-                      },
-                      style:
-                      TextStyle(fontSize: 20, color: ColourTheme.white),
-                      decoration: InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                              BorderSide(color: ColourTheme.grey)),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                              BorderSide(color: ColourTheme.pink)),
-                          hintText: "College",
-                          icon: Icon(
-                            Icons.school,
-                            color: ColourTheme.lightGrey,
-                          ),
-                          hintStyle: TextStyle(
-                            color: ColourTheme.lightGrey,
-                          )),
-                    )),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    height: 72,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 7, horizontal: 8),
-                    child: DropdownButtonFormField(
-                      value: _year,
-                      onChanged: (String? value) {
-                        setState(() {
-                          _year = value!;
-                        });
-                      },
-                      validator: (String? value) {
-                        if (value == "None") {
-                          return 'Enter Current year';
-                        }
-                        return null;
-                      },
-                      items: [
-                        DropdownMenuItem(
-                            value: "None",
-                            child: Text(
-                              "Year",
-                              style: TextStyle(color: ColourTheme.lightGrey),
-                            )),
-                        const DropdownMenuItem(
-                            value: "one", child: Text("1st Year")),
-                        const DropdownMenuItem(
-                            value: "two", child: Text("2nd Year")),
-                        const DropdownMenuItem(
-                            value: "three", child: Text("3rd Year")),
-                        const DropdownMenuItem(
-                            value: "four", child: Text("4th Year")),
-                      ],
-                      dropdownColor: ColourTheme.background,
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        color: ColourTheme.lightGrey,
-                      ),
-                      style:
-                      TextStyle(fontSize: 20, color: ColourTheme.white),
-                      decoration: InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide:
-                              BorderSide(color: ColourTheme.grey)),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide:
-                              BorderSide(color: ColourTheme.pink)),
-                          hintText: "Year",
-                          icon: Icon(
-                            Icons.ballot,
-                            color: ColourTheme.lightGrey,
-                          ),
-                          hintStyle: TextStyle(
-                            color: ColourTheme.lightGrey,
-                          )),
-                    )),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 60,
+                          color: ColourTheme.secondary,
+                          fontSize: 18,
+                          fontFamily: 'IBM Plex',
+                          fontWeight: FontWeight.bold),
+                      text: "Log in",
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Login()),
+                            (Route<dynamic> route) => false,
+                          );
+                        }),
+                ]),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Container(
+                  //height: 60,
                   padding:
-                  const EdgeInsets.symmetric(vertical: 7, horizontal: 8),
+                      const EdgeInsets.symmetric(vertical: 7, horizontal: 8),
                   child: TextFormField(
                     keyboardType: TextInputType.text,
-                    obscureText: !_isPasswordVisible,
                     validator: (String? value) {
-                      if (value!.length < 6) {
-                        return 'Password must be at least 6 characters';
+                      String name = value!.trim();
+                      return (name.isEmpty ||
+                              !RegExp(r'^[A-Za-z ]+$').hasMatch(name))
+                          ? 'Enter valid Name'
+                          : null;
+                    },
+                    onChanged: (String value) {
+                      _name = value;
+                    },
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: ColourTheme.white,
+                        fontFamily: 'IBM Plex'),
+                    decoration: InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: ColourTheme.grey)),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: ColourTheme.pink),
+                        ),
+                        hintText: "Name",
+                        icon: Icon(
+                          Icons.person,
+                          color: ColourTheme.lightGrey,
+                        ),
+                        hintStyle: TextStyle(
+                          fontFamily: 'IBM Plex',
+                          color: ColourTheme.lightGrey,
+                        )),
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                  height: 60,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 7, horizontal: 8),
+                  child: TextFormField(
+                    validator: (String? value) {
+                      if (EmailValidator.validate(value!)) {
+                        return null;
+                      } else {
+                        return 'Enter valid Email';
+                      }
+                    },
+                    onChanged: (String value) {
+                      _email = value;
+                    },
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: ColourTheme.white,
+                        fontFamily: 'IBM Plex'),
+                    decoration: InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: ColourTheme.grey)),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: ColourTheme.pink),
+                        ),
+                        hintText: "Email",
+                        icon: Icon(
+                          Icons.mail_outline,
+                          color: ColourTheme.lightGrey,
+                        ),
+                        hintStyle: TextStyle(
+                          fontFamily: 'IBM Plex',
+                          color: ColourTheme.lightGrey,
+                        )),
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                  height: 60,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 7, horizontal: 8),
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    validator: (String? value) {
+                      if (value!.length != 10 ||
+                          !RegExp(r'^[0-9]+$').hasMatch(value)) {
+                        return 'Enter valid Number';
                       }
                       return null;
                     },
                     onChanged: (String value) {
-                      _password = value;
+                      _phone = value;
                     },
                     style: TextStyle(fontSize: 20, color: ColourTheme.white),
                     decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            // Based on passwordVisible state choose the icon
-                            _isPasswordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            // Update the state i.e. toogle the state of passwordVisible variable
-                            setState(() {
-                              _isPasswordVisible = !_isPasswordVisible;
-                            });
-                          },
-                        ),
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: ColourTheme.grey)),
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: ColourTheme.pink)),
-                        hintText: "Password",
+                        hintText: "Phone number",
                         icon: Icon(
-                          Icons.lock_outline,
+                          Icons.phone,
+                          color: ColourTheme.lightGrey,
+                        ),
+                        hintStyle: TextStyle(
+                          fontFamily: 'IBM Plex',
+                          color: ColourTheme.lightGrey,
+                        )),
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                  height: 72,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 7, horizontal: 8),
+                  child: DropdownButtonFormField(
+                    value: _gender,
+                    onChanged: (String? value) {
+                      setState(() {
+                        _gender = value!;
+                      });
+                    },
+                    validator: (String? value) {
+                      if (value == "None") {
+                        return 'Enter Gender';
+                      }
+                      return null;
+                    },
+                    items: [
+                      DropdownMenuItem(
+                          value: "None",
+                          child: Text(
+                            "Gender",
+                            style: TextStyle(color: ColourTheme.lightGrey),
+                          )),
+                      const DropdownMenuItem(
+                          value: "Male", child: Text("Male")),
+                      const DropdownMenuItem(
+                          value: "Female", child: Text("Female")),
+                      const DropdownMenuItem(
+                          value: "Others", child: Text("Others")),
+                    ],
+                    dropdownColor: ColourTheme.background,
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: ColourTheme.lightGrey,
+                    ),
+                    style: TextStyle(fontSize: 20, color: ColourTheme.white),
+                    decoration: InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: ColourTheme.grey)),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: ColourTheme.pink)),
+                        hintText: "Gender",
+                        icon: Icon(
+                          Icons.male,
                           color: ColourTheme.lightGrey,
                         ),
                         hintStyle: TextStyle(
                           color: ColourTheme.lightGrey,
                         )),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  width: double.maxFinite,
-                  child: TextButton(
-                    onPressed: () async {
-                      SystemChannels.textInput.invokeMethod('TextInput.hide');
-                      if (_formKey.currentState!.validate()) {
-                        try {
-                          final dup = await supabase
-                              .from('profiles')
-                              .select('user_email')
-                              .eq('user_email', _email);
-
-                          if (dup.toString() == '[]') {
-                            final res = await Supabase.instance.client.auth
-                                .signUp(
-                                email: _email,
-                                password: _password,
-                                data: {
-                                  'name': _name,
-                                  'phone': _phone,
-                                  'gender': _gender,
-                                  'college': _college,
-                                  'year': _year,
-                                });
-                            debugPrint(res.toString());
-
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBarSignupSuccess)
-                                .toString();
-
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Login()),
-                                  (Route<dynamic> route) => false,
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBarEmailExists)
-                                .toString();
-                          }
-                        } on AuthException catch (error) {
-                          debugPrint(error.toString());
-                          // ScaffoldMessenger.of(context)
-                          //     .showSnackBar(snackBarNoInternet)
-                          //     .toString();
-                        }
-                      }
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                  height: 60,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 7, horizontal: 8),
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    enabled: !widget.collegeIsDIT,
+                    initialValue: _college,
+                    validator: (String? value) {
+                      return (value!.trim() == "")
+                          ? 'College cannot be empty'
+                          : null;
                     },
-                    style: ButtonStyle(
-                        shape:
-                        MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40))),
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            ColourTheme.blue),
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                            ColourTheme.white)),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 3),
-                      child: Text(
-                        "SUBMIT",
-                        style: TextStyle(
-                            fontFamily: 'IBM Plex',
-                            fontWeight: FontWeight.bold),
+                    onChanged: (String value) {
+                      _college = value;
+                    },
+                    style: TextStyle(fontSize: 20, color: ColourTheme.white),
+                    decoration: InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: ColourTheme.grey)),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: ColourTheme.pink)),
+                        hintText: "College",
+                        icon: Icon(
+                          Icons.school,
+                          color: ColourTheme.lightGrey,
+                        ),
+                        hintStyle: TextStyle(
+                          color: ColourTheme.lightGrey,
+                        )),
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                  height: 72,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 7, horizontal: 8),
+                  child: DropdownButtonFormField(
+                    value: _year,
+                    onChanged: (String? value) {
+                      setState(() {
+                        _year = value!;
+                      });
+                    },
+                    validator: (String? value) {
+                      if (value == "None") {
+                        return 'Enter Current year';
+                      }
+                      return null;
+                    },
+                    items: [
+                      DropdownMenuItem(
+                          value: "None",
+                          child: Text(
+                            "Year",
+                            style: TextStyle(color: ColourTheme.lightGrey),
+                          )),
+                      const DropdownMenuItem(
+                          value: "one", child: Text("1st Year")),
+                      const DropdownMenuItem(
+                          value: "two", child: Text("2nd Year")),
+                      const DropdownMenuItem(
+                          value: "three", child: Text("3rd Year")),
+                      const DropdownMenuItem(
+                          value: "four", child: Text("4th Year")),
+                    ],
+                    dropdownColor: ColourTheme.background,
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: ColourTheme.lightGrey,
+                    ),
+                    style: TextStyle(fontSize: 20, color: ColourTheme.white),
+                    decoration: InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: ColourTheme.grey)),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: ColourTheme.pink)),
+                        hintText: "Year",
+                        icon: Icon(
+                          Icons.ballot,
+                          color: ColourTheme.lightGrey,
+                        ),
+                        hintStyle: TextStyle(
+                          color: ColourTheme.lightGrey,
+                        )),
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: 60,
+                padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 8),
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  obscureText: !_isPasswordVisible,
+                  validator: (String? value) {
+                    if (value!.length < 6) {
+                      return 'Password must be at least 6 characters';
+                    }
+                    return null;
+                  },
+                  onChanged: (String value) {
+                    _password = value;
+                  },
+                  style: TextStyle(fontSize: 20, color: ColourTheme.white),
+                  decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          // Based on passwordVisible state choose the icon
+                          _isPasswordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          // Update the state i.e. toogle the state of passwordVisible variable
+                          setState(() {
+                            _isPasswordVisible = !_isPasswordVisible;
+                          });
+                        },
                       ),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: ColourTheme.grey)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: ColourTheme.pink)),
+                      hintText: "Password",
+                      icon: Icon(
+                        Icons.lock_outline,
+                        color: ColourTheme.lightGrey,
+                      ),
+                      hintStyle: TextStyle(
+                        color: ColourTheme.lightGrey,
+                      )),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                width: double.maxFinite,
+                child: TextButton(
+                  onPressed: () async {
+                    SystemChannels.textInput.invokeMethod('TextInput.hide');
+                    if (_formKey.currentState!.validate()) {
+                      try {
+                        final dup = await supabase
+                            .from('profiles')
+                            .select('user_email')
+                            .eq('user_email', _email);
+
+                        if (dup.toString() == '[]') {
+                          final res = await Supabase.instance.client.auth
+                              .signUp(
+                                  email: _email,
+                                  password: _password,
+                                  data: {
+                                'name': _name,
+                                'phone': _phone,
+                                'gender': _gender,
+                                'college': _college,
+                                'year': _year,
+                              });
+                          debugPrint(res.toString());
+
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(snackBarSignupSuccess)
+                              .toString();
+
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Login()),
+                            (Route<dynamic> route) => false,
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(snackBarEmailExists)
+                              .toString();
+                        }
+                      } on AuthException catch (error) {
+                        debugPrint(error.toString());
+                        // ScaffoldMessenger.of(context)
+                        //     .showSnackBar(snackBarNoInternet)
+                        //     .toString();
+                      }
+                    }
+                  },
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40))),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(ColourTheme.blue),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(ColourTheme.white)),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 3),
+                    child: Text(
+                      "SUBMIT",
+                      style: TextStyle(
+                          fontFamily: 'IBM Plex', fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
+              ),
               const SizedBox(
                 height: 300,
               )
