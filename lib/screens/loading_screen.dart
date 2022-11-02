@@ -52,8 +52,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColourTheme.background,
-      body: const Center(child: CircularProgressIndicator())
+      backgroundColor: ColourTheme.black,
+      body: const Center(
+          child: Image(
+              image: AssetImage(
+                  'assets/loading.gif')))
     );
   }
 }

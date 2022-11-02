@@ -3,8 +3,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/screens/main_screen.dart';
 import 'package:youthopia_2022_app/screens/profile_screen.dart';
-
-import 'cart_screen.dart';
+import 'package:youthopia_2022_app/screens/registered_events_screen.dart';
 
 class NavBarScreen extends StatefulWidget {
   const NavBarScreen({super.key});
@@ -17,7 +16,7 @@ class _NavBarScreenState extends State<NavBarScreen> {
   int _currentPageIndex = 0;
   final List<Widget> _pages = [
     const MainScreen(),
-    const CartScreen(),
+    const RegisteredEvents(),
     const ProfileScreen(),
   ];
   @override
@@ -40,9 +39,9 @@ class _NavBarScreenState extends State<NavBarScreen> {
             horizontal: 20, vertical: 15), // tab button border
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         tabs: const [
-          GButton(icon: Icons.home, text: "Home"),
-          GButton(icon: Icons.dataset, text: "Category"),
-          GButton(icon: Icons.person, text: "Profile"),
+          GButton(icon: Icons.home, text: "Home",),
+          GButton(icon: Icons.event_available_outlined, text: "My Events",),
+          GButton(icon: Icons.person, text: "Profile", ),
         ],
         selectedIndex: _currentPageIndex,
         onTabChange: (index) {

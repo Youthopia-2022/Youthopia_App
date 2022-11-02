@@ -77,3 +77,14 @@ var snackBarLoginEmailNotConfirm = SnackBar(
     contentType: ContentType.failure,
   ),
 );
+
+var snackBarAlreadyRegistered = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  content: AwesomeSnackbarContent(
+    title: 'Failure !!',
+    message: 'You are already registered for this event',
+    contentType: ContentType.failure,
+  ),
+);
