@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/about_us_screen.dart';
+import 'package:youthopia_2022_app/screens/loading_screen.dart';
 import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:youthopia_2022_app/services/supabase.dart';
@@ -39,11 +40,9 @@ class _LoginState extends State<Login> {
       final session = data.session;
       if (session != null) {
         _redirecting = true;
-        await supa.getCurrentProfile();
-        await supa.getEventData();
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => const NavBarScreen()),
+          MaterialPageRoute(builder: (context) => const LoadingScreen()),
           (Route<dynamic> route) => false,
         );
       }
