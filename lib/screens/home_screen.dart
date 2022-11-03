@@ -7,229 +7,201 @@ import 'individual_reg_form_screen.dart';
 import 'team_reg_form_screen.dart';
 
 class Home extends StatefulWidget {
-  const Home(
-      this.event,
-      {super.key});
+  const Home(this.event, {super.key});
 
   final Event event;
-
 
   @override
   State<Home> createState() => _HomeState();
 }
 
-
 class _HomeState extends State<Home> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF161515),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-            child: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  stops: [0.1, 0.6, 0.9],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xFFD9D9D9),
-                    Color(0xFF323232),
-                    Color.fromARGB(255, 22, 21, 21),
-                  ],
+      backgroundColor: ColourTheme.black,
+      appBar: AppBar(
+        backgroundColor: ColourTheme.black,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          widget.event.eventName,
+          style: TextStyle(
+            color: ColourTheme.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold
+          ),
+        ),
+      ),
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 18),
+        child: ListView(
+          children: <Widget>[
+            Stack(
+              children: [
+                Image(
+                    image: NetworkImage(
+                  widget.event.eventPosterUrl
+                    ),
+                  width: double.maxFinite,
+                  fit: BoxFit.cover,
                 ),
-              ),
-              //color: const Color.fromARGB(255, 43, 40, 40),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: const Icon(
-                            Icons.arrow_back,
-                            color: Color.fromARGB(255, 20, 19, 19),
-                          ),
-                          iconSize: 30,
+                Positioned(
+                  top: 00,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 10.0),
+                    child: SizedBox(
+                      width: 60,
+                      child: Image(
+                        image: AssetImage(
+                          'assets/DITU_Highres_WHITE.png'
                         ),
-                        const Image(
-                          image: AssetImage('assets/DITU_Highres_WHITE.png'),
-                        ),
-                      ],
+                      )
                     ),
-                    SizedBox(
-                      height: 420,
-                      child: Image.network(
-                        widget.event.eventPosterUrl,
-                        height: 200,
-                        width: 320,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GradientText(
-                          widget.event.eventName,
-                          style: const TextStyle(fontSize: 38),
-                        ),
-                        const Image(
-                          image: AssetImage(
-                            'assets/CodeGenX-logo-W 1.png',
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Venue",
-                              style: TextStyle(
-                                color: ColourTheme.blue,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Text(
-                              widget.event.eventVenue,
-                              style: const TextStyle(
-                                color: Color.fromARGB(255, 225, 235, 238),
-                                fontSize: 18,
-                              ),
-                            ),
-                          ],
-                        ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Date",
-                                style: TextStyle(
-                                  color: ColourTheme.blue,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              Text(
-                                  DateFormat('dd-MM-yyyy').format(widget.event.eventDate).toString(),
-                                style: const TextStyle(
-                                  color: Color.fromARGB(255, 225, 235, 238),
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Time",
-                                style: TextStyle(
-                                  color: ColourTheme.blue,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              Text(
-                                widget.event.eventTime.toString().substring(10,15),
-                                style: const TextStyle(
-                                  color: Color.fromARGB(255, 225, 235, 238),
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Price",
-                                style: TextStyle(
-                                  color: ColourTheme.blue,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              Text(
-                                widget.event.eventFees.toString(),
-                                style: const TextStyle(
-                                  color: Color.fromARGB(255, 225, 235, 238),
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ],
-                          ),
-                          // Row(
-                          //   //mainAxisAlignment: MainAxisAlignment.start,
-                          //   children: const [
-                          //     Text(
-                          //       "GPF",
-                          //       style: TextStyle(
-                          //         color: Color(0xFF1BBEE9),
-                          //         fontSize: 18,
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                widget.event.eventDescription,
-                                style: const TextStyle(
-                                  color: Color.fromARGB(255, 225, 235, 238),
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    ElevatedButton.icon(
-
-                        onPressed: () {
-
-                          (!widget.event.isTeamEvent)? Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DITIndividualRegFormScreen(widget.event))) :
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => DITTeamRegFormScreen(widget.event)));
-                        },
-                        icon: const Icon(
-                          Icons.edit,
-                          size: 24.0,
-                        ),
-                        label: const Text(
-                          'Register Now',
-                          style: TextStyle(fontSize: 24),
-                        ),
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40.0),
-                            ))) // <-- Text
-                    ),
-                  ],
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Event info',
+              style: TextStyle(
+                  color: ColourTheme.white, fontWeight: FontWeight.bold, fontSize: 22),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.schedule,
+                  size: 25,
+                  color: ColourTheme.white,
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Text(
+                  widget.event.eventTime.toString().substring(10, 15),
+                  style: TextStyle(color: ColourTheme.white, fontSize: 20),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.event_available_outlined,
+                  size: 25,
+                  color: ColourTheme.white,
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Text(
+                  DateFormat('dd-MM-yyyy')
+                      .format(widget.event.eventDate)
+                      .toString(),
+                  style: TextStyle(color: ColourTheme.white, fontSize: 20),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.location_on_outlined,
+                  size: 25,
+                  color: ColourTheme.white,
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Text(
+                  widget.event.eventVenue,
+                  style: TextStyle(color: ColourTheme.white, fontSize: 20),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.payments_outlined,
+                  color: ColourTheme.white,
+                  size: 25,
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Text(
+                  '₹ ${widget.event.eventFees}',
+                  style: TextStyle(color: ColourTheme.white, fontSize: 20),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            Text(
+              'Description',
+              style: TextStyle(
+                  color: ColourTheme.white, fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              widget.event.eventDescription,
+              style: TextStyle(
+                  color: ColourTheme.white, fontSize: 18),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                (!widget.event.isTeamEvent)
+                    ? Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                DITIndividualRegFormScreen(widget.event)))
+                    : Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                DITTeamRegFormScreen(widget.event)));
+              },
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(40.0),
+              ))),
+              child: const Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Text(
+                  'Register for this event',
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );

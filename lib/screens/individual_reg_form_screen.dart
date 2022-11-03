@@ -229,6 +229,7 @@ class _DITIndividualRegFormScreenState
 
                                 List events = resEvents[0]['events_registered'];
                                 events.add(widget.event.eventId);
+                                UserProfile.currentUser!.registeredEvents = events;
                                 await supabase
                                     .from('profiles')
                                     .update({'events_registered' : events})

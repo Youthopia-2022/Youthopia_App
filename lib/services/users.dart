@@ -7,7 +7,7 @@ class UserProfile {
   final String userGender;
   final String userCollege;
   final String userYear;
-  final List registeredEvents;
+  List registeredEvents;
 
   static UserProfile? currentUser;
   UserProfile(this.userId,
