@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youthopia_2022_app/constants/about_container.dart';
+import 'package:youthopia_2022_app/widgets/about_container.dart';
 import 'package:youthopia_2022_app/constants/gradient_color.dart';
 
 class AboutUsScreen extends StatefulWidget {
@@ -47,8 +47,12 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 ),
               ],
             ),
-            const NameContainer(branch: "branch", name: "name"),
-            const NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            NameContainer(
+              branch: "branch",
+              name: "name",
+              linkedinUrl: Uri.tryParse('https://google.com'),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: const [
@@ -61,8 +65,8 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 ),
               ],
             ),
-            const NameContainer(branch: "branch", name: "name"),
-            const NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: const [
@@ -75,10 +79,10 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 ),
               ],
             ),
-            const NameContainer(branch: "branch", name: "name"),
-            const NameContainer(branch: "branch", name: "name"),
-            const NameContainer(branch: "branch", name: "name"),
-            const NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: const [
@@ -91,8 +95,8 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 ),
               ],
             ),
-            const NameContainer(branch: "branch", name: "name"),
-            const NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: const [
@@ -105,11 +109,11 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 ),
               ],
             ),
-            const NameContainer(branch: "branch", name: "name"),
-            const NameContainer(branch: "branch", name: "name"),
-            const NameContainer(branch: "branch", name: "name"),
-            const NameContainer(branch: "branch", name: "name"),
-            const NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
           ],
         ),
       ),
