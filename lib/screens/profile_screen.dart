@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/login_screen.dart';
@@ -30,17 +31,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _getProfile() async {
-      setState(() {
-        _name = UserProfile.currentUser!.userName;
-        _email = UserProfile.currentUser!.userEmail;
-        _phone = UserProfile.currentUser!.userPhone;
-        _year = UserProfile.currentUser!.userYear;
-        _college = UserProfile.currentUser!.userCollege;
-        _gender = UserProfile.currentUser!.userGender;
-        _genderImage = (_gender == "Female")
-            ? 'assets/female.png'
-            : 'assets/male.png';
-      });
+    setState(() {
+      _name = UserProfile.currentUser!.userName;
+      _email = UserProfile.currentUser!.userEmail;
+      _phone = UserProfile.currentUser!.userPhone;
+      _year = UserProfile.currentUser!.userYear;
+      _college = UserProfile.currentUser!.userCollege;
+      _gender = UserProfile.currentUser!.userGender;
+      _genderImage =
+          (_gender == "Female") ? 'assets/female.png' : 'assets/male.png';
+    });
   }
 
   @override
@@ -172,7 +172,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const SizedBox(
                       height: 30,
                     ),
-
                     Expanded(
                       child: Container(
                         padding: const EdgeInsets.only(bottom: 20),
@@ -189,7 +188,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               if (mounted) {
                                 Navigator.pushAndRemoveUntil(
                                   context,
-                                  MaterialPageRoute(
+                                  CupertinoPageRoute(
                                       builder: (context) => const Login()),
                                   (Route<dynamic> route) => false,
                                 );

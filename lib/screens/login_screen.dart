@@ -1,12 +1,12 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/about_us_screen.dart';
 import 'package:youthopia_2022_app/screens/loading_screen.dart';
-import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:youthopia_2022_app/services/supabase.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
@@ -42,7 +42,7 @@ class _LoginState extends State<Login> {
         _redirecting = true;
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => const LoadingScreen()),
+          CupertinoPageRoute(builder: (context) => const LoadingScreen()),
           (Route<dynamic> route) => false,
         );
       }
@@ -289,12 +289,11 @@ class _LoginState extends State<Login> {
                                   text: "Sign up",
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      Navigator.pushAndRemoveUntil(
+                                      Navigator.push(
                                         context,
-                                        MaterialPageRoute(
+                                        CupertinoPageRoute(
                                             builder: (context) =>
                                                 const CollegeScreen()),
-                                        (Route<dynamic> route) => false,
                                       );
                                     }),
                             ]),
@@ -309,7 +308,7 @@ class _LoginState extends State<Login> {
                               onPressed: () {
                                 Navigator.push(
                                     context,
-                                    MaterialPageRoute(
+                                    CupertinoPageRoute(
                                         builder: (context) =>
                                             const AboutUsScreen()));
                               },

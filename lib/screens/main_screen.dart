@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/constants/gradient_color.dart';
@@ -94,7 +95,7 @@ class _MainScreenState extends State<MainScreen> {
                         onPressed: () {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(
+                              CupertinoPageRoute(
                                   builder: (context) =>
                                       SeeMoreScreen(techEvents!)));
                         },
@@ -130,7 +131,7 @@ class _MainScreenState extends State<MainScreen> {
                             onTap: () {
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(
+                                  CupertinoPageRoute(
                                       builder: (context) =>
                                           Home(techEvents?[index])));
                             },
@@ -153,7 +154,7 @@ class _MainScreenState extends State<MainScreen> {
                         onPressed: () {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(
+                              CupertinoPageRoute(
                                   builder: (context) =>
                                       SeeMoreScreen(culturalEvents!)));
                         },
@@ -189,7 +190,7 @@ class _MainScreenState extends State<MainScreen> {
                             onTap: () {
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(
+                                  CupertinoPageRoute(
                                       builder: (context) =>
                                           Home(culturalEvents?[index])));
                             },
@@ -212,7 +213,7 @@ class _MainScreenState extends State<MainScreen> {
                         onPressed: () {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(
+                              CupertinoPageRoute(
                                   builder: (context) =>
                                       SeeMoreScreen(informalEvents!)));
                         },
@@ -248,7 +249,7 @@ class _MainScreenState extends State<MainScreen> {
                             onTap: () {
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(
+                                  CupertinoPageRoute(
                                       builder: (context) =>
                                           Home(informalEvents?[index])));
                             },
@@ -271,7 +272,7 @@ class _MainScreenState extends State<MainScreen> {
                         onPressed: () {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(
+                              CupertinoPageRoute(
                                   builder: (context) =>
                                       SeeMoreScreen(debateEvents!)));
                         },
@@ -307,7 +308,7 @@ class _MainScreenState extends State<MainScreen> {
                             onTap: () {
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(
+                                  CupertinoPageRoute(
                                       builder: (context) =>
                                           Home(debateEvents?[index])));
                             },
@@ -330,7 +331,7 @@ class _MainScreenState extends State<MainScreen> {
                         onPressed: () {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(
+                              CupertinoPageRoute(
                                   builder: (context) =>
                                       SeeMoreScreen(artsEvents!)));
                         },
@@ -366,7 +367,7 @@ class _MainScreenState extends State<MainScreen> {
                             onTap: () {
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(
+                                  CupertinoPageRoute(
                                       builder: (context) =>
                                           Home(artsEvents?[index])));
                             },

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
+import 'package:youthopia_2022_app/screens/category_screen.dart';
 import 'package:youthopia_2022_app/screens/main_screen.dart';
 import 'package:youthopia_2022_app/screens/profile_screen.dart';
 import 'package:youthopia_2022_app/screens/registered_events_screen.dart';
@@ -16,6 +18,7 @@ class _NavBarScreenState extends State<NavBarScreen> {
   int _currentPageIndex = 0;
   final List<Widget> _pages = [
     const MainScreen(),
+    const CategoryScreen(),
     const RegisteredEvents(),
     const ProfileScreen(),
   ];
@@ -24,24 +27,37 @@ class _NavBarScreenState extends State<NavBarScreen> {
     return Scaffold(
       body: _pages[_currentPageIndex],
       bottomNavigationBar: GNav(
-        gap: 10,
+        gap: 5,
         backgroundColor: const Color(0xFF0f0f0f),
         hoverColor: const Color(0xFF222222),
         haptic: true,
-        tabBorderRadius: 15,
+        tabBorderRadius: 10,
         curve: Curves.easeOutExpo,
         duration: const Duration(milliseconds: 100),
         color: ColourTheme.white,
         activeColor: ColourTheme.pink,
-        iconSize: 25,
+        iconSize: 20,
         tabBackgroundColor: const Color(0xFF222222),
         tabMargin: const EdgeInsets.symmetric(
-            horizontal: 20, vertical: 15), // tab button border
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            horizontal: 10, vertical: 15), // tab button border
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         tabs: const [
-          GButton(icon: Icons.home, text: "Home",),
-          GButton(icon: Icons.event_available_outlined, text: "My Events",),
-          GButton(icon: Icons.person, text: "Profile", ),
+          GButton(
+            icon: FontAwesomeIcons.houseUser,
+            text: "Home",
+          ),
+          GButton(
+            icon: FontAwesomeIcons.tableList,
+            text: "Category",
+          ),
+          GButton(
+            icon: FontAwesomeIcons.calendarCheck,
+            text: "Events",
+          ),
+          GButton(
+            icon: FontAwesomeIcons.user,
+            text: "Profile",
+          ),
         ],
         selectedIndex: _currentPageIndex,
         onTabChange: (index) {

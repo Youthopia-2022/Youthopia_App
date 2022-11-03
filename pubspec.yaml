@@ -40,7 +40,7 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#050705"
-  image: assets/youthopia_splash.png
+  image: assets/youthopiaIcon.png
 
 flutter:
   uses-material-design: true
