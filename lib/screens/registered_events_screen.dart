@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:youthopia_2022_app/services/supabase.dart';
+import 'package:youthopia_2022_app/services/users.dart';
 
 import '../constants/color_theme.dart';
+import '../services/events.dart';
 
 class RegisteredEvents extends StatefulWidget {
   const RegisteredEvents({Key? key}) : super(key: key);
@@ -9,10 +12,36 @@ class RegisteredEvents extends StatefulWidget {
   State<RegisteredEvents> createState() => _RegisteredEventsState();
 }
 
+
 class _RegisteredEventsState extends State<RegisteredEvents> {
+
+  bool _isLoaded = false;
+  bool eventsRegistered = true;
+  Supa supa = Supa();
+  @override
+  void initState() {
+    super.initState();
+    if(UserProfile.currentUser!.registeredEvents.toString() == '[]') {
+      setState(() {
+        eventsRegistered = false;
+        return ;
+      });
+    }
+    eventsData();
+  }
+
+  Future<void> eventsData() async {
+    RegisteredEvent.registeredEvents = [];
+    await supa.getRegisteredEvents();
+    setState(() {
+      _isLoaded = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+    Scaffold(
       backgroundColor: ColourTheme.black,
       appBar: AppBar(
         title: Text(
@@ -23,210 +52,71 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
         ),
         backgroundColor: ColourTheme.black,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
       ),
-      body: ListView(
-        children: <Widget>[
-          const SizedBox(
-            height: 30,
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+      body: (!eventsRegistered)? const Center(
+          child: Image(
+              image: AssetImage(
+                  'assets/youthopia_splash.png'))) :
+      (!_isLoaded)? const Center(
+          child: Image(
+              image: AssetImage(
+                  'assets/loading.gif'))) :
+          ListView.builder(
+            itemCount: RegisteredEvent.registeredEvents.length,
+              itemBuilder: (BuildContext context, int index) {
+              String eventTime = RegisteredEvent.registeredEvents[index].eventTime;
+              String eventVenue = RegisteredEvent.registeredEvents[index].eventVenue;
+                return Column(
                   children: [
-                    Text(
-                      'Name of the Event',
-                      style: TextStyle(fontSize: 16, color: ColourTheme.white),
+                    const SizedBox(
+                      height: 15,
                     ),
-                    Text(
-                      'Time: 10:00 AM',
-                      style: TextStyle(fontSize: 12, color: ColourTheme.lightGrey),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 130,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 10,),
+                                Text(
+                                  RegisteredEvent.registeredEvents[index].eventName,
+                                  style: TextStyle(fontSize: 18, color: ColourTheme.white),
+                                ),
+                                const SizedBox(height: 10,),
+                                Text(
+                                  'Time: $eventTime',
+                                  style: TextStyle(fontSize: 14, color: ColourTheme.lightGrey),
+                                ),
+                                Text(
+                                  eventVenue,
+                                  style: TextStyle(fontSize: 14, color: ColourTheme.lightGrey),
+                                )
+                              ],
+                            ),
+                          ),
+                          ClipRRect(
+                            borderRadius: const BorderRadius.all(Radius.circular(5)),
+                            child: Image(
+                              image: NetworkImage(
+                                RegisteredEvent.registeredEvents[index].eventPoster,
+                              ),
+                              width: 180,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                    Text(
-                      'Venue: Hall',
-                      style: TextStyle(fontSize: 12, color: ColourTheme.lightGrey),
-                    )
+                    const SizedBox(
+                      height: 15,
+                    ),
                   ],
-                ),
-                const ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  child: Image(
-                    image: AssetImage(
-                      'assets/sample 1.jpg',
-                    ),
-                    width: 180,
-                  ),
-                )
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Name of the Event',
-                      style: TextStyle(fontSize: 16, color: ColourTheme.white),
-                    ),
-                    Text(
-                      'Time: 10:00 AM',
-                      style: TextStyle(fontSize: 12, color: ColourTheme.lightGrey),
-                    ),
-                    Text(
-                      'Venue: Hall',
-                      style: TextStyle(fontSize: 12, color: ColourTheme.lightGrey),
-                    )
-                  ],
-                ),
-                const ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  child: Image(
-                    image: AssetImage(
-                      'assets/sample 2.jpg',
-                    ),
-                    width: 180,
-                  ),
-                )
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Name of the Event',
-                      style: TextStyle(fontSize: 16, color: ColourTheme.white),
-                    ),
-                    Text(
-                      'Time: 10:00 AM',
-                      style: TextStyle(fontSize: 12, color: ColourTheme.lightGrey),
-                    ),
-                    Text(
-                      'Venue: Hall',
-                      style: TextStyle(fontSize: 12, color: ColourTheme.lightGrey),
-                    )
-                  ],
-                ),
-                const ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  child: Image(
-                    image: AssetImage(
-                      'assets/sample 3.jpg',
-                    ),
-                    width: 180,
-                  ),
-                )
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Name of the Event',
-                      style: TextStyle(fontSize: 16, color: ColourTheme.white),
-                    ),
-                    Text(
-                      'Time: 10:00 AM',
-                      style: TextStyle(fontSize: 12, color: ColourTheme.lightGrey),
-                    ),
-                    Text(
-                      'Venue: Hall',
-                      style: TextStyle(fontSize: 12, color: ColourTheme.lightGrey),
-                    )
-                  ],
-                ),
-                const ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  child: Image(
-                    image: AssetImage(
-                      'assets/sample 4.jpg',
-                    ),
-                    width: 180,
-                  ),
-                )
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Name of the Event',
-                      style: TextStyle(fontSize: 16, color: ColourTheme.white),
-                    ),
-                    Text(
-                      'Time: 10:00 AM',
-                      style: TextStyle(fontSize: 12, color: ColourTheme.lightGrey),
-                    ),
-                    Text(
-                      'Venue: Hall',
-                      style: TextStyle(fontSize: 12, color: ColourTheme.lightGrey),
-                    )
-                  ],
-                ),
-                const ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  child: Image(
-                    image: AssetImage(
-                      'assets/sample 5.jpg',
-                    ),
-                    width: 180,
-                  ),
-                )
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-        ],
-      ),
+                );
+              })
     );
   }
 }

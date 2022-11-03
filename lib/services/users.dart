@@ -7,6 +7,7 @@ class UserProfile {
   final String userGender;
   final String userCollege;
   final String userYear;
+  List registeredEvents;
 
   static UserProfile? currentUser;
   UserProfile(this.userId,
@@ -16,6 +17,7 @@ class UserProfile {
       this.userGender,
       this.userCollege,
       this.userYear,
+      this.registeredEvents
       );
 
 }
