@@ -30,3 +30,21 @@ class Event {
       this.eventPosterUrl,
       );
 }
+
+class RegisteredEvent {
+  final String eventId;
+  final String eventName;
+  final String eventVenue;
+  final String eventTime;
+  final String eventPoster;
+
+  static List registeredEvents = [];
+
+  RegisteredEvent(
+      this.eventId,
+      this.eventName,
+      this.eventVenue,
+      this.eventTime,
+      this.eventPoster
+      );
+}
