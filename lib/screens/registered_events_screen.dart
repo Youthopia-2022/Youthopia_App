@@ -21,16 +21,16 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
   @override
   void initState() {
     super.initState();
-    eventsData();
-  }
-
-  Future<void> eventsData() async {
-    if(UserProfile.currentUser!.registeredEvents == []) {
+    if(UserProfile.currentUser!.registeredEvents.toString() == '[]') {
       setState(() {
         eventsRegistered = false;
         return ;
       });
     }
+    eventsData();
+  }
+
+  Future<void> eventsData() async {
     RegisteredEvent.registeredEvents = [];
     await supa.getRegisteredEvents();
     setState(() {

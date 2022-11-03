@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/login_screen.dart';
-import 'package:youthopia_2022_app/screens/registered_events_screen.dart';
 import 'package:youthopia_2022_app/services/users.dart';
 import '../constants/color_theme.dart';
 import '../services/supabase.dart';
@@ -20,7 +19,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? _year;
   String? _college;
   String? _gender;
-  String _genderImage = 'assets/profile_male.jpg';
+  String _genderImage = 'assets/male.png';
 
   Supa supa = Supa();
 
@@ -39,8 +38,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _college = UserProfile.currentUser!.userCollege;
         _gender = UserProfile.currentUser!.userGender;
         _genderImage = (_gender == "Female")
-            ? 'assets/profile_female.jpg'
-            : 'assets/profile_male.jpg';
+            ? 'assets/female.png'
+            : 'assets/male.png';
       });
   }
 
