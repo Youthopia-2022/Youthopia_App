@@ -28,7 +28,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
     return Scaffold(
       backgroundColor: ColourTheme.black,
       appBar: AppBar(
-        backgroundColor: ColourTheme.black,
+        backgroundColor: const Color(0xFF0F0F0F),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -52,8 +52,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
               crossAxisCount: 2,
               childAspectRatio: 0.65,
               children: List.generate(totalItems, (index) {
-                return
-                Container(
+                return Container(
                   decoration: const BoxDecoration(
                     color: Color(0xFF101010),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -71,18 +70,23 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                     child: Column(
                       children: [
                         Image(
-                          image: NetworkImage(
-                              widget.events[index].eventPosterUrl),
+                          image:
+                              NetworkImage(widget.events[index].eventPosterUrl),
                         ),
-                        Text(
-                          widget.events[index].eventName,
-                          style: TextStyle(
-                              color: ColourTheme.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.events[index].eventName,
+                              style: TextStyle(
+                                  color: ColourTheme.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            ),
+                          ],
                         ),
-                        const SizedBox(
-                          height: 5,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.01,
                         ),
                         Row(
                           children: [
