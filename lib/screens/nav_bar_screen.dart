@@ -47,8 +47,8 @@ class _NavBarScreenState extends State<NavBarScreen> {
             text: "Home",
           ),
           GButton(
-            icon: FontAwesomeIcons.tableList,
-            text: "Category",
+            icon: FontAwesomeIcons.dice,
+            text: " Category",
           ),
           GButton(
             icon: FontAwesomeIcons.calendarCheck,

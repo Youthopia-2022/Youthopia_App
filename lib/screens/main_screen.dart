@@ -1,12 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
-import 'package:youthopia_2022_app/constants/gradient_color.dart';
-import 'package:youthopia_2022_app/screens/see_more_screen.dart';
-import 'package:youthopia_2022_app/widgets/horizontal_carousel.dart';
 import 'package:youthopia_2022_app/services/events.dart';
 
-import 'home_screen.dart';
+import '../widgets/home_page_container.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -69,9 +65,18 @@ class _MainScreenState extends State<MainScreen> {
               onPressed: null),
         ],
       ),
-      body: (!isLoaded)
-          ? const Center(child: CircularProgressIndicator())
-          : ListView(
+      body: SafeArea(
+        child: (!isLoaded)
+            ? const Center(child: CircularProgressIndicator())
+            : HomePageContainer(branch: "bsc", name: "asiae"),
+      ),
+    );
+  }
+}
+
+
+/* 
+ListView(
               children: <Widget>[
                 Carousel(
                   imgList,
@@ -376,7 +381,4 @@ class _MainScreenState extends State<MainScreen> {
                           );
                         })),
               ],
-            ),
-    );
-  }
-}
+            ), */
