@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/color_theme.dart';
@@ -38,7 +39,9 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
           itemBuilder: (BuildContext context, int index) {
             return Column(
               children: [
-                const SizedBox(height: 30,),
+                const SizedBox(
+                  height: 30,
+                ),
                 Stack(
                   children: [
                     GestureDetector(
@@ -48,15 +51,17 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(15)),
                             child: Image.network(
-                                widget.events[index].eventPosterUrl,
+                              widget.events[index].eventPosterUrl,
                               height: 200,
                               width: 320,
-                            )
-                        ),
+                            )),
                       ),
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Home(widget.events[index])));
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) =>
+                                    Home(widget.events[index])));
                       },
                     ),
                     Positioned(

@@ -27,9 +27,10 @@ dependencies:
   google_nav_bar: ^5.0.6
   intl: ^0.17.0
   line_icons: ^2.0.1
+  quantity_input: ^1.0.2
   sizer: ^2.0.15
   supabase_flutter: ^1.0.1
-  quantity_input: ^1.0.2
+  url_launcher: ^6.1.6
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -39,7 +40,7 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#050705"
-  image: assets/youthopia_splash.png
+  image: assets/youthopiaIcon.png
 
 flutter:
   uses-material-design: true

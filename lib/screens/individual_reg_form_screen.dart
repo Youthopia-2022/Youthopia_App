@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
@@ -8,9 +9,7 @@ import '../services/users.dart';
 import '../widgets/snack_bar.dart';
 
 class DITIndividualRegFormScreen extends StatefulWidget {
-  const DITIndividualRegFormScreen(
-      this.event,
-      {super.key});
+  const DITIndividualRegFormScreen(this.event, {super.key});
 
   final Event event;
 
@@ -21,16 +20,16 @@ class DITIndividualRegFormScreen extends StatefulWidget {
 
 class _DITIndividualRegFormScreenState
     extends State<DITIndividualRegFormScreen> {
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String name = UserProfile.currentUser!.userName;
   String phone = UserProfile.currentUser!.userPhone;
   String email = UserProfile.currentUser!.userEmail;
   String uuid = UserProfile.currentUser!.userId;
   String identity = "";
-  bool isDIT = (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false ;
+  bool isDIT =
+      (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false;
   String eventId = "";
-  
+
   @override
   void initState() {
     super.initState();
@@ -40,43 +39,41 @@ class _DITIndividualRegFormScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ColourTheme.black,
-        appBar: AppBar(
-          title: Text(
-            'Registration Form',
-            style: TextStyle(
-              color: ColourTheme.white,
-            ),
-          ),
-          backgroundColor: ColourTheme.black,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+      backgroundColor: ColourTheme.black,
+      appBar: AppBar(
+        title: Text(
+          'Registration Form',
+          style: TextStyle(
+            color: ColourTheme.white,
           ),
         ),
+        backgroundColor: ColourTheme.black,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
-          padding:
-          const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
           child: Form(
-            key: _formKey,
+              key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
                     'Name',
-                    style:
-                    TextStyle(fontSize: 24, color: ColourTheme.white),
+                    style: TextStyle(fontSize: 24, color: ColourTheme.white),
                   ),
                   TextFormField(
                     initialValue: name,
                     validator: (String? value) {
                       String name = value!.trim();
                       return (name.isEmpty ||
-                          !RegExp(r'^[A-Za-z ]+$').hasMatch(name))
+                              !RegExp(r'^[A-Za-z ]+$').hasMatch(name))
                           ? 'Enter valid Name'
                           : null;
                     },
@@ -84,10 +81,10 @@ class _DITIndividualRegFormScreenState
                       name = value;
                     },
                     decoration: InputDecoration(
-                      focusedBorder:  OutlineInputBorder(
-                          borderSide: BorderSide(
-                              width: 2, color: ColourTheme.lightGrey),
-                          borderRadius: BorderRadius.circular(5)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                width: 2, color: ColourTheme.lightGrey),
+                            borderRadius: BorderRadius.circular(5)),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
@@ -100,16 +97,15 @@ class _DITIndividualRegFormScreenState
                     height: 30,
                   ),
                   Text(
-                    (isDIT) ?'SAP ID' : 'Aadhaar card number',
-                    style:
-                    TextStyle(fontSize: 24, color: ColourTheme.white),
+                    (isDIT) ? 'SAP ID' : 'Aadhaar card number',
+                    style: TextStyle(fontSize: 24, color: ColourTheme.white),
                   ),
                   TextFormField(
                     onChanged: (String value) {
                       identity = value;
                     },
                     validator: (String? value) {
-                      if(isDIT) {
+                      if (isDIT) {
                         if (value!.length != 10 ||
                             !RegExp(r'^[0-9]+$').hasMatch(value) ||
                             value.substring(0, 5) != "10000") {
@@ -117,14 +113,14 @@ class _DITIndividualRegFormScreenState
                         }
                         return null;
                       } else {
-                        if(value!.length != 12) {
+                        if (value!.length != 12) {
                           return 'Enter valid Aadhaar number';
                         }
                         return null;
                       }
                     },
                     decoration: InputDecoration(
-                        focusedBorder:  OutlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
                             borderRadius: BorderRadius.circular(5)),
@@ -141,23 +137,22 @@ class _DITIndividualRegFormScreenState
                   ),
                   Text(
                     'Phone Number',
-                    style:
-                    TextStyle(fontSize: 24, color: ColourTheme.white),
+                    style: TextStyle(fontSize: 24, color: ColourTheme.white),
                   ),
                   TextFormField(
                     initialValue: phone,
                     onChanged: (String value) {
                       phone = value;
                     },
-                      validator: (String? value) {
-                        if (value!.length != 10 ||
-                            !RegExp(r'^[0-9]+$').hasMatch(value)) {
-                          return 'Enter valid Number';
-                        }
-                        return null;
-                      },
+                    validator: (String? value) {
+                      if (value!.length != 10 ||
+                          !RegExp(r'^[0-9]+$').hasMatch(value)) {
+                        return 'Enter valid Number';
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
-                        focusedBorder:  OutlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
                             borderRadius: BorderRadius.circular(5)),
@@ -178,25 +173,23 @@ class _DITIndividualRegFormScreenState
                       width: double.infinity,
                       child: TextButton(
                         onPressed: () async {
-                          if(_formKey.currentState!.validate()) {
+                          if (_formKey.currentState!.validate()) {
                             debugPrint(identity);
                             debugPrint(phone);
                             debugPrint(name);
                             debugPrint(email);
                             debugPrint(widget.event.eventId);
-                            
+
                             String orderId = '$eventId-$identity';
-                            
-                            try{
+
+                            try {
                               final check = await supabase
                                   .from('registrations')
                                   .select('order_id')
                                   .eq('order_id', orderId);
 
-                              if(check.toString() == '[]') {
-                                await supabase
-                                    .from('registrations')
-                                    .insert({
+                              if (check.toString() == '[]') {
+                                await supabase.from('registrations').insert({
                                   'order_id': orderId,
                                   'event_id': eventId,
                                   'participant_email': email,
@@ -204,8 +197,8 @@ class _DITIndividualRegFormScreenState
                                   'participant_phone': phone,
                                   'participant_identity': identity,
                                   'event_isTeamEvent': false,
-                                  'team_name':null,
-                                  'team_members_name':null
+                                  'team_name': null,
+                                  'team_members_name': null
                                 });
 
                                 final resParticipants = await supabase
@@ -213,12 +206,12 @@ class _DITIndividualRegFormScreenState
                                     .select('registered_participant')
                                     .eq('event_id', widget.event.eventId);
 
-                                List participants = resParticipants[0]['registered_participant'];
+                                List participants = resParticipants[0]
+                                    ['registered_participant'];
                                 participants.add(uuid);
-                                await supabase
-                                    .from('events')
-                                    .update({'registered_participant' : participants})
-                                    .eq('event_id', widget.event.eventId);
+                                await supabase.from('events').update({
+                                  'registered_participant': participants
+                                }).eq('event_id', widget.event.eventId);
 
                                 debugPrint("added in events");
 
@@ -229,25 +222,25 @@ class _DITIndividualRegFormScreenState
 
                                 List events = resEvents[0]['events_registered'];
                                 events.add(widget.event.eventId);
-                                UserProfile.currentUser!.registeredEvents = events;
+                                UserProfile.currentUser!.registeredEvents =
+                                    events;
                                 await supabase
                                     .from('profiles')
-                                    .update({'events_registered' : events})
-                                    .eq('user_id', uuid);
+                                    .update({'events_registered': events}).eq(
+                                        'user_id', uuid);
 
                                 debugPrint("added in profiles");
 
                                 ScaffoldMessenger.of(context)
-                                    .showSnackBar(
-                                    snackBarRegistrationSuccess)
+                                    .showSnackBar(snackBarRegistrationSuccess)
                                     .toString();
 
                                 Navigator.pushAndRemoveUntil(
                                   context,
-                                  MaterialPageRoute(
+                                  CupertinoPageRoute(
                                       builder: (context) =>
-                                      const NavBarScreen()),
-                                      (Route<dynamic> route) => false,
+                                          const NavBarScreen()),
+                                  (Route<dynamic> route) => false,
                                 );
                               } else {
                                 ScaffoldMessenger.of(context)
@@ -259,22 +252,18 @@ class _DITIndividualRegFormScreenState
                             }
                           } else {
                             ScaffoldMessenger.of(context)
-                                .showSnackBar(
-                                snackBarInvalidCredentials)
+                                .showSnackBar(snackBarInvalidCredentials)
                                 .toString();
                           }
                         },
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
+                                    RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(20))),
-                            backgroundColor:
-                            MaterialStateProperty.all<Color>(
+                                    borderRadius: BorderRadius.circular(20))),
+                            backgroundColor: MaterialStateProperty.all<Color>(
                                 ColourTheme.blue),
-                            foregroundColor:
-                            MaterialStateProperty.all<Color>(
+                            foregroundColor: MaterialStateProperty.all<Color>(
                                 ColourTheme.white)),
                         child: const Padding(
                           padding: EdgeInsets.symmetric(vertical: 6),
@@ -291,7 +280,6 @@ class _DITIndividualRegFormScreenState
               )),
         ),
       ),
-
     );
   }
 }

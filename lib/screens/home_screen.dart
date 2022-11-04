@@ -1,8 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:youthopia_2022_app/services/events.dart';
 import 'package:intl/intl.dart';
 import '../constants/color_theme.dart';
-import '../constants/gradient_color.dart';
 import 'individual_reg_form_screen.dart';
 import 'team_reg_form_screen.dart';
 
@@ -32,10 +32,9 @@ class _HomeState extends State<Home> {
         title: Text(
           widget.event.eventName,
           style: TextStyle(
-            color: ColourTheme.white,
-            fontSize: 24,
-            fontWeight: FontWeight.bold
-          ),
+              color: ColourTheme.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold),
         ),
       ),
       body: Container(
@@ -45,9 +44,7 @@ class _HomeState extends State<Home> {
             Stack(
               children: [
                 Image(
-                    image: NetworkImage(
-                  widget.event.eventPosterUrl
-                    ),
+                  image: NetworkImage(widget.event.eventPosterUrl),
                   width: double.maxFinite,
                   fit: BoxFit.cover,
                 ),
@@ -57,14 +54,11 @@ class _HomeState extends State<Home> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 10.0),
-                    child: SizedBox(
-                      width: 60,
-                      child: Image(
-                        image: AssetImage(
-                          'assets/DITU_Highres_WHITE.png'
-                        ),
-                      )
-                    ),
+                    child: const SizedBox(
+                        width: 60,
+                        child: Image(
+                          image: AssetImage('assets/DITU_Highres_WHITE.png'),
+                        )),
                   ),
                 )
               ],
@@ -75,7 +69,9 @@ class _HomeState extends State<Home> {
             Text(
               'Event info',
               style: TextStyle(
-                  color: ColourTheme.white, fontWeight: FontWeight.bold, fontSize: 22),
+                  color: ColourTheme.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22),
             ),
             const SizedBox(
               height: 20,
@@ -161,15 +157,16 @@ class _HomeState extends State<Home> {
             Text(
               'Description',
               style: TextStyle(
-                  color: ColourTheme.white, fontWeight: FontWeight.bold, fontSize: 20),
+                  color: ColourTheme.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
             ),
             const SizedBox(
               height: 20,
             ),
             Text(
               widget.event.eventDescription,
-              style: TextStyle(
-                  color: ColourTheme.white, fontSize: 18),
+              style: TextStyle(color: ColourTheme.white, fontSize: 18),
             ),
             const SizedBox(
               height: 20,
@@ -179,12 +176,12 @@ class _HomeState extends State<Home> {
                 (!widget.event.isTeamEvent)
                     ? Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                             builder: (context) =>
                                 DITIndividualRegFormScreen(widget.event)))
                     : Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                             builder: (context) =>
                                 DITTeamRegFormScreen(widget.event)));
               },

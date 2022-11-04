@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/constants/gradient_color.dart';
@@ -28,7 +29,8 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
   String teamName = "";
   String eventId = "";
   late List members;
-  bool isDIT = (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false ;
+  bool isDIT =
+      (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false;
 
   @override
   void initState() {
@@ -138,7 +140,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                     height: 30,
                   ),
                   Text(
-                    (isDIT) ?'Leader SAP ID' : 'Aadhaar card number',
+                    (isDIT) ? 'Leader SAP ID' : 'Aadhaar card number',
                     style: TextStyle(fontSize: 24, color: ColourTheme.white),
                   ),
                   TextFormField(
@@ -146,7 +148,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                       leaderId = value;
                     },
                     validator: (String? value) {
-                      if(isDIT) {
+                      if (isDIT) {
                         if (value!.length != 10 ||
                             !RegExp(r'^[0-9]+$').hasMatch(value) ||
                             value.substring(0, 5) != "10000") {
@@ -154,7 +156,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                         }
                         return null;
                       } else {
-                        if(value!.length != 12) {
+                        if (value!.length != 12) {
                           return 'Enter valid Aadhaar number';
                         }
                         return null;
@@ -293,13 +295,13 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
 
                             String orderId = '$eventId-$leaderId';
 
-                            try{
+                            try {
                               final check = await supabase
                                   .from('registrations')
                                   .select('order_id')
                                   .eq('order_id', orderId);
 
-                              if(check.toString() == '[]') {
+                              if (check.toString() == '[]') {
                                 final data = await supabase
                                     .from('registrations')
                                     .insert({
@@ -310,8 +312,8 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                                   'participant_phone': leaderPhone,
                                   'participant_identity': leaderId,
                                   'event_isTeamEvent': true,
-                                  'team_name':teamName,
-                                  'team_members_name':members
+                                  'team_name': teamName,
+                                  'team_members_name': members
                                 });
 
                                 final resParticipants = await supabase
@@ -319,12 +321,12 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                                     .select('registered_participant')
                                     .eq('event_id', widget.event.eventId);
 
-                                List participants = resParticipants[0]['registered_participant'];
+                                List participants = resParticipants[0]
+                                    ['registered_participant'];
                                 participants.add(uuid);
-                                await supabase
-                                    .from('events')
-                                    .update({'registered_participant' : participants})
-                                    .eq('event_id', widget.event.eventId);
+                                await supabase.from('events').update({
+                                  'registered_participant': participants
+                                }).eq('event_id', widget.event.eventId);
 
                                 debugPrint("added in events");
 
@@ -335,27 +337,26 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
 
                                 List events = resEvents[0]['events_registered'];
                                 events.add(widget.event.eventId);
-                                UserProfile.currentUser!.registeredEvents = events;
+                                UserProfile.currentUser!.registeredEvents =
+                                    events;
                                 await supabase
                                     .from('profiles')
-                                    .update({'events_registered' : events})
-                                    .eq('user_id', uuid);
+                                    .update({'events_registered': events}).eq(
+                                        'user_id', uuid);
 
                                 debugPrint("added in profiles");
 
                                 ScaffoldMessenger.of(context)
-                                    .showSnackBar(
-                                    snackBarRegistrationSuccess)
+                                    .showSnackBar(snackBarRegistrationSuccess)
                                     .toString();
 
                                 Navigator.pushAndRemoveUntil(
                                   context,
-                                  MaterialPageRoute(
+                                  CupertinoPageRoute(
                                       builder: (context) =>
-                                      const NavBarScreen()),
-                                      (Route<dynamic> route) => false,
+                                          const NavBarScreen()),
+                                  (Route<dynamic> route) => false,
                                 );
-
                               } else {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBarAlreadyRegistered)

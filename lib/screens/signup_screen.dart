@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
@@ -88,7 +89,7 @@ class _SignUpState extends State<SignUp> {
                         ..onTap = () {
                           Navigator.pushAndRemoveUntil(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                                 builder: (context) => const Login()),
                             (Route<dynamic> route) => false,
                           );
@@ -435,7 +436,7 @@ class _SignUpState extends State<SignUp> {
 
                           Navigator.pushAndRemoveUntil(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                                 builder: (context) => const Login()),
                             (Route<dynamic> route) => false,
                           );
