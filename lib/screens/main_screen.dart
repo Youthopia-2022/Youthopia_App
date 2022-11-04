@@ -21,13 +21,6 @@ final List<String> imgList = [
   'assets/sample 4.jpg',
   'assets/sample 5.jpg'
 ];
-final List<String> sponsorList = [
-  "assets/starbucks.png",
-  "assets/mcdon.png",
-  "assets/dominos.png",
-  "assets/cocacola.png",
-  "assets/burgerking.png"
-];
 
 class _MainScreenState extends State<MainScreen> {
   bool isLoaded = false;
@@ -78,64 +71,63 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: SingleChildScrollView(
         child: SafeArea(
-          child: (!isLoaded)
+          child: /* (!isLoaded)
               ? const Center(child: CircularProgressIndicator())
-              : Column(
-                  children: [
-                    const HomePageContainer(),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 8.0, left: 17),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: GradientText(
-                          "Sponsors",
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w500),
-                        ),
-                      ),
+              : */
+              Column(
+            children: [
+              const HomePageContainer(),
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0, left: 17),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: GradientText(
+                    "Sponsors",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: const [
+                    SponsorContainer(
+                      sponsorImage: 'assets/cocacola.png',
                     ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: const [
-                          SponsorContainer(
-                            sponsorImage: 'assets/cocacola.png',
-                          ),
-                          SponsorContainer(
-                            sponsorImage: 'assets/dominos.png',
-                          ),
-                          SponsorContainer(
-                            sponsorImage: 'assets/starbucks.png',
-                          ),
-                          SponsorContainer(
-                            sponsorImage: 'assets/burgerking.png',
-                          ),
-                          SponsorContainer(
-                            sponsorImage: 'assets/mcdon.png',
-                          ),
-                        ],
-                      ),
+                    SponsorContainer(
+                      sponsorImage: 'assets/dominos.png',
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 10.0, left: 17),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: GradientText(
-                          "Live Events",
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w500),
-                        ),
-                      ),
+                    SponsorContainer(
+                      sponsorImage: 'assets/starbucks.png',
                     ),
-                    Carousel(
-                      imgList,
-                      auto: true,
-                      enlarge: true,
-                      loop: true,
-                      height: MediaQuery.of(context).size.height * 0.3,
+                    SponsorContainer(
+                      sponsorImage: 'assets/burgerking.png',
+                    ),
+                    SponsorContainer(
+                      sponsorImage: 'assets/mcdon.png',
                     ),
                   ],
                 ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 10.0, left: 17),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: GradientText(
+                    "Live Events",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ),
+              Carousel(
+                imgList,
+                auto: true,
+                enlarge: true,
+                loop: true,
+                height: MediaQuery.of(context).size.height * 0.3,
+              ),
+            ],
+          ),
         ),
       ),
     );
