@@ -31,6 +31,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
   late List members;
   bool isDIT =
       (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false;
+  bool isProcessing = false;
 
   @override
   void initState() {
@@ -283,94 +284,8 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                       width: double.infinity,
                       child: TextButton(
                         onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            for (int i = 0; i < members.length; i++) {
-                              (members[i] == '') ? null : members[i];
-                            }
-                            debugPrint(teamName);
-                            debugPrint(leaderName);
-                            debugPrint(leaderId);
-                            debugPrint(leaderPhone);
-                            debugPrint(members.toString());
-
-                            String orderId = '$eventId-$leaderId';
-
-                            try {
-                              final check = await supabase
-                                  .from('registrations')
-                                  .select('order_id')
-                                  .eq('order_id', orderId);
-
-                              if (check.toString() == '[]') {
-                                final data = await supabase
-                                    .from('registrations')
-                                    .insert({
-                                  'order_id': orderId,
-                                  'event_id': eventId,
-                                  'participant_email': leaderEmail,
-                                  'participant_name': leaderName,
-                                  'participant_phone': leaderPhone,
-                                  'participant_identity': leaderId,
-                                  'event_isTeamEvent': true,
-                                  'team_name': teamName,
-                                  'team_members_name': members
-                                });
-
-                                final resParticipants = await supabase
-                                    .from('events')
-                                    .select('registered_participant')
-                                    .eq('event_id', widget.event.eventId);
-
-                                List participants = resParticipants[0]
-                                    ['registered_participant'];
-                                participants.add(uuid);
-                                await supabase.from('events').update({
-                                  'registered_participant': participants
-                                }).eq('event_id', widget.event.eventId);
-
-                                debugPrint("added in events");
-
-                                final resEvents = await supabase
-                                    .from('profiles')
-                                    .select('events_registered')
-                                    .eq('user_id', uuid);
-
-                                List events = resEvents[0]['events_registered'];
-                                events.add(widget.event.eventId);
-                                UserProfile.currentUser!.registeredEvents =
-                                    events;
-                                await supabase
-                                    .from('profiles')
-                                    .update({'events_registered': events}).eq(
-                                        'user_id', uuid);
-
-                                debugPrint("added in profiles");
-
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBarRegistrationSuccess)
-                                    .toString();
-
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  CupertinoPageRoute(
-                                      builder: (context) =>
-                                          const NavBarScreen()),
-                                  (Route<dynamic> route) => false,
-                                );
-                              } else {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBarAlreadyRegistered)
-                                    .toString();
-                              }
-                            } on PostgrestException catch (error) {
-                              debugPrint(error.toString());
-                            }
-                          } else {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBarInvalidCredentials)
-                                .toString();
-                          }
-                        },
+                          (isProcessing) ? null : buttonPress();
+                          },
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
@@ -380,14 +295,19 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                                 ColourTheme.blue),
                             foregroundColor: MaterialStateProperty.all<Color>(
                                 ColourTheme.white)),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 6),
-                          child: Text(
-                            "SUBMIT",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18),
-                          ),
-                        ),
+                        child: (isProcessing)
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 6),
+                                child: Text(
+                                  "SUBMIT",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                              ),
                       ),
                     ),
                   ),
@@ -397,4 +317,103 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
       ),
     );
   }
+
+  Future buttonPress() async {
+
+    setState(() {
+      isProcessing = true;
+    });
+
+    if (_formKey.currentState!.validate()) {
+      for (int i = 0; i < members.length; i++) {
+        (members[i] == '') ? null : members[i];
+      }
+      debugPrint(teamName);
+      debugPrint(leaderName);
+      debugPrint(leaderId);
+      debugPrint(leaderPhone);
+      debugPrint(members.toString());
+
+      String orderId = '$eventId-$leaderId';
+
+      try {
+        final check = await supabase
+            .from('registrations')
+            .select('order_id')
+            .eq('order_id', orderId);
+
+        if (check.toString() == '[]') {
+          await supabase
+              .from('registrations')
+              .insert({
+            'order_id': orderId,
+            'event_id': eventId,
+            'participant_email': leaderEmail,
+            'participant_name': leaderName,
+            'participant_phone': leaderPhone,
+            'participant_identity': leaderId,
+            'event_isTeamEvent': true,
+            'team_name': teamName,
+            'team_members_name': members
+          });
+
+          final resParticipants = await supabase
+              .from('events')
+              .select('registered_participant')
+              .eq('event_id', widget.event.eventId);
+
+          List participants = resParticipants[0]
+          ['registered_participant'];
+          participants.add(uuid);
+          await supabase.from('events').update({
+            'registered_participant': participants
+          }).eq('event_id', widget.event.eventId);
+
+          debugPrint("added in events");
+
+          final resEvents = await supabase
+              .from('profiles')
+              .select('events_registered')
+              .eq('user_id', uuid);
+
+          List events = resEvents[0]['events_registered'];
+          events.add(widget.event.eventId);
+          UserProfile.currentUser!.registeredEvents =
+              events;
+          await supabase
+              .from('profiles')
+              .update({'events_registered': events}).eq(
+              'user_id', uuid);
+
+          debugPrint("added in profiles");
+
+          ScaffoldMessenger.of(context)
+              .showSnackBar(snackBarRegistrationSuccess)
+              .toString();
+
+          Navigator.pushAndRemoveUntil(
+            context,
+            CupertinoPageRoute(
+                builder: (context) =>
+                const NavBarScreen()),
+                (Route<dynamic> route) => false,
+          );
+        } else {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(snackBarAlreadyRegistered)
+              .toString();
+        }
+      } on PostgrestException catch (error) {
+        debugPrint(error.toString());
+      }
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(snackBarInvalidCredentials)
+          .toString();
+    }
+    setState(() {
+      isProcessing = false;
+    });
+  }
+
 }

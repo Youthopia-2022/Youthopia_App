@@ -33,6 +33,7 @@ class _SignUpState extends State<SignUp> {
   String _college = "";
   String _year = "None";
   late bool _isPasswordVisible;
+  bool isProcessing = false;
 
   @override
   void initState() {
@@ -408,50 +409,7 @@ class _SignUpState extends State<SignUp> {
                 width: double.maxFinite,
                 child: TextButton(
                   onPressed: () async {
-                    SystemChannels.textInput.invokeMethod('TextInput.hide');
-                    if (_formKey.currentState!.validate()) {
-                      try {
-                        final dup = await supabase
-                            .from('profiles')
-                            .select('user_email')
-                            .eq('user_email', _email);
-
-                        if (dup.toString() == '[]') {
-                          final res = await Supabase.instance.client.auth
-                              .signUp(
-                                  email: _email,
-                                  password: _password,
-                                  data: {
-                                'name': _name,
-                                'phone': _phone,
-                                'gender': _gender,
-                                'college': _college,
-                                'year': _year,
-                              });
-                          debugPrint(res.toString());
-
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(snackBarSignupSuccess)
-                              .toString();
-
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            CupertinoPageRoute(
-                                builder: (context) => const Login()),
-                            (Route<dynamic> route) => false,
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(snackBarEmailExists)
-                              .toString();
-                        }
-                      } on AuthException catch (error) {
-                        debugPrint(error.toString());
-                        // ScaffoldMessenger.of(context)
-                        //     .showSnackBar(snackBarNoInternet)
-                        //     .toString();
-                      }
-                    }
+                    (isProcessing) ? null : buttonPressed();
                   },
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -461,12 +419,17 @@ class _SignUpState extends State<SignUp> {
                           MaterialStateProperty.all<Color>(ColourTheme.blue),
                       foregroundColor:
                           MaterialStateProperty.all<Color>(ColourTheme.white)),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 3),
+                  child: (isProcessing)
+                      ? const CircularProgressIndicator(
+                    color: Colors.white,
+                  )
+                      : const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 6),
                     child: Text(
                       "SUBMIT",
                       style: TextStyle(
-                          fontFamily: 'IBM Plex', fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
                     ),
                   ),
                 ),
@@ -475,16 +438,64 @@ class _SignUpState extends State<SignUp> {
                 height: 300,
               )
             ],
-            // child: Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 18.0),
-            //   child: Column(
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: ,
-            //   ),
-            // ),
           ),
         ),
       ),
     );
   }
+
+  Future buttonPressed() async {
+    setState(() {
+      isProcessing = true;
+    });
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
+    if (_formKey.currentState!.validate()) {
+      try {
+        final dup = await supabase
+            .from('profiles')
+            .select('user_email')
+            .eq('user_email', _email);
+
+        if (dup.toString() == '[]') {
+          final res = await Supabase.instance.client.auth
+              .signUp(
+              email: _email,
+              password: _password,
+              data: {
+                'name': _name,
+                'phone': _phone,
+                'gender': _gender,
+                'college': _college,
+                'year': _year,
+              });
+          debugPrint(res.toString());
+
+          ScaffoldMessenger.of(context)
+              .showSnackBar(snackBarSignupSuccess)
+              .toString();
+
+          Navigator.pushAndRemoveUntil(
+            context,
+            CupertinoPageRoute(
+                builder: (context) => const Login()),
+                (Route<dynamic> route) => false,
+          );
+        } else {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(snackBarEmailExists)
+              .toString();
+        }
+      } on AuthException catch (error) {
+        debugPrint(error.toString());
+        // ScaffoldMessenger.of(context)
+        //     .showSnackBar(snackBarNoInternet)
+        //     .toString();
+      }
+    }
+
+    setState(() {
+      isProcessing = false;
+    });
+  }
+
 }

@@ -31,6 +31,7 @@ class _LoginState extends State<Login> {
   late final StreamSubscription<AuthState> _authStateSubscription;
   late bool _isPasswordVisible;
   Supa supa = Supa();
+  bool isProcessing = false;
 
   @override
   void initState() {
@@ -214,35 +215,7 @@ class _LoginState extends State<Login> {
                           width: double.maxFinite,
                           child: TextButton(
                             onPressed: () async {
-                              SystemChannels.textInput
-                                  .invokeMethod('TextInput.hide');
-                              if (_formKey.currentState!.validate()) {
-                                try {
-                                  await supa.login(_email, _password);
-                                } on AuthException catch (error) {
-                                  debugPrint(error.message.toString());
-                                  debugPrint(error.statusCode.toString());
-
-                                  if (error.message ==
-                                      "Invalid login credentials") {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(
-                                            snackBarLoginInvalidCredentials)
-                                        .toString();
-                                  }
-                                  if (error.message == "Email not confirmed") {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(
-                                            snackBarLoginEmailNotConfirm)
-                                        .toString();
-                                  }
-                                }
-                                /* if () {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBarNoInternet)
-                                      .toString();
-                                } */
-                              }
+                              (isProcessing) ? null : buttonPressed();
                             },
                             style: ButtonStyle(
                                 shape: MaterialStateProperty.all<
@@ -256,15 +229,19 @@ class _LoginState extends State<Login> {
                                 foregroundColor:
                                     MaterialStateProperty.all<Color>(
                                         ColourTheme.white)),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 3),
-                              child: Text(
-                                "LOGIN",
-                                style: TextStyle(
-                                    fontFamily: 'IBM Plex',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
+                            child: (isProcessing)
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  )
+                                : const Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 6),
+                                    child: Text(
+                                      "SUBMIT",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
+                                    ),
+                                  ),
                           ),
                         ),
                         const SizedBox(
@@ -333,5 +310,40 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  Future buttonPressed() async {
+    setState(() {
+      isProcessing = true;
+    });
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
+    if (_formKey.currentState!.validate()) {
+      try {
+        await supa.login(_email, _password);
+      } on AuthException catch (error) {
+        debugPrint(error.message.toString());
+        debugPrint(error.statusCode.toString());
+
+        if (error.message == "Invalid login credentials") {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(snackBarLoginInvalidCredentials)
+              .toString();
+        }
+        if (error.message == "Email not confirmed") {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(snackBarLoginEmailNotConfirm)
+              .toString();
+        }
+      }
+      /* if () {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBarNoInternet)
+                                      .toString();
+                                } */
+    }
+
+    setState(() {
+      isProcessing = false;
+    });
   }
 }
