@@ -37,7 +37,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
       Navigator.pushReplacement(
         context,
-        CupertinoPageRoute(builder: (context) => const NavBarScreen()),
+        CupertinoPageRoute(builder: (context) => const NavBarScreen(true)),
       );
     } else {
       Navigator.pushReplacement(

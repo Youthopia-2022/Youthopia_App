@@ -8,7 +8,7 @@ import 'package:youthopia_2022_app/screens/profile_screen.dart';
 import 'package:youthopia_2022_app/screens/registered_events_screen.dart';
 
 class NavBarScreen extends StatefulWidget {
-  const NavBarScreen({super.key});
+  const NavBarScreen(bool bool, {super.key});
 
   @override
   State<NavBarScreen> createState() => _NavBarScreenState();

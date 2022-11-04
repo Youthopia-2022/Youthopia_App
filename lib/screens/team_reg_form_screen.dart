@@ -285,7 +285,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                       child: TextButton(
                         onPressed: () async {
                           (isProcessing) ? null : buttonPress();
-                          },
+                        },
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
@@ -319,7 +319,6 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
   }
 
   Future buttonPress() async {
-
     setState(() {
       isProcessing = true;
     });
@@ -343,9 +342,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
             .eq('order_id', orderId);
 
         if (check.toString() == '[]') {
-          await supabase
-              .from('registrations')
-              .insert({
+          await supabase.from('registrations').insert({
             'order_id': orderId,
             'event_id': eventId,
             'participant_email': leaderEmail,
@@ -362,12 +359,12 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
               .select('registered_participant')
               .eq('event_id', widget.event.eventId);
 
-          List participants = resParticipants[0]
-          ['registered_participant'];
+          List participants = resParticipants[0]['registered_participant'];
           participants.add(uuid);
-          await supabase.from('events').update({
-            'registered_participant': participants
-          }).eq('event_id', widget.event.eventId);
+          await supabase
+              .from('events')
+              .update({'registered_participant': participants}).eq(
+                  'event_id', widget.event.eventId);
 
           debugPrint("added in events");
 
@@ -378,12 +375,10 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
 
           List events = resEvents[0]['events_registered'];
           events.add(widget.event.eventId);
-          UserProfile.currentUser!.registeredEvents =
-              events;
+          UserProfile.currentUser!.registeredEvents = events;
           await supabase
               .from('profiles')
-              .update({'events_registered': events}).eq(
-              'user_id', uuid);
+              .update({'events_registered': events}).eq('user_id', uuid);
 
           debugPrint("added in profiles");
 
@@ -391,12 +386,11 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
               .showSnackBar(snackBarRegistrationSuccess)
               .toString();
 
+          // ignore: use_build_context_synchronously
           Navigator.pushAndRemoveUntil(
             context,
-            CupertinoPageRoute(
-                builder: (context) =>
-                const NavBarScreen()),
-                (Route<dynamic> route) => false,
+            CupertinoPageRoute(builder: (context) => const NavBarScreen(true)),
+            (Route<dynamic> route) => false,
           );
         } else {
           ScaffoldMessenger.of(context)
@@ -415,5 +409,4 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
       isProcessing = false;
     });
   }
-
 }

@@ -274,7 +274,7 @@ class _DITIndividualRegFormScreenState
 
           Navigator.pushAndRemoveUntil(
             context,
-            CupertinoPageRoute(builder: (context) => const NavBarScreen()),
+            CupertinoPageRoute(builder: (context) => const NavBarScreen(true)),
             (Route<dynamic> route) => false,
           );
         } else {
