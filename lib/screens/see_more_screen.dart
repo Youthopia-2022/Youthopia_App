@@ -52,8 +52,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
               crossAxisCount: 2,
               childAspectRatio: 0.65,
               children: List.generate(totalItems, (index) {
-                return
-                Container(
+                return Container(
                   decoration: const BoxDecoration(
                     color: Color(0xFF101010),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -71,8 +70,8 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                     child: Column(
                       children: [
                         Image(
-                          image: NetworkImage(
-                              widget.events[index].eventPosterUrl),
+                          image:
+                              NetworkImage(widget.events[index].eventPosterUrl),
                         ),
                         Text(
                           widget.events[index].eventName,
