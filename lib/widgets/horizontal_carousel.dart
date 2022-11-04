@@ -45,7 +45,11 @@ class _CarouselState extends State<Carousel> {
                   borderRadius: const BorderRadius.all(Radius.circular(5)),
                   child: Stack(
                     children: <Widget>[
-                      Image.asset(item, fit: BoxFit.cover, width: 1000.0),
+                      Image.asset(
+                        item,
+                        fit: BoxFit.cover,
+                        width: MediaQuery.of(context).size.height,
+                      ),
                       Positioned(
                         bottom: 00,
                         left: 0,

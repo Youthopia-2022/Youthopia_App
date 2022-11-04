@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/services/events.dart';
+import 'package:youthopia_2022_app/widgets/home_page_container.dart';
+import 'package:youthopia_2022_app/widgets/sponsor_container.dart';
 
-import '../widgets/home_page_container.dart';
+import '../constants/gradient_color.dart';
+import '../widgets/horizontal_carousel.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -18,6 +21,13 @@ final List<String> imgList = [
   'assets/sample 4.jpg',
   'assets/sample 5.jpg'
 ];
+final List<String> sponsorList = [
+  "assets/starbucks.png",
+  "assets/mcdon.png",
+  "assets/dominos.png",
+  "assets/cocacola.png",
+  "assets/burgerking.png"
+];
 
 class _MainScreenState extends State<MainScreen> {
   bool isLoaded = false;
@@ -26,6 +36,7 @@ class _MainScreenState extends State<MainScreen> {
   List? informalEvents;
   List? debateEvents;
   List? artsEvents;
+  late final Event event;
 
   @override
   void initState() {
@@ -65,15 +76,71 @@ class _MainScreenState extends State<MainScreen> {
               onPressed: null),
         ],
       ),
-      body: SafeArea(
-        child: (!isLoaded)
-            ? const Center(child: CircularProgressIndicator())
-            : HomePageContainer(branch: "bsc", name: "asiae"),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: (!isLoaded)
+              ? const Center(child: CircularProgressIndicator())
+              : Column(
+                  children: [
+                    const HomePageContainer(),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 8.0, left: 17),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: GradientText(
+                          "Sponsors",
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: const [
+                          SponsorContainer(
+                            sponsorImage: 'assets/cocacola.png',
+                          ),
+                          SponsorContainer(
+                            sponsorImage: 'assets/dominos.png',
+                          ),
+                          SponsorContainer(
+                            sponsorImage: 'assets/starbucks.png',
+                          ),
+                          SponsorContainer(
+                            sponsorImage: 'assets/burgerking.png',
+                          ),
+                          SponsorContainer(
+                            sponsorImage: 'assets/mcdon.png',
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 10.0, left: 17),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: GradientText(
+                          "Live Events",
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                    Carousel(
+                      imgList,
+                      auto: true,
+                      enlarge: true,
+                      loop: true,
+                      height: MediaQuery.of(context).size.height * 0.3,
+                    ),
+                  ],
+                ),
+        ),
       ),
     );
   }
 }
-
 
 /* 
 ListView(
