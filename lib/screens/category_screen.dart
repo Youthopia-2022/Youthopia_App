@@ -19,20 +19,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
         appBar: AppBar(
           //toolbarHeight: 70,
           leadingWidth: double.maxFinite,
-          backgroundColor: ColourTheme.black,
+          backgroundColor: const Color(0xFF0F0F0F),
           leading: SizedBox(
             width: double.maxFinite,
             child: Image.asset('assets/youthopiaIcon.png', fit: BoxFit.contain),
           ),
-          actions: const [
-            IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-                iconSize: 30,
-                onPressed: null),
-          ],
         ),
         backgroundColor: ColourTheme.black,
         body: ListView(
