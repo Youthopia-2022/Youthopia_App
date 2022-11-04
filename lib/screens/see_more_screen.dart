@@ -28,7 +28,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
     return Scaffold(
       backgroundColor: ColourTheme.black,
       appBar: AppBar(
-        backgroundColor: ColourTheme.black,
+        backgroundColor: const Color(0xFF0F0F0F),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -73,15 +73,20 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                           image:
                               NetworkImage(widget.events[index].eventPosterUrl),
                         ),
-                        Text(
-                          widget.events[index].eventName,
-                          style: TextStyle(
-                              color: ColourTheme.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.events[index].eventName,
+                              style: TextStyle(
+                                  color: ColourTheme.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            ),
+                          ],
                         ),
-                        const SizedBox(
-                          height: 5,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.01,
                         ),
                         Row(
                           children: [

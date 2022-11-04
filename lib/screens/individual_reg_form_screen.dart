@@ -98,7 +98,7 @@ class _DITIndividualRegFormScreenState
                     height: 30,
                   ),
                   Text(
-                    (isDIT) ? 'SAP ID' : 'Aadhaar card number',
+                    (isDIT) ? 'Student ID' : 'Aadhaar card number',
                     style: TextStyle(fontSize: 24, color: ColourTheme.white),
                   ),
                   TextFormField(

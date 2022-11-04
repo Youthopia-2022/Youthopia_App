@@ -39,7 +39,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: const [
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.only(left: 15.0),
                   child: GradientText(
                     "Conveners",
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
@@ -57,37 +57,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: const [
                 Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: GradientText(
-                    "Designing Team",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ],
-            ),
-            NameContainer(branch: "branch", name: "name"),
-            NameContainer(branch: "branch", name: "name"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: GradientText(
-                    "Designing Team Members",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ],
-            ),
-            NameContainer(branch: "branch", name: "name"),
-            NameContainer(branch: "branch", name: "name"),
-            NameContainer(branch: "branch", name: "name"),
-            NameContainer(branch: "branch", name: "name"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.only(left: 15.0),
                   child: GradientText(
                     "Development Team",
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
@@ -101,7 +71,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: const [
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.only(left: 15.0),
                   child: GradientText(
                     "Development Team Members",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
@@ -110,6 +80,36 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               ],
             ),
             NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: const [
+                Padding(
+                  padding: EdgeInsets.only(left: 15.0),
+                  child: GradientText(
+                    "Designing Team",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ],
+            ),
+            NameContainer(branch: "branch", name: "name"),
+            NameContainer(branch: "branch", name: "name"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: const [
+                Padding(
+                  padding: EdgeInsets.only(left: 15.0),
+                  child: GradientText(
+                    "Designing Team Members",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ],
+            ),
             NameContainer(branch: "branch", name: "name"),
             NameContainer(branch: "branch", name: "name"),
             NameContainer(branch: "branch", name: "name"),
