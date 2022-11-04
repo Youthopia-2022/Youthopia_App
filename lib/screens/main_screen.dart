@@ -55,7 +55,9 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: ColourTheme.black,
         leading: SizedBox(
           width: double.maxFinite,
-          child: Image.asset('assets/youthopiaIcon.png', fit: BoxFit.contain),
+          child: Image.asset(
+            'assets/yss.png',
+          ),
         ),
         actions: const [
           IconButton(
