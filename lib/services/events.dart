@@ -18,17 +18,18 @@ class Event {
   static List? debateEvents;
   static List? artsEvents;
 
-  Event(this.eventId,
-      this.eventName,
-      this.eventVenue,
-      this.eventTime,
-      this.eventDate,
-      this.eventFees,
-      this.eventDescription,
-      this.isTeamEvent,
-      this.eventMembers,
-      this.eventPosterUrl,
-      );
+  Event(
+    this.eventId,
+    this.eventName,
+    this.eventVenue,
+    this.eventTime,
+    this.eventDate,
+    this.eventFees,
+    this.eventDescription,
+    this.isTeamEvent,
+    this.eventMembers,
+    this.eventPosterUrl,
+  );
 }
 
 class RegisteredEvent {
@@ -40,16 +41,11 @@ class RegisteredEvent {
 
   static List registeredEvents = [];
 
-  RegisteredEvent(
-      this.eventId,
-      this.eventName,
-      this.eventVenue,
-      this.eventTime,
-      this.eventPoster
-      );
+  RegisteredEvent(this.eventId, this.eventName, this.eventVenue, this.eventTime,
+      this.eventPoster);
 }
 
-class MainEvents{
+class MainEvents {
   final String eventId;
   final String eventName;
   final String eventTime;
@@ -57,19 +53,13 @@ class MainEvents{
   final String eventPosterUrl;
   final String starName;
 
-  static MainEvents? starNight ;
+  static MainEvents? starNight;
 
-  MainEvents(
-      this.eventId,
-      this.eventName,
-      this.eventTime,
-      this.eventDate,
-      this.eventPosterUrl,
-      this.starName
-      );
+  MainEvents(this.eventId, this.eventName, this.eventTime, this.eventDate,
+      this.eventPosterUrl, this.starName);
 }
 
-class LiveEvents{
+class LiveEvents {
   final String eventId;
   final String eventName;
   final String eventTime;
@@ -79,12 +69,6 @@ class LiveEvents{
 
   static List? liveEvents;
 
-  LiveEvents(
-      this.eventId,
-      this.eventName,
-      this.eventTime,
-      this.eventDate,
-      this.eventPosterUrl,
-      this.event
-      );
+  LiveEvents(this.eventId, this.eventName, this.eventTime, this.eventDate,
+      this.eventPosterUrl, this.event);
 }
