@@ -6,7 +6,7 @@ class Event {
   final String eventVenue;
   final TimeOfDay eventTime;
   final DateTime eventDate;
-  final int eventFees;
+  final String eventFees;
   final String eventDescription;
   final bool isTeamEvent;
   final int eventMembers;
