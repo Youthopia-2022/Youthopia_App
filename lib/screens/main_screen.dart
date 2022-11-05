@@ -72,6 +72,9 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ),
               SizedBox(
+                height: MediaQuery.of(context).size.height * 0.01,
+              ),
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: 78,
                 child: ListView.builder(
@@ -106,6 +109,9 @@ class _MainScreenState extends State<MainScreen> {
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
                   ),
                 ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               Carousel(
                 LiveEvents.liveEvents!,

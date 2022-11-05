@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youthopia_2022_app/services/events.dart';
 
 class HomePageContainer extends StatefulWidget {
@@ -23,7 +22,7 @@ class _HomePageContainerState extends State<HomePageContainer> {
             Image.network(
               MainEvents.starNight!.eventPosterUrl,
               fit: BoxFit.cover,
-              width: MediaQuery.of(context).size.height,
+              width: double.maxFinite,
             ),
             Positioned(
               bottom: 10,
@@ -66,15 +65,15 @@ class _HomePageContainerState extends State<HomePageContainer> {
                           textAlign: TextAlign.left,
                           text: TextSpan(
                             children: [
-                               const WidgetSpan(
+                              const WidgetSpan(
                                   child: Icon(
                                     Icons.schedule,
                                     color: Colors.white,
                                     size: 20,
                                   ),
-                                  alignment:
-                                  PlaceholderAlignment.middle),
-                              TextSpan(text: '  ${MainEvents.starNight!.eventTime}')
+                                  alignment: PlaceholderAlignment.middle),
+                              TextSpan(
+                                  text: '  ${MainEvents.starNight!.eventTime}')
                             ],
                             style: const TextStyle(
                               color: Colors.white,
@@ -104,9 +103,9 @@ class _HomePageContainerState extends State<HomePageContainer> {
                                     color: Colors.white,
                                     size: 20,
                                   ),
-                                  alignment:
-                                  PlaceholderAlignment.middle),
-                              TextSpan(text: '  ${MainEvents.starNight!.eventDate}')
+                                  alignment: PlaceholderAlignment.middle),
+                              TextSpan(
+                                  text: '  ${MainEvents.starNight!.eventDate}')
                             ],
                             style: const TextStyle(
                               color: Colors.white,
@@ -120,7 +119,6 @@ class _HomePageContainerState extends State<HomePageContainer> {
           ],
         ),
       ),
-    )
-    ;
+    );
   }
 }
