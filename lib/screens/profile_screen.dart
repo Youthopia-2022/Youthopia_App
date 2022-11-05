@@ -50,10 +50,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: const Color(0xFF000000),
       appBar: AppBar(
         backgroundColor: ColourTheme.black,
-        title: Text(
-          'Settings',
+        title: const Text(
+          'My Profile',
           style: TextStyle(
-            color: ColourTheme.white,
+            fontFamily: 'IBM Plex Sans',
+            fontSize: 24,
           ),
         ),
       ),

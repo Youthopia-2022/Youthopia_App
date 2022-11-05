@@ -44,10 +44,11 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
     return Scaffold(
       backgroundColor: ColourTheme.black,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Registered Events',
           style: TextStyle(
-            color: ColourTheme.white,
+            fontFamily: 'IBM Plex Sans',
+            fontSize: 24,
           ),
         ),
         backgroundColor: const Color(0xFF0F0F0F),
