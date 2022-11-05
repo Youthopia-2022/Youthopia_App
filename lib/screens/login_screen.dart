@@ -41,10 +41,9 @@ class _LoginState extends State<Login> {
       final session = data.session;
       if (session != null) {
         _redirecting = true;
-        Navigator.pushAndRemoveUntil(
+        Navigator.push(
           context,
           CupertinoPageRoute(builder: (context) => const LoadingScreen()),
-          (Route<dynamic> route) => false,
         );
       }
     });
