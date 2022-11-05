@@ -1,16 +1,18 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/color_theme.dart';
+import '../screens/home_screen.dart';
 
 class Carousel extends StatefulWidget {
-  const Carousel(this.imgList,
+  const Carousel(this.list,
       {super.key,
       required this.auto,
       required this.enlarge,
       required this.loop,
       required this.height});
-  final List<String> imgList;
+  final List list;
   final bool auto;
   final bool enlarge;
   final bool loop;
@@ -38,125 +40,134 @@ class _CarouselState extends State<Carousel> {
               _current = index;
             });
           }),
-      items: widget.imgList
-          .map((item) => Container(
-                margin: const EdgeInsets.all(5),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(5)),
-                  child: Stack(
-                    children: <Widget>[
-                      Image.asset(
-                        item,
-                        fit: BoxFit.cover,
-                        width: MediaQuery.of(context).size.height,
-                      ),
-                      Positioned(
-                        bottom: 00,
-                        left: 0,
-                        child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                RichText(
-                                    textAlign: TextAlign.left,
-                                    text: const TextSpan(
-                                      children: [
-                                        WidgetSpan(
-                                            child: Icon(
-                                              Icons.event_available_outlined,
-                                              color: Colors.white,
-                                              size: 16,
-                                            ),
-                                            alignment:
-                                                PlaceholderAlignment.middle),
-                                        TextSpan(text: ' Date')
-                                      ],
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    )),
-                                const Text(
-                                  'Event Name',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
+      items: widget.list
+          .map((item) => GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              CupertinoPageRoute(
+                  builder: (context) =>
+                      Home(item.event)));
+        },
+            child: Container(
+                  margin: const EdgeInsets.all(5),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(5)),
+                    child: Stack(
+                      children: <Widget>[
+                        Image.network(
+                          item.eventPosterUrl,
+                          fit: BoxFit.cover,
+                          width: MediaQuery.of(context).size.height,
+                        ),
+                        Positioned(
+                          bottom: 00,
+                          left: 8,
+                          child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RichText(
+                                      textAlign: TextAlign.left,
+                                      text: TextSpan(
+                                        children: [
+                                          const WidgetSpan(
+                                              child: Icon(
+                                                Icons.event_available_outlined,
+                                                color: Colors.white,
+                                                size: 20,
+                                              ),
+                                              alignment:
+                                                  PlaceholderAlignment.middle),
+                                          TextSpan(text: '  ${item.eventDate}')
+                                        ],
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )),
+                                   Text(
+                                    item.eventName,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 30.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            )),
-                      ),
-                      Positioned(
-                        top: 00,
-                        left: 0,
-                        child: Container(
+                                ],
+                              )),
+                        ),
+                        Positioned(
+                          top: 00,
+                          left: 8,
+                          child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RichText(
+                                      textAlign: TextAlign.left,
+                                      text:  TextSpan(
+                                        children: [
+                                          const WidgetSpan(
+                                              child: Icon(
+                                                Icons.schedule,
+                                                color: Colors.white,
+                                                size: 20,
+                                              ),
+                                              alignment:
+                                                  PlaceholderAlignment.middle),
+                                          TextSpan(text: ' ${item.eventTime}')
+                                        ],
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )),
+                                ],
+                              )),
+                        ),
+                        Positioned(
+                          top: 00,
+                          right: 0,
+                          child: Container(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                RichText(
-                                    textAlign: TextAlign.left,
-                                    text: const TextSpan(
-                                      children: [
-                                        WidgetSpan(
-                                            child: Icon(
-                                              Icons.schedule,
-                                              color: Colors.white,
-                                              size: 16,
-                                            ),
-                                            alignment:
-                                                PlaceholderAlignment.middle),
-                                        TextSpan(text: ' Time')
-                                      ],
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    )),
-                              ],
-                            )),
-                      ),
-                      Positioned(
-                        top: 00,
-                        right: 0,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 10.0),
-                          child: SizedBox(
-                            width: 60,
-                            child: TextButton(
-                              onPressed: () {},
-                              style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(5))),
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          ColourTheme.white),
-                                  foregroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          ColourTheme.black)),
-                              child: const Text(
-                                "LIVE",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 14),
+                            child: SizedBox(
+                              width: 60,
+                              child: TextButton(
+                                onPressed: () {},
+                                style: ButtonStyle(
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5))),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            ColourTheme.white),
+                                    foregroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            ColourTheme.black)),
+                                child: const Text(
+                                  "LIVE",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold, fontSize: 14),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ))
+          ))
           .toList(),
       carouselController: _controller,
     );

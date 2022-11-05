@@ -13,14 +13,6 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
-final List<String> imgList = [
-  'assets/sample 1.jpg',
-  'assets/sample 2.jpg',
-  'assets/sample 3.jpg',
-  'assets/sample 4.jpg',
-  'assets/sample 5.jpg'
-];
-
 class _MainScreenState extends State<MainScreen> {
   bool isLoaded = false;
   List? techEvents;
@@ -123,12 +115,15 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ),
               Carousel(
-                imgList,
+                LiveEvents.liveEvents!,
                 auto: true,
                 enlarge: true,
                 loop: true,
                 height: MediaQuery.of(context).size.height * 0.3,
               ),
+              const SizedBox(
+                height: 50,
+              )
             ],
           ),
         ),

@@ -96,7 +96,6 @@ class Supa {
 
   Future<void> getRegisteredEvents() async {
     List regEvents = UserProfile.currentUser!.registeredEvents;
-    debugPrint(UserProfile.currentUser!.registeredEvents.toString());
     int eventCount = 0;
     String events = "";
     for (int i = 0; i < regEvents.length; i++) {
@@ -147,7 +146,6 @@ class Supa {
   }
 
   MainEvents toStarNight(List<dynamic> result) {
-    debugPrint(result.toString());
     return MainEvents(
         result[0]['event_id'],
         result[0]['event_name'],
@@ -164,6 +162,46 @@ class Supa {
           .from('daily-main-events')
           .select();
       MainEvents.starNight = toStarNight(data);
+    } on PostgrestException catch (error) {
+      debugPrint(error.toString());
+    }
+  }
+
+  LiveEvents toLive(Map<String, dynamic> result) {
+
+    List? search;
+     search = (result['event_id'].indexOf('tech') != -1) ? Event.techEvents :
+              (result['event_id'].indexOf('cul') != -1) ? Event.culturalEvents :
+              (result['event_id'].indexOf('inf') != -1) ? Event.informalEvents :
+              (result['event_id'].indexOf('lit') != -1) ? Event.debateEvents :
+              (result['event_id'].indexOf('fa') != -1) ? Event.artsEvents :
+              null;
+     Event? event ;
+     if(search != null) {
+       for(int i = 0; i < search.length; i++) {
+         if(search[i].eventId == result['event_id']) {
+           event = search[i]; break;
+         }
+       }
+     }
+
+    return LiveEvents(
+        result['event_id'],
+        result['event_name'],
+        result['event_time'],
+        result['event_date'],
+        result['event_poster_url'],
+        event!
+    );
+  }
+  
+  Future<void> getLiveEvents() async {
+    try {
+      final data = await supabase
+          .from('live-events')
+          .select();
+      debugPrint(data.toString());
+      LiveEvents.liveEvents = data.map((e) => toLive(e)).toList();
     } on PostgrestException catch (error) {
       debugPrint(error.toString());
     }

@@ -68,3 +68,23 @@ class MainEvents{
       this.starName
       );
 }
+
+class LiveEvents{
+  final String eventId;
+  final String eventName;
+  final String eventTime;
+  final String eventDate;
+  final String eventPosterUrl;
+  Event event;
+
+  static List? liveEvents;
+
+  LiveEvents(
+      this.eventId,
+      this.eventName,
+      this.eventTime,
+      this.eventDate,
+      this.eventPosterUrl,
+      this.event
+      );
+}
