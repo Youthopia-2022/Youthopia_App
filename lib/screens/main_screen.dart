@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/services/events.dart';
 import 'package:youthopia_2022_app/widgets/home_page_container.dart';
-import 'package:youthopia_2022_app/widgets/sponsor_container.dart';
-
 import '../constants/gradient_color.dart';
+import '../services/sponsors.dart';
 import '../widgets/horizontal_carousel.dart';
 
 class MainScreen extends StatefulWidget {
@@ -87,26 +86,30 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: const [
-                    SponsorContainer(
-                      sponsorImage: 'assets/cocacola.png',
-                    ),
-                    SponsorContainer(
-                      sponsorImage: 'assets/dominos.png',
-                    ),
-                    SponsorContainer(
-                      sponsorImage: 'assets/starbucks.png',
-                    ),
-                    SponsorContainer(
-                      sponsorImage: 'assets/burgerking.png',
-                    ),
-                    SponsorContainer(
-                      sponsorImage: 'assets/mcdon.png',
-                    ),
-                  ],
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 78,
+                child: ListView.builder(
+                  itemCount: Sponsors.sponsors!.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 8.0, left: 17),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(70),
+                        child: Container(
+                          color: const Color(0xFF121212),
+                          child: Image(
+                            image: NetworkImage(
+                              Sponsors.sponsors![index].iconUrl,
+                            ),
+                            height: 70,
+                            width: 70,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
               const Padding(

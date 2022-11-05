@@ -32,6 +32,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
     _redirectCalled = true;
     final session = supabase.auth.currentSession;
     if (session != null) {
+      debugPrint("getting");
+      await supa.getSponsors();
+      debugPrint("completed");
       await supa.getCurrentProfile();
       await supa.getEventData();
 

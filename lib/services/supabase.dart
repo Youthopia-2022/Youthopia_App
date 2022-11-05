@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:youthopia_2022_app/services/sponsors.dart';
 import 'package:youthopia_2022_app/services/users.dart';
 import 'package:youthopia_2022_app/services/events.dart';
 
@@ -125,6 +126,23 @@ class Supa {
       //   }
       // }
 
+    }
+  }
+
+  Sponsors toSponsor(Map<String, dynamic> result) {
+    return Sponsors(
+        result['sponsor_name'],
+        result['sponsor_icon_url']);
+  }
+
+  Future<void> getSponsors() async {
+    try {
+      final data = await supabase
+          .from('sponsors')
+          .select();
+      Sponsors.sponsors = data.map((e) => toSponsor(e)).toList();
+    } on PostgrestException catch (error) {
+      debugPrint(error.toString());
     }
   }
 
