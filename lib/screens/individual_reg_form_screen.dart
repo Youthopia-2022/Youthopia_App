@@ -161,7 +161,7 @@ class _DITIndividualRegFormScreenState
                                         .pickImage(source: ImageSource.gallery);
                                     if (image == null) return;
                                     this.image = File(image.path);
-                                  } on PlatformException catch (e) {
+                                  } on PlatformException {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(snackBarPermission)
                                         .toString();
@@ -202,7 +202,7 @@ class _DITIndividualRegFormScreenState
                                         .pickImage(source: ImageSource.camera);
                                     if (image == null) return;
                                     this.image = File(image.path);
-                                  } on PlatformException catch (e) {
+                                  } on PlatformException {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(snackBarPermission)
                                         .toString();
@@ -334,7 +334,6 @@ class _DITIndividualRegFormScreenState
               .eq('order_id', orderId);
 
           if (check.toString() == '[]') {
-
             if (!isDIT) {
               await supabase.storage
                   .from('participant-identity-proof')
@@ -385,11 +384,10 @@ class _DITIndividualRegFormScreenState
                 .showSnackBar(snackBarRegistrationSuccess)
                 .toString();
 
-            Navigator.pushAndRemoveUntil(
+            Navigator.push(
               context,
               CupertinoPageRoute(
                   builder: (context) => const NavBarScreen(true)),
-              (Route<dynamic> route) => false,
             );
           } else {
             ScaffoldMessenger.of(context)

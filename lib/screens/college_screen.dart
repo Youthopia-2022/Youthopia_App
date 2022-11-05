@@ -77,11 +77,10 @@ class CollegeScreen extends StatelessWidget {
                   width: 300,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushAndRemoveUntil(
+                      Navigator.push(
                         context,
                         CupertinoPageRoute(
                             builder: (context) => const SignUp(true)),
-                        (Route<dynamic> route) => false,
                       );
                     },
                     style: ButtonStyle(
@@ -126,11 +125,10 @@ class CollegeScreen extends StatelessWidget {
                   width: 300,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushAndRemoveUntil(
+                      Navigator.push(
                         context,
                         CupertinoPageRoute(
                             builder: (context) => const SignUp(false)),
-                        (Route<dynamic> route) => false,
                       );
                     },
                     style: ButtonStyle(
