@@ -70,9 +70,11 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                         ),
                       ],
                     ),
-                    const Center(
-                      child: Image(
-                        image: AssetImage('assets/r1.png'),
+                    const SingleChildScrollView(
+                      child: Center(
+                        child: Image(
+                          image: AssetImage('assets/r1.png'),
+                        ),
                       ),
                     ),
                     SizedBox(
