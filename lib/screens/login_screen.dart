@@ -4,14 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:youthopia_2022_app/screens/about_us_screen.dart';
 import 'package:youthopia_2022_app/screens/loading_screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:youthopia_2022_app/services/supabase.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 
 import '../constants/gradient_color.dart';
+import '../widgets/gradient_button.dart';
 import '../widgets/snack_bar.dart';
 import 'college_screen.dart';
 
@@ -54,260 +55,240 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColourTheme.background,
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: SizedBox(
-            height: 800,
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 80,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: ShaderMask(
-                                shaderCallback: (Rect rect) {
-                                  return ColourTheme.primaryGradient
-                                      .createShader(rect);
-                                },
-                                child: Text(
-                                  "Welcome back to Youthopia !",
-                                  style: TextStyle(
-                                      color: ColourTheme.white,
-                                      fontSize: 30,
-                                      fontFamily: 'IBM Plex'),
+      backgroundColor: Colors.black,
+      body: Stack(children: [
+        Positioned.fill(
+          child: Image.asset(
+            "assets/bottomimg.png",
+            fit: BoxFit.fitWidth,
+            alignment: Alignment.bottomLeft,
+          ),
+        ),
+        Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: SizedBox(
+              height: 800,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.15,
+                          ),
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "Welcome back to ",
+                                      style: TextStyle(
+                                        color: ColourTheme.white,
+                                        fontSize: 30,
+                                        fontFamily: 'IBM Plex Sans',
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: const [
+                                  GradientText(
+                                    'Youthopia !',
+                                    style: TextStyle(
+                                      fontFamily: 'IBM Plex Sans',
+                                      fontSize: 35,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.02,
+                              ),
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: RichText(
+                                  text: TextSpan(children: [
+                                    TextSpan(
+                                        style: TextStyle(
+                                            color: ColourTheme.lightGrey,
+                                            fontSize: 18,
+                                            fontFamily: 'IBM Plex'),
+                                        text: "Don't have an account yet ? "),
+                                    TextSpan(
+                                        style: TextStyle(
+                                            color: ColourTheme.secondary,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'IBM Plex'),
+                                        text: "Sign up",
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Navigator.push(
+                                              context,
+                                              CupertinoPageRoute(
+                                                  builder: (context) =>
+                                                      const CollegeScreen()),
+                                            );
+                                          }),
+                                  ]),
                                 ),
                               ),
-                            ),
-                            Container(
-                              padding:
-                                  const EdgeInsets.only(top: 20, right: 10),
-                              child: const Image(
-                                  image:
-                                      AssetImage('assets/youthopia_face.png'),
-                                  color: Color.fromRGBO(255, 255, 255, 0.15),
-                                  colorBlendMode: BlendMode.modulate),
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                            // height: 60,
+                            ],
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.05,
+                          ),
+                          Container(
+                              // height: 60,
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 7, horizontal: 8),
+                              child: TextFormField(
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (String? value) {
+                                  if (EmailValidator.validate(value!)) {
+                                    return null;
+                                  } else {
+                                    return 'Enter valid Email';
+                                  }
+                                },
+                                onChanged: (String value) {
+                                  _email = value;
+                                },
+                                style: TextStyle(
+                                    fontSize: 20, color: ColourTheme.white),
+                                decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: ColourTheme.grey)),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: ColourTheme.pink),
+                                    ),
+                                    hintText: "Email",
+                                    icon: Icon(
+                                      Icons.mail_outline,
+                                      color: ColourTheme.lightGrey,
+                                    ),
+                                    hintStyle: TextStyle(
+                                      color: ColourTheme.lightGrey,
+                                    )),
+                              )),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.03,
+                          ),
+                          Container(
+                            //height: 60,
                             width: double.infinity,
                             padding: const EdgeInsets.symmetric(
-                                vertical: 7, horizontal: 8),
+                                vertical: 7, horizontal: 10),
                             child: TextFormField(
-                              keyboardType: TextInputType.emailAddress,
+                              keyboardType: TextInputType.text,
+                              obscureText: !_isPasswordVisible,
                               validator: (String? value) {
-                                if (EmailValidator.validate(value!)) {
-                                  return null;
-                                } else {
-                                  return 'Enter valid Email';
+                                if (value!.length < 6) {
+                                  return 'Password must be at least 6 characters';
                                 }
+                                return null;
                               },
                               onChanged: (String value) {
-                                _email = value;
+                                _password = value;
                               },
                               style: TextStyle(
                                   fontSize: 20, color: ColourTheme.white),
                               decoration: InputDecoration(
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      // Based on passwordVisible state choose the icon
+                                      _isPasswordVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      // Update the state i.e. toggle the state of passwordVisible variable
+                                      setState(() {
+                                        _isPasswordVisible =
+                                            !_isPasswordVisible;
+                                      });
+                                    },
+                                  ),
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide:
                                           BorderSide(color: ColourTheme.grey)),
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: ColourTheme.pink),
-                                  ),
-                                  hintText: "Email",
+                                      borderSide:
+                                          BorderSide(color: ColourTheme.pink)),
+                                  hintText: "Password",
                                   icon: Icon(
-                                    Icons.mail_outline,
+                                    Icons.lock_outline,
                                     color: ColourTheme.lightGrey,
                                   ),
                                   hintStyle: TextStyle(
                                     color: ColourTheme.lightGrey,
                                   )),
-                            )),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.03,
-                        ),
-                        Container(
-                          //height: 60,
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 7, horizontal: 10),
-                          child: TextFormField(
-                            keyboardType: TextInputType.text,
-                            obscureText: !_isPasswordVisible,
-                            validator: (String? value) {
-                              if (value!.length < 6) {
-                                return 'Password must be at least 6 characters';
-                              }
-                              return null;
-                            },
-                            onChanged: (String value) {
-                              _password = value;
-                            },
-                            style: TextStyle(
-                                fontSize: 20, color: ColourTheme.white),
-                            decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    // Based on passwordVisible state choose the icon
-                                    _isPasswordVisible
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () {
-                                    // Update the state i.e. toggle the state of passwordVisible variable
-                                    setState(() {
-                                      _isPasswordVisible = !_isPasswordVisible;
-                                    });
-                                  },
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: ColourTheme.grey)),
-                                focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: ColourTheme.pink)),
-                                hintText: "Password",
-                                icon: Icon(
-                                  Icons.lock_outline,
-                                  color: ColourTheme.lightGrey,
-                                ),
-                                hintStyle: TextStyle(
-                                  color: ColourTheme.lightGrey,
-                                )),
-                          ),
-                        ),
-                        // Align(
-                        //   alignment: Alignment.centerRight,
-                        //   child: TextButton(
-                        //     onPressed: () {
-                        //       //Forgot Password Connectivity with Supabase
-                        //     },
-                        //     child: GradientText(
-                        //       "Forgot Password?",
-                        //       style: TextStyle(
-                        //         color: ColourTheme.secondary,
-                        //         fontSize: 18,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        SizedBox(
-                          width: double.maxFinite,
-                          child: TextButton(
-                            onPressed: () async {
-                              (isProcessing) ? null : buttonPressed();
-                            },
-                            style: ButtonStyle(
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(40))),
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        ColourTheme.blue),
-                                foregroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        ColourTheme.white)),
-                            child: (isProcessing)
-                                ? const CircularProgressIndicator(
-                                    color: Colors.white,
-                                  )
-                                : const Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 6),
-                                    child: Text(
-                                      "SUBMIT",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                    ),
-                                  ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: RichText(
-                            text: TextSpan(children: [
-                              TextSpan(
-                                  style: TextStyle(
-                                      color: ColourTheme.lightGrey,
-                                      fontSize: 18,
-                                      fontFamily: 'IBM Plex'),
-                                  text: "Don't have an account yet ? "),
-                              TextSpan(
-                                  style: TextStyle(
-                                      color: ColourTheme.secondary,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'IBM Plex'),
-                                  text: "Sign up",
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      Navigator.push(
-                                        context,
-                                        CupertinoPageRoute(
-                                            builder: (context) =>
-                                                const CollegeScreen()),
-                                      );
-                                    }),
-                            ]),
-                          ),
-                        ),
-                        Expanded(
-                            child: Container(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: Align(
-                            alignment: FractionalOffset.bottomCenter,
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                        builder: (context) =>
-                                            const AboutUsScreen()));
-                              },
-                              child: GradientText(
-                                'About Us',
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: 'IBM Plex',
-                                    fontWeight: FontWeight.bold,
-                                    color: ColourTheme.secondary),
-                              ),
                             ),
                           ),
-                        ))
-                      ],
+                          // Align(
+                          //   alignment: Alignment.centerRight,
+                          //   child: TextButton(
+                          //     onPressed: () {
+                          //       //Forgot Password Connectivity with Supabase
+                          //     },
+                          //     child: GradientText(
+                          //       "Forgot Password?",
+                          //       style: TextStyle(
+                          //         color: ColourTheme.secondary,
+                          //         fontSize: 18,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.05,
+                          ),
+                          GradientButton(
+                            onPressed: () async {
+                              (isProcessing)
+                                  ? const CircularProgressIndicator(
+                                      color: Colors.white,
+                                    )
+                                  : buttonPressed();
+                            },
+                            height: 50,
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            text: "\t \t \t \t \t\tLogin",
+                            titleStyle: const TextStyle(
+                                fontSize: 20,
+                                fontFamily: "IBM Plex Sans",
+                                color: Colors.white),
+                            textColor: Colors.black87,
+                            icon: (FontAwesomeIcons.arrowRight),
+                            iconColor: const Color.fromARGB(255, 255, 255, 255),
+                            gradientColor1: const Color(0xFFF7797D),
+                            gradientColor2: const Color(0xFFC471ED),
+                            gradientColor3: const Color(0xFF12C2E9),
+                            hoverElv: 20,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
-      ),
+      ]),
     );
   }
 

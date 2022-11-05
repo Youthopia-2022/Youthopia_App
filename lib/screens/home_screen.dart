@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
+import 'package:youthopia_2022_app/screens/team_reg_form_screen.dart';
 import 'package:youthopia_2022_app/services/events.dart';
 import 'package:intl/intl.dart';
 import '../constants/color_theme.dart';
+import '../widgets/gradient_button.dart';
 import 'individual_reg_form_screen.dart';
-import 'team_reg_form_screen.dart';
 
 class Home extends StatefulWidget {
   const Home(this.event, {super.key});
@@ -44,10 +45,9 @@ class _HomeState extends State<Home> {
             Stack(
               children: [
                 Image(
-                  image: NetworkImage(widget.event.eventPosterUrl),
-                  width: double.maxFinite,
-                  fit: BoxFit.cover,
-                ),
+                    image: NetworkImage(widget.event.eventPosterUrl),
+                    width: double.maxFinite,
+                    fit: BoxFit.cover),
                 Positioned(
                   top: 00,
                   right: 0,
@@ -171,7 +171,7 @@ class _HomeState extends State<Home> {
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(
+            GradientButton(
               onPressed: () {
                 (!widget.event.isTeamEvent)
                     ? Navigator.push(
@@ -185,21 +185,24 @@ class _HomeState extends State<Home> {
                             builder: (context) =>
                                 DITTeamRegFormScreen(widget.event)));
               },
-              style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(40.0),
-              ))),
-              child: const Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Text(
-                  'Register for this event',
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
+              height: 50,
+              width: MediaQuery.of(context).size.width * 0.75,
+              text: "Register For this Event",
+              titleStyle: const TextStyle(
+                  fontSize: 20,
+                  fontFamily: "IBM Plex Sans",
+                  color: Colors.white),
+              textColor: Colors.black87,
+              //icon: (FontAwesomeIcons.arrowRight),
+              //iconColor: const Color.fromARGB(255, 255, 255, 255),
+              gradientColor1: const Color(0xFFF7797D),
+              gradientColor2: const Color(0xFFC471ED),
+              gradientColor3: const Color(0xFF12C2E9),
+              hoverElv: 20,
             ),
             const SizedBox(
-              height: 50,)
+              height: 50,
+            )
           ],
         ),
       ),

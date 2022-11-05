@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:youthopia_2022_app/screens/about_us_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youthopia_2022_app/screens/signup_screen.dart';
-import '../constants/color_theme.dart';
-import '../constants/gradient_color.dart';
+
+import '../widgets/gradient_button.dart';
 
 class CollegeScreen extends StatelessWidget {
   const CollegeScreen({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class CollegeScreen extends StatelessWidget {
         const Positioned.fill(
             child: Image(
           image: AssetImage(
-            'assets/background_image.png',
+            'assets/homescreenbg.png',
           ),
           color: Color.fromARGB(84, 0, 0, 0),
           colorBlendMode: BlendMode.darken,
@@ -25,155 +25,126 @@ class CollegeScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           body: Column(
             children: [
-              Column(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                  ),
-                  Row(
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: const Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                            size: 50,
-                          )),
-                    ],
-                  ),
-                ],
-              ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.15,
+                height: MediaQuery.of(context).size.height * 0.1,
                 width: double.maxFinite,
               ),
               const Image(
                 image: AssetImage(
-                  'assets/youthopiaIcon.png',
+                  'assets/y3.png',
                 ),
                 fit: BoxFit.cover,
               ),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.02,
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: const Align(
-                  alignment: Alignment.centerLeft,
-                  child: GradientText(
-                    'Are you from ',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-                  ),
+              const Image(
+                image: AssetImage('assets/clgscreenlogo.png'),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.08,
+              ),
+              const Text(
+                'Who are you ?',
+                style: TextStyle(
+                  fontFamily: 'IBM Plex Sans',
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
-              const SizedBox(
-                height: 30,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.017,
               ),
-              Align(
-                alignment: Alignment.center,
-                child: SizedBox(
-                  width: 300,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (context) => const SignUp(true)),
-                      );
-                    },
-                    style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40))),
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(ColourTheme.blue),
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                            ColourTheme.white)),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
-                      child: Text(
-                        "DIT University",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
+              GradientButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => const SignUp(true),
+                    ),
+                  );
+                },
+                height: 50,
+                width: MediaQuery.of(context).size.width * 0.75,
+                text: "DIT Student",
+                titleStyle: const TextStyle(
+                    fontSize: 20,
+                    fontFamily: "IBM Plex Sans",
+                    color: Colors.white),
+                textColor: Colors.black87,
+                icon: (FontAwesomeIcons.arrowRight),
+                iconColor: const Color.fromARGB(255, 255, 255, 255),
+                gradientColor1: const Color(0xFFF7797D),
+                gradientColor2: const Color(0xFFC471ED),
+                gradientColor3: const Color(0xFF12C2E9),
+                hoverElv: 20,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.02,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => const SignUp(false),
+                    ),
+                  );
+                },
+                child: Container(
+                  height: 55,
+                  width: MediaQuery.of(context).size.width * 0.75,
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(colors: [
+                      Color(0xFFF7797D),
+                      Color(0xFFC471ED),
+                      Color(0xFF12C2E9)
+                    ]),
+                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(32),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        image: const DecorationImage(
+                          image: AssetImage(
+                            'assets/bgofbtn.png',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                        border: Border.all(
+                            color: const Color.fromARGB(0, 255, 255, 255)),
+                        borderRadius: BorderRadius.circular(32),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text(
+                                "Outsider\t \t \t \t \t \t",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'IBM Plex Sans',
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Icon(
+                                FontAwesomeIcons.arrowRight,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'OR',
-                  style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: ColourTheme.white),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: SizedBox(
-                  width: 300,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (context) => const SignUp(false)),
-                      );
-                    },
-                    style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40))),
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(ColourTheme.blue),
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                            ColourTheme.white)),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 6),
-                      child: Text(
-                        "Other College",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                  child: Container(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Align(
-                  alignment: FractionalOffset.bottomCenter,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                              builder: (context) => const AboutUsScreen()));
-                    },
-                    child: GradientText(
-                      'About Us',
-                      style: TextStyle(
-                          fontSize: 25,
-                          fontFamily: 'IBM Plex',
-                          fontWeight: FontWeight.bold,
-                          color: ColourTheme.secondary),
-                    ),
-                  ),
-                ),
-              )),
             ],
           ),
         )
