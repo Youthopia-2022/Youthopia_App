@@ -45,20 +45,13 @@ class _MainScreenState extends State<MainScreen> {
         leadingWidth: double.maxFinite,
         backgroundColor: ColourTheme.black,
         leading: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.05,
           width: double.maxFinite,
           child: Image.asset(
             'assets/yss.png',
+            height: MediaQuery.of(context).size.height * 0.03,
           ),
         ),
-        actions: const [
-          IconButton(
-              icon: Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-              iconSize: 30,
-              onPressed: null),
-        ],
       ),
       body: SingleChildScrollView(
         child: SafeArea(
