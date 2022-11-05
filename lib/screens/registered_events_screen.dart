@@ -128,8 +128,15 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                 ),
               )
             : (!_isLoaded)
-                ? const Center(
-                    child: Image(image: AssetImage('assets/loading.gif')))
+                ? Center(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: const Image(
+                        image: AssetImage('assets/loading.gif'),
+                      ),
+                    ),
+                  )
                 : ListView.builder(
                     itemCount: RegisteredEvent.registeredEvents.length,
                     itemBuilder: (BuildContext context, int index) {
