@@ -88,3 +88,25 @@ var snackBarAlreadyRegistered = SnackBar(
     contentType: ContentType.failure,
   ),
 );
+
+var snackBarPermission = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  content: AwesomeSnackbarContent(
+    title: 'Failure !!',
+    message: 'Not enough permissions',
+    contentType: ContentType.failure,
+  ),
+);
+
+var snackBarImage = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  content: AwesomeSnackbarContent(
+    title: 'Failure !!',
+    message: 'Upload Identity Proof',
+    contentType: ContentType.failure,
+  ),
+);
