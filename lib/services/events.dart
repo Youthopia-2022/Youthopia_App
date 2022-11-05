@@ -48,3 +48,43 @@ class RegisteredEvent {
       this.eventPoster
       );
 }
+
+class MainEvents{
+  final String eventId;
+  final String eventName;
+  final String eventTime;
+  final String eventDate;
+  final String eventPosterUrl;
+  final String starName;
+
+  static MainEvents? starNight ;
+
+  MainEvents(
+      this.eventId,
+      this.eventName,
+      this.eventTime,
+      this.eventDate,
+      this.eventPosterUrl,
+      this.starName
+      );
+}
+
+class LiveEvents{
+  final String eventId;
+  final String eventName;
+  final String eventTime;
+  final String eventDate;
+  final String eventPosterUrl;
+  Event event;
+
+  static List? liveEvents;
+
+  LiveEvents(
+      this.eventId,
+      this.eventName,
+      this.eventTime,
+      this.eventDate,
+      this.eventPosterUrl,
+      this.event
+      );
+}
