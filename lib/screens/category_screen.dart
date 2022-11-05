@@ -19,11 +19,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
         appBar: AppBar(
           //toolbarHeight: 70,
           leadingWidth: double.maxFinite,
-          backgroundColor: const Color(0xFF0F0F0F),
-          leading: SizedBox(
-            width: double.maxFinite,
-            child: Image.asset('assets/youthopiaIcon.png', fit: BoxFit.contain),
+          title: const Text(
+            'Event Categories',
+            style: TextStyle(
+              fontFamily: 'IBM Plex Sans',
+              fontSize: 24,
+            ),
           ),
+          backgroundColor: const Color(0xFF0F0F0F),
         ),
         backgroundColor: ColourTheme.black,
         body: ListView(
