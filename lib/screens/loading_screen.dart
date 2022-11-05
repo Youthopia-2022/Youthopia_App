@@ -33,9 +33,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
     final session = supabase.auth.currentSession;
     if (session != null) {
       debugPrint("getting");
-      await supa.getSponsors();
+      await supa.getStarNight();
       debugPrint("completed");
-      await supa.getCurrentProfile();
+      supa.getSponsors();
+      supa.getCurrentProfile();
       await supa.getEventData();
 
       Navigator.pushReplacement(

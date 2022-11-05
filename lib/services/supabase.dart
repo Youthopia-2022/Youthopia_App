@@ -146,6 +146,29 @@ class Supa {
     }
   }
 
+  MainEvents toStarNight(List<dynamic> result) {
+    debugPrint(result.toString());
+    return MainEvents(
+        result[0]['event_id'],
+        result[0]['event_name'],
+        result[0]['event_time'],
+        result[0]['event_date'],
+        result[0]['event_poster_url'],
+        result[0]['event_star_name']
+    );
+  }
+
+  Future<void> getStarNight() async {
+    try {
+      final data = await supabase
+          .from('daily-main-events')
+          .select();
+      MainEvents.starNight = toStarNight(data);
+    } on PostgrestException catch (error) {
+      debugPrint(error.toString());
+    }
+  }
+
   Future<void> signOut() {
     return supabase.auth.signOut();
   }
