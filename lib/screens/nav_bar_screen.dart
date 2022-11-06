@@ -18,8 +18,8 @@ class _NavBarScreenState extends State<NavBarScreen> {
   int _currentPageIndex = 0;
   final List<Widget> _pages = [
     const MainScreen(),
-    const CategoryScreen(),
     const RegisteredEvents(),
+    const CategoryScreen(),
     const ProfileScreen(),
   ];
   @override
@@ -47,7 +47,7 @@ class _NavBarScreenState extends State<NavBarScreen> {
             text: "Home",
           ),
           GButton(
-            icon: FontAwesomeIcons.dice,
+            icon: Icons.grid_view,
             text: " Category",
           ),
           GButton(
