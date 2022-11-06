@@ -25,8 +25,6 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  // SupabaseHandler supabaseHandler = SupabaseHandler();
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String _name = "";
@@ -51,18 +49,18 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       backgroundColor: Colors.black,
       resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18.0),
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: Image.asset(
-                "assets/bottomimg.png",
-                fit: BoxFit.fitHeight,
-                alignment: Alignment.center,
-              ),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              "assets/bottomimg.png",
+              fit: BoxFit.fitHeight,
+              alignment: Alignment.center,
             ),
-            Form(
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            child: Form(
               key: _formKey,
               child: ListView(
                 children: [
@@ -456,24 +454,45 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.03,
                   ),
-                  GradientButton(
-                    onPressed: () async {
-                      (isProcessing) ? null : buttonPressed();
-                    },
-                    height: 50,
+                  Container(
                     width: MediaQuery.of(context).size.width * 0.9,
-                    text: "\t \t \t \tGet started",
-                    titleStyle: const TextStyle(
-                        fontSize: 20,
-                        fontFamily: "IBM Plex Sans",
-                        color: Colors.white),
-                    textColor: Colors.black87,
-                    icon: (FontAwesomeIcons.arrowRight),
-                    iconColor: const Color.fromARGB(255, 255, 255, 255),
-                    gradientColor1: const Color(0xFFF7797D),
-                    gradientColor2: const Color(0xFFC471ED),
-                    gradientColor3: const Color(0xFF12C2E9),
-                    hoverElv: 20,
+                    height: 50.0,
+                    decoration: BoxDecoration(
+                        gradient: ColourTheme.buttonGradient,
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0.0, 1.5),
+                            blurRadius: 1.5,
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                          onTap: () async {
+                            (isProcessing)
+                                ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                                : buttonPressed();
+                          },
+                          child: Center(
+                              child: (isProcessing)
+                                  ? const CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                                  :  const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 6),
+                                child: Text(
+                                  "Get Started",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Colors.white),
+                                ),
+                              ))),
+                    ),
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.2,
@@ -481,8 +500,8 @@ class _SignUpState extends State<SignUp> {
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
