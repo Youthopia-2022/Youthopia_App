@@ -206,8 +206,6 @@ class Supa {
   }
 
   Person toPerson(result) {
-
-    debugPrint(result.toString());
     return Person(
       result['name'],
       result['branch'],

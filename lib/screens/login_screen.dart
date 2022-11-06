@@ -256,28 +256,45 @@ class _LoginState extends State<Login> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05,
                           ),
-                          GradientButton(
-                            onPressed: () async {
-                              (isProcessing)
-                                  ? const CircularProgressIndicator(
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            height: 50.0,
+                            decoration: BoxDecoration(
+                                gradient: ColourTheme.buttonGradient,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    offset: Offset(0.0, 1.5),
+                                    blurRadius: 1.5,
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.circular(50)),
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                  onTap: () async {
+                                    (isProcessing)
+                                        ? const CircularProgressIndicator(
                                       color: Colors.white,
                                     )
-                                  : buttonPressed();
-                            },
-                            height: 50,
-                            width: MediaQuery.of(context).size.width * 0.9,
-                            text: "\t \t \t \t \t\tLogin",
-                            titleStyle: const TextStyle(
-                                fontSize: 20,
-                                fontFamily: "IBM Plex Sans",
-                                color: Colors.white),
-                            textColor: Colors.black87,
-                            icon: (FontAwesomeIcons.arrowRight),
-                            iconColor: const Color.fromARGB(255, 255, 255, 255),
-                            gradientColor1: const Color(0xFFF7797D),
-                            gradientColor2: const Color(0xFFC471ED),
-                            gradientColor3: const Color(0xFF12C2E9),
-                            hoverElv: 20,
+                                        : buttonPressed();
+                                  },
+                                  child: Center(
+                                      child: (isProcessing)
+                                          ? const CircularProgressIndicator(
+                                        color: Colors.white,
+                                      )
+                                          :  const Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 6),
+                                        child: Text(
+                                          "LOGIN",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                              color: Colors.white),
+                                        ),
+                                      ))),
+                            ),
                           ),
                           Expanded(
                               child: Padding(
