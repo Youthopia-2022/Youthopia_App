@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/login_screen.dart';
 import 'package:youthopia_2022_app/services/users.dart';
 import '../constants/color_theme.dart';
+import '../constants/gradient_color.dart';
 import '../services/supabase.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -50,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: const Color(0xFF000000),
       appBar: AppBar(
         backgroundColor: ColourTheme.black,
-        title: const Text(
+        title: const GradientText(
           'My Profile',
           style: TextStyle(
             fontFamily: 'IBM Plex Sans',

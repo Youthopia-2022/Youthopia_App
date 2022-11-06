@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youthopia_2022_app/constants/gradient_color.dart';
 import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
 import 'package:youthopia_2022_app/services/supabase.dart';
 import 'package:youthopia_2022_app/services/users.dart';
@@ -44,7 +45,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
     return Scaffold(
       backgroundColor: ColourTheme.black,
       appBar: AppBar(
-        title: const Text(
+        title: const GradientText(
           'Registered Events',
           style: TextStyle(
             fontFamily: 'IBM Plex Sans',

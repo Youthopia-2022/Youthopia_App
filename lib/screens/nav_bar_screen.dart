@@ -18,8 +18,8 @@ class _NavBarScreenState extends State<NavBarScreen> {
   int _currentPageIndex = 0;
   final List<Widget> _pages = [
     const MainScreen(),
-    const RegisteredEvents(),
     const CategoryScreen(),
+    const RegisteredEvents(),
     const ProfileScreen(),
   ];
   @override

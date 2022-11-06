@@ -4,6 +4,7 @@ import 'package:youthopia_2022_app/screens/see_more_screen.dart';
 import 'package:youthopia_2022_app/services/events.dart';
 
 import '../constants/color_theme.dart';
+import '../constants/gradient_color.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
@@ -20,7 +21,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           //toolbarHeight: 70,
           automaticallyImplyLeading: false,
           leadingWidth: double.maxFinite,
-          title: const Text(
+          title:  const GradientText(
             'Event Categories',
             style: TextStyle(
               fontFamily: 'IBM Plex Sans',
