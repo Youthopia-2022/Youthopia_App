@@ -489,7 +489,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
             if (!isDIT) {
               await supabase.storage
                   .from('participant-identity-proof')
-                  .upload(orderId, image!);
+                  .upload('$orderId.png', image!);
             }
             await supabase.from('registrations').insert({
               'order_id': orderId,

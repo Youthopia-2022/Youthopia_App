@@ -374,7 +374,7 @@ class _DITIndividualRegFormScreenState
             if (!isDIT) {
               await supabase.storage
                   .from('participant-identity-proof')
-                  .upload(orderId, image!);
+                  .upload('$orderId.png', image!);
             }
 
             await supabase.from('registrations').insert({
