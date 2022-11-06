@@ -6,10 +6,12 @@ class Event {
   final String eventVenue;
   final TimeOfDay eventTime;
   final DateTime eventDate;
-  final String eventFees;
+  final String eventFeesDIT;
+  final String eventFeesOutsider;
   final String eventDescription;
   final bool isTeamEvent;
-  final int eventMembers;
+  final int eventMinMembers;
+  final int eventMaxMembers;
   final String eventPosterUrl;
 
   static List? techEvents;
@@ -19,16 +21,18 @@ class Event {
   static List? artsEvents;
 
   Event(
-    this.eventId,
-    this.eventName,
-    this.eventVenue,
-    this.eventTime,
-    this.eventDate,
-    this.eventFees,
-    this.eventDescription,
-    this.isTeamEvent,
-    this.eventMembers,
-    this.eventPosterUrl,
+      this.eventId,
+      this.eventName,
+      this.eventVenue,
+      this.eventTime,
+      this.eventDate,
+      this.eventFeesDIT,
+      this.eventFeesOutsider,
+      this.eventDescription,
+      this.isTeamEvent,
+      this.eventMinMembers,
+      this.eventMaxMembers,
+      this.eventPosterUrl
   );
 }
 
@@ -62,8 +66,8 @@ class MainEvents {
 class LiveEvents {
   final String eventId;
   final String eventName;
-  final String eventTime;
-  final String eventDate;
+  final TimeOfDay eventTime;
+  final DateTime eventDate;
   final String eventPosterUrl;
   Event event;
 

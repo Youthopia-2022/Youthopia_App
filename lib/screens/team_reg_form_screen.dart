@@ -41,7 +41,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
   @override
   void initState() {
     eventId = widget.event.eventId;
-    members = List.filled(widget.event.eventMembers - 1, null);
+    members = List.filled(widget.event.eventMaxMembers - 1, null);
     super.initState();
   }
 
@@ -360,10 +360,10 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                     height: 20,
                   ),
                   SizedBox(
-                    height: ((widget.event.eventMembers - 1) * 125),
+                    height: ((widget.event.eventMaxMembers - 1) * 125),
                     child: ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: widget.event.eventMembers - 1,
+                        itemCount: widget.event.eventMaxMembers - 1,
                         itemBuilder: (BuildContext context, int index) {
                           int memNum = index + 1;
                           String labelText = "Member $memNum name";

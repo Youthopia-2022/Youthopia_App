@@ -146,7 +146,7 @@ class _HomeState extends State<Home> {
                   width: 15,
                 ),
                 Text(
-                  widget.event.eventFees,
+                  widget.event.eventFeesDIT,
                   style: TextStyle(color: ColourTheme.white, fontSize: 20),
                 ),
               ],
