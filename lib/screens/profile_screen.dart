@@ -61,177 +61,197 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: (_name == null)
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Center(
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(_genderImage))),
+              child: Stack(clipBehavior: Clip.none, children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Stack(clipBehavior: Clip.none, children: [
+                      const Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Image(
+                          image: AssetImage('assets/profileBg.png'),
+                        ),
+                      ),
+                      Positioned(
+                        top: MediaQuery.of(context).size.height * 0.05,
+                        left: MediaQuery.of(context).size.width * 0.34,
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            width: 130,
+                            height: 130,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(_genderImage))),
+                          ),
+                        ),
+                      ),
+                    ]),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.082,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Center(
-                    child: Text(
-                      _name!,
-                      style: TextStyle(fontSize: 22, color: ColourTheme.white),
-                    ),
-                  ),
-                  Center(
-                    child: Text(
-                      _email!,
-                      style:
-                          TextStyle(fontSize: 18, color: ColourTheme.lightGrey),
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.06,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: const Text(
-                      'MOBILE NUMBER',
-                      style: TextStyle(fontSize: 18, color: Color(0xFF93959E)),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10.0, top: 5),
-                    child: Container(
-                      padding: const EdgeInsets.only(left: 20),
+                    Center(
                       child: Text(
-                        _phone!,
+                        _name!,
+                        style:
+                            TextStyle(fontSize: 22, color: ColourTheme.white),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        _email!,
+                        style: TextStyle(
+                            fontSize: 18, color: ColourTheme.lightGrey),
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.06,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: const Text(
+                        'MOBILE NUMBER',
+                        style:
+                            TextStyle(fontSize: 18, color: Color(0xFF93959E)),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0, top: 5),
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Text(
+                          _phone!,
+                          style:
+                              TextStyle(fontSize: 24, color: ColourTheme.white),
+                        ),
+                      ),
+                    ),
+                    Divider(
+                      color: const Color(0xFF101010),
+                      thickness: 4.0,
+                      indent: MediaQuery.of(context).size.width * 0.04,
+                      endIndent: MediaQuery.of(context).size.width * 0.04,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(left: 20, top: 10),
+                      child: const Text(
+                        'YEAR',
+                        style:
+                            TextStyle(fontSize: 18, color: Color(0xFF93959E)),
+                      ),
+                    ),
+                    Container(
+                      padding:
+                          const EdgeInsets.only(left: 20, bottom: 10.0, top: 5),
+                      child: Text(
+                        (_year == "one")
+                            ? "1st Year"
+                            : (_year == "two")
+                                ? "2nd Year"
+                                : (_year == "three")
+                                    ? "3rd Year"
+                                    : (_year == "four")
+                                        ? "4th Year"
+                                        : "None",
                         style:
                             TextStyle(fontSize: 24, color: ColourTheme.white),
                       ),
                     ),
-                  ),
-                  Divider(
-                    color: const Color(0xFF101010),
-                    thickness: 4.0,
-                    indent: MediaQuery.of(context).size.width * 0.04,
-                    endIndent: MediaQuery.of(context).size.width * 0.04,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(left: 20, top: 10),
-                    child: const Text(
-                      'YEAR',
-                      style: TextStyle(fontSize: 18, color: Color(0xFF93959E)),
+                    Divider(
+                      color: const Color(0xFF101010),
+                      thickness: 4.0,
+                      indent: MediaQuery.of(context).size.width * 0.04,
+                      endIndent: MediaQuery.of(context).size.width * 0.04,
                     ),
-                  ),
-                  Container(
-                    padding:
-                        const EdgeInsets.only(left: 20, bottom: 10.0, top: 5),
-                    child: Text(
-                      (_year == "one")
-                          ? "1st Year"
-                          : (_year == "two")
-                              ? "2nd Year"
-                              : (_year == "three")
-                                  ? "3rd Year"
-                                  : (_year == "four")
-                                      ? "4th Year"
-                                      : "None",
-                      style: TextStyle(fontSize: 24, color: ColourTheme.white),
+                    Container(
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        top: 10,
+                      ),
+                      child: const Text(
+                        'COLLEGE',
+                        style:
+                            TextStyle(fontSize: 18, color: Color(0xFF93959E)),
+                      ),
                     ),
-                  ),
-                  Divider(
-                    color: const Color(0xFF101010),
-                    thickness: 4.0,
-                    indent: MediaQuery.of(context).size.width * 0.04,
-                    endIndent: MediaQuery.of(context).size.width * 0.04,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(
-                      left: 20,
-                      top: 10,
+                    Container(
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        bottom: 10.0,
+                        top: 5,
+                      ),
+                      child: Text(
+                        (_college == null) ? "None" : _college!,
+                        style:
+                            TextStyle(fontSize: 24, color: ColourTheme.white),
+                      ),
                     ),
-                    child: const Text(
-                      'COLLEGE',
-                      style: TextStyle(fontSize: 18, color: Color(0xFF93959E)),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
                     ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(
-                      left: 20,
-                      bottom: 10.0,
-                      top: 5,
-                    ),
-                    child: Text(
-                      (_college == null) ? "None" : _college!,
-                      style: TextStyle(fontSize: 24, color: ColourTheme.white),
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: TextButton(
-                        onPressed: () async {
-                          try {
-                            await supa.signOut();
-                          } on AuthException catch (error) {
-                            debugPrint(error.toString());
-                          }
+                    Align(
+                      alignment: Alignment.center,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: TextButton(
+                          onPressed: () async {
+                            try {
+                              await supa.signOut();
+                            } on AuthException catch (error) {
+                              debugPrint(error.toString());
+                            }
 
-                          if (mounted) {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (context) => const Login()),
-                              (Route<dynamic> route) => false,
-                            );
-                          }
-                        },
-                        style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25),
+                            if (mounted) {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                CupertinoPageRoute(
+                                    builder: (context) => const Login()),
+                                (Route<dynamic> route) => false,
+                              );
+                            }
+                          },
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25),
+                              ),
                             ),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              const Color(0xFF191919),
+                            ),
+                            foregroundColor: MaterialStateProperty.all<Color>(
+                                ColourTheme.white),
                           ),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color(0xFF191919),
-                          ),
-                          foregroundColor: MaterialStateProperty.all<Color>(
-                              ColourTheme.white),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 6),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.05,
-                              ),
-                              const Icon(
-                                  FontAwesomeIcons.arrowRightFromBracket),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.03,
-                              ),
-                              const Text(
-                                "Log Out",
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ],
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 6),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.05,
+                                ),
+                                const Icon(
+                                    FontAwesomeIcons.arrowRightFromBracket),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.03,
+                                ),
+                                const Text(
+                                  "Log Out",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ]),
             ),
     );
   }
