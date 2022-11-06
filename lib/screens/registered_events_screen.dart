@@ -101,7 +101,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                           gradient: ColourTheme.buttonGradient,
                           boxShadow: const [
                             BoxShadow(
-                              color: Colors.grey,
+                              color: Colors.transparent,
                               offset: Offset(0.0, 1.5),
                               blurRadius: 1.5,
                             ),
