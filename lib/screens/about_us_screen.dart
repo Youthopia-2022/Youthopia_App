@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youthopia_2022_app/constants/gradient_color.dart';
 import '../constants/color_theme.dart';
@@ -12,13 +13,12 @@ class AboutUsScreen extends StatefulWidget {
 }
 
 class _AboutUsScreenState extends State<AboutUsScreen> {
-
   double totalHeight = 0;
   @override
   void initState() {
     super.initState();
     double height = 0;
-    for(int i = 0; i < Team.teams.length; i++) {
+    for (int i = 0; i < Team.teams.length; i++) {
       height += 80;
       height += Team.teams[i].heads.length * 80;
       height += Team.teams[i].members.length * 80;
@@ -27,6 +27,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
       totalHeight = height;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +111,9 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                                             decoration: const BoxDecoration(
                                                 color: Color(0xFF222222)),
                                             child: Padding(
-                                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 8.0),
                                               child: Row(
                                                 children: [
                                                   Expanded(
@@ -128,7 +131,8 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                                                               color: ColourTheme
                                                                   .white,
                                                               fontWeight:
-                                                                  FontWeight.bold,
+                                                                  FontWeight
+                                                                      .bold,
                                                               fontSize: 22),
                                                         ),
                                                         Text(
@@ -143,7 +147,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                                                   ),
                                                   GestureDetector(
                                                     child: Icon(
-                                                      Icons.public,
+                                                      FontAwesomeIcons.globe,
                                                       color: ColourTheme.white,
                                                       size: 25,
                                                     ),
@@ -188,7 +192,9 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                                             decoration: const BoxDecoration(
                                                 color: Color(0xFF222222)),
                                             child: Padding(
-                                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 8.0),
                                               child: Row(
                                                 children: [
                                                   Expanded(
@@ -207,7 +213,8 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                                                               color: ColourTheme
                                                                   .white,
                                                               fontWeight:
-                                                                  FontWeight.bold,
+                                                                  FontWeight
+                                                                      .bold,
                                                               fontSize: 22),
                                                         ),
                                                         Text(
@@ -222,7 +229,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                                                   ),
                                                   GestureDetector(
                                                     child: Icon(
-                                                      Icons.public,
+                                                      FontAwesomeIcons.globe,
                                                       color: ColourTheme.white,
                                                       size: 25,
                                                     ),

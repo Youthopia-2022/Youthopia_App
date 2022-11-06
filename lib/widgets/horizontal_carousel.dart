@@ -42,14 +42,13 @@ class _CarouselState extends State<Carousel> {
           }),
       items: widget.list
           .map((item) => GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context,
-              CupertinoPageRoute(
-                  builder: (context) =>
-                      Home(item.event)));
-        },
-            child: Container(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => Home(item.event)));
+                },
+                child: Container(
                   margin: const EdgeInsets.all(5),
                   child: ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(5)),
@@ -89,7 +88,7 @@ class _CarouselState extends State<Carousel> {
                                           fontWeight: FontWeight.bold,
                                         ),
                                       )),
-                                   Text(
+                                  Text(
                                     item.eventName,
                                     style: const TextStyle(
                                       color: Colors.white,
@@ -111,7 +110,7 @@ class _CarouselState extends State<Carousel> {
                                 children: [
                                   RichText(
                                       textAlign: TextAlign.left,
-                                      text:  TextSpan(
+                                      text: TextSpan(
                                         children: [
                                           const WidgetSpan(
                                               child: Icon(
@@ -150,14 +149,16 @@ class _CarouselState extends State<Carousel> {
                                                 BorderRadius.circular(5))),
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
-                                            ColourTheme.white),
+                                            const Color(0xFFFF0000)),
                                     foregroundColor:
                                         MaterialStateProperty.all<Color>(
                                             ColourTheme.black)),
                                 child: const Text(
                                   "LIVE",
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 14),
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize: 14),
                                 ),
                               ),
                             ),
@@ -167,7 +168,7 @@ class _CarouselState extends State<Carousel> {
                     ),
                   ),
                 ),
-          ))
+              ))
           .toList(),
       carouselController: _controller,
     );

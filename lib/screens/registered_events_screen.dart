@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:youthopia_2022_app/screens/category_screen.dart';
 import 'package:youthopia_2022_app/services/supabase.dart';
 import 'package:youthopia_2022_app/services/users.dart';
 
 import '../constants/color_theme.dart';
 import '../services/events.dart';
+import 'category_screen.dart';
 
 class RegisteredEvents extends StatefulWidget {
   const RegisteredEvents({Key? key}) : super(key: key);
@@ -94,38 +94,41 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.07,
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.7,
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (context) =>
-                                      const CategoryScreen()));
-                        },
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25))),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ColourTheme.blue),
-                            foregroundColor: MaterialStateProperty.all<Color>(
-                                ColourTheme.white)),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 6),
-                          child: Text(
-                            "Register Event",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  Container(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      height: 50.0,
+                      decoration: BoxDecoration(
+                          gradient: ColourTheme.buttonGradient,
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.transparent,
+                              offset: Offset(0.0, 1.5),
+                              blurRadius: 1.5,
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                      builder: (context) =>
+                                          const CategoryScreen()));
+                            },
+                            child: const Center(
+                                child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 6),
+                              child: Text(
+                                "Register Event",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.white),
+                              ),
+                            ))),
+                      )),
                 ],
               ),
             )
