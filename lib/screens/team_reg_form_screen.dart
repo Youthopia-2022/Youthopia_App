@@ -196,81 +196,116 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                             const SizedBox(
                               height: 10,
                             ),
-                            SizedBox(
-                              width: (MediaQuery.of(context).size.width / 2),
-                              child: TextButton(
-                                onPressed: () async {try {
-                                  final image = await ImagePicker()
-                                      .pickImage(source: ImageSource.gallery);
-                                  if (image == null) return;
-                                  this.image = File(image.path);
-                                } on PlatformException catch (e) {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBarPermission)
-                                      .toString();
-                                }},
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(40))),
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            ColourTheme.blue),
-                                    foregroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            ColourTheme.white)),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 6),
-                                  child: Text(
-                                    "Upload from Gallery",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
+                            (image != null)? Column(
+                              children: [
+                                SizedBox(
+                                  height: 200,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Image(
+                                    image: FileImage(
+                                      image!
+                                    ),
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
+                                const SizedBox(
+                                  height: 20,
+                                )
+                              ],
+                            )
+                                : const SizedBox(height: 0),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                  gradient: ColourTheme.buttonGradient,
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      offset: Offset(0.0, 1.5),
+                                      blurRadius: 1.5,
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                    onTap: () async {
+                                      try {
+                                        final image = await ImagePicker()
+                                            .pickImage(
+                                            source: ImageSource.gallery);
+                                        if (image == null) return;
+                                        setState(() {
+                                          this.image = File(image.path);
+                                        });
+
+                                      } on PlatformException {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBarPermission)
+                                            .toString();
+                                      }
+                                    },
+                                    child: const Center(
+                                        child: Padding(
+                                          padding:
+                                          EdgeInsets.symmetric(vertical: 6),
+                                          child: Text(
+                                            "Upload from Gallery",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                                color: Colors.white),
+                                          ),
+                                        ))),
                               ),
                             ),
                             const SizedBox(
                               height: 10,
                             ),
-                            SizedBox(
-                                width: (MediaQuery.of(context).size.width / 2),
-                              child: TextButton(
-                                onPressed: () async {
-                                  try {
-                                    final image = await ImagePicker()
-                                        .pickImage(source: ImageSource.camera);
-                                    if (image == null) return;
-                                    this.image = File(image.path);
-                                  } on PlatformException catch (e) {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(snackBarPermission)
-                                        .toString();
-                                  }
-                                },
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(40))),
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            ColourTheme.blue),
-                                    foregroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            ColourTheme.white)),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 6),
-                                  child: Text(
-                                    "Upload from Camera",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                  ),
-                                ),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                  gradient: ColourTheme.buttonGradient,
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      offset: Offset(0.0, 1.5),
+                                      blurRadius: 1.5,
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                    onTap: () async {
+                                      try {
+                                        final image = await ImagePicker()
+                                            .pickImage(
+                                                source: ImageSource.camera);
+                                        if (image == null) return;
+                                        setState(() {
+                                          this.image = File(image.path);
+                                        });
+                                      } on PlatformException {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBarPermission)
+                                            .toString();
+                                      }
+                                    },
+                                    child: const Center(
+                                        child: Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 6),
+                                      child: Text(
+                                        "Upload from Camera",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            color: Colors.white),
+                                      ),
+                                    ))),
                               ),
                             ),
                             const SizedBox(
@@ -380,39 +415,43 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                   const SizedBox(
                     height: 50,
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: TextButton(
-                        onPressed: () async {
-                          (isProcessing) ? null : buttonPress();
-                        },
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20))),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                ColourTheme.blue),
-                            foregroundColor: MaterialStateProperty.all<Color>(
-                                ColourTheme.white)),
-                        child: (isProcessing)
-                            ? const CircularProgressIndicator(
-                                color: Colors.white,
-                              )
-                            : const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 6),
-                                child: Text(
-                                  "SUBMIT",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
-                                ),
-                              ),
-                      ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50.0,
+                    decoration: BoxDecoration(
+                        gradient: ColourTheme.buttonGradient,
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0.0, 1.5),
+                            blurRadius: 1.5,
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(50)),
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                          onTap: () async {
+                            (isProcessing) ? null : buttonPress();
+                          },
+                          child: Center(
+                              child: (isProcessing)
+                                  ? const CircularProgressIndicator(
+                                      color: Colors.white,
+                                    )
+                                  : const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 6),
+                                      child: Text(
+                                        "SUBMIT",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            color: Colors.white),
+                                      ),
+                                    ))),
                     ),
-                  ),
+                  )
                 ],
               )),
         ),
@@ -425,12 +464,9 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
       isProcessing = true;
     });
 
-    if(!isDIT && image == null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(snackBarImage)
-          .toString();
-    }
-    else {
+    if (!isDIT && image == null) {
+      ScaffoldMessenger.of(context).showSnackBar(snackBarImage).toString();
+    } else {
       if (_formKey.currentState!.validate()) {
         for (int i = 0; i < members.length; i++) {
           (members[i] == '') ? null : members[i];
@@ -450,7 +486,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
               .eq('order_id', orderId);
 
           if (check.toString() == '[]') {
-            if(!isDIT) {
+            if (!isDIT) {
               await supabase.storage
                   .from('participant-identity-proof')
                   .upload(orderId, image!);
@@ -477,7 +513,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
             await supabase
                 .from('events')
                 .update({'registered_participant': participants}).eq(
-                'event_id', widget.event.eventId);
+                    'event_id', widget.event.eventId);
 
             debugPrint("added in events");
 
@@ -495,6 +531,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
 
             debugPrint("added in profiles");
 
+            // ignore: use_build_context_synchronously
             ScaffoldMessenger.of(context)
                 .showSnackBar(snackBarRegistrationSuccess)
                 .toString();
@@ -502,10 +539,12 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
             // ignore: use_build_context_synchronously
             Navigator.pushAndRemoveUntil(
               context,
-              CupertinoPageRoute(builder: (context) => const NavBarScreen(true)),
-                  (Route<dynamic> route) => false,
+              CupertinoPageRoute(
+                  builder: (context) => const NavBarScreen(true)),
+              (Route<dynamic> route) => false,
             );
           } else {
+            // ignore: use_build_context_synchronously
             ScaffoldMessenger.of(context)
                 .showSnackBar(snackBarAlreadyRegistered)
                 .toString();

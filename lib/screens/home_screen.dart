@@ -138,7 +138,7 @@ class _HomeState extends State<Home> {
             Row(
               children: [
                 Icon(
-                  Icons.payments_outlined,
+                  Icons.currency_rupee,
                   color: ColourTheme.white,
                   size: 25,
                 ),
@@ -146,7 +146,7 @@ class _HomeState extends State<Home> {
                   width: 15,
                 ),
                 Text(
-                  '₹ ${widget.event.eventFees}',
+                  widget.event.eventFees,
                   style: TextStyle(color: ColourTheme.white, fontSize: 20),
                 ),
               ],
