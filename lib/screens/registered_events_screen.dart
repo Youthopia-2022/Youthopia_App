@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
 import 'package:youthopia_2022_app/services/supabase.dart';
 import 'package:youthopia_2022_app/services/users.dart';
 
 import '../constants/color_theme.dart';
 import '../services/events.dart';
-import 'category_screen.dart';
 
 class RegisteredEvents extends StatefulWidget {
   const RegisteredEvents({Key? key}) : super(key: key);
@@ -115,7 +115,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                   context,
                                   CupertinoPageRoute(
                                       builder: (context) =>
-                                          const CategoryScreen()));
+                                          const NavBarScreen(false)));
                             },
                             child: const Center(
                                 child: Padding(
