@@ -93,7 +93,7 @@ class Supa {
       final arts = await Supabase.instance.client
           .from('events')
           .select()
-          .eq('event_category', 'Fine Arts');
+          .eq('event_category', 'Fine arts');
       Event.artsEvents = arts.map((e) => toEvent(e)).toList();
     } on PostgrestException catch (error) {
       debugPrint(error.toString());
@@ -105,7 +105,7 @@ class Supa {
         .from('event-posters')
         .getPublicUrl(result['event_id']);
     return RegisteredEvent(result['event_id'], result['event_name'],
-        result['event_venue'], result['event_time'], '$eventPosterUrl.png');
+        result['event_venue'], result['event_startTime'], '$eventPosterUrl.png');
   }
 
   Future<void> getRegisteredEvents() async {
@@ -115,7 +115,7 @@ class Supa {
       final data = await supabase
           .from('events')
           .select(
-            'event_id, event_name, event_venue, event_time',
+            'event_id, event_name, event_venue, event_startTime',
           )
           .eq('event_id', regEvents[i]);
       if (!events.contains(data[0]['event_id'])) {

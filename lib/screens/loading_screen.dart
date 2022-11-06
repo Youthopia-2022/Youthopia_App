@@ -36,9 +36,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       supa.getSponsors();
       supa.getCurrentProfile();
       await supa.getEventData();
-      debugPrint("getting");
       await supa.getLiveEvents();
-      debugPrint("completed");
 
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
