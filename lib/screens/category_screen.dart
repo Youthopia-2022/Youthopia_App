@@ -18,6 +18,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return Scaffold(
         appBar: AppBar(
           //toolbarHeight: 70,
+          automaticallyImplyLeading: false,
           leadingWidth: double.maxFinite,
           title: const Text(
             'Event Categories',
