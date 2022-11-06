@@ -29,14 +29,12 @@ class _LoginState extends State<Login> {
   String _email = "";
   String _password = "";
   bool _redirecting = false;
-  late final StreamSubscription<AuthState> _authStateSubscription;
   late bool _isPasswordVisible;
   Supa supa = Supa();
   bool isProcessing = false;
 
   @override
   void initState() {
-    _authStateSubscription =
         supabase.auth.onAuthStateChange.listen((data) async {
       if (_redirecting) return;
       final session = data.session;

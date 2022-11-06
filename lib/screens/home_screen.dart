@@ -171,34 +171,47 @@ class _HomeState extends State<Home> {
             const SizedBox(
               height: 20,
             ),
-            GradientButton(
-              onPressed: () {
-                (!widget.event.isTeamEvent)
-                    ? Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (context) =>
-                                DITIndividualRegFormScreen(widget.event)))
-                    : Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (context) =>
-                                DITTeamRegFormScreen(widget.event)));
-              },
-              height: 50,
-              width: MediaQuery.of(context).size.width * 0.75,
-              text: "Register For this Event",
-              titleStyle: const TextStyle(
-                  fontSize: 20,
-                  fontFamily: "IBM Plex Sans",
-                  color: Colors.white),
-              textColor: Colors.black87,
-              //icon: (FontAwesomeIcons.arrowRight),
-              //iconColor: const Color.fromARGB(255, 255, 255, 255),
-              gradientColor1: const Color(0xFFF7797D),
-              gradientColor2: const Color(0xFFC471ED),
-              gradientColor3: const Color(0xFF12C2E9),
-              hoverElv: 20,
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 50.0,
+              decoration: BoxDecoration(
+                  gradient: ColourTheme.buttonGradient,
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0.0, 1.5),
+                      blurRadius: 1.5,
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(50)),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                    onTap: () {
+                      (!widget.event.isTeamEvent)
+                          ? Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) =>
+                                      DITIndividualRegFormScreen(widget.event)))
+                          : Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) =>
+                                      DITTeamRegFormScreen(widget.event)));
+                    },
+                    child: const Center(
+                        child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 6),
+                      child: Text(
+                        "Register for this Event",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Colors.white),
+                      ),
+                    ))),
+              ),
             ),
             const SizedBox(
               height: 50,

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/services/sponsors.dart';
@@ -96,17 +95,15 @@ class Supa {
 
   Future<void> getRegisteredEvents() async {
     List regEvents = UserProfile.currentUser!.registeredEvents;
-    int eventCount = 0;
     String events = "";
     for (int i = 0; i < regEvents.length; i++) {
-      bool flag = false;
       final data = await supabase
           .from('events')
           .select(
             'event_id, event_name, event_venue, event_time',
           )
           .eq('event_id', regEvents[i]);
-      if(events.indexOf(data[0]['event_id']) == -1) {
+      if(!events.contains(data[0]['event_id'])) {
         RegisteredEvent.registeredEvents.add(registered(data[0]));
       }
       events = "${events + data[0]['event_id']}-" ;
