@@ -14,6 +14,7 @@ import 'package:youthopia_2022_app/constants/color_theme.dart';
 import '../constants/gradient_color.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/snack_bar.dart';
+import 'about_us_screen.dart';
 import 'college_screen.dart';
 
 class Login extends StatefulWidget {
@@ -278,6 +279,27 @@ class _LoginState extends State<Login> {
                             gradientColor3: const Color(0xFF12C2E9),
                             hoverElv: 20,
                           ),
+                          Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 16.0),
+                                child: Align(
+                                  alignment: FractionalOffset.bottomCenter,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(builder: (context) => const AboutUsScreen()),
+                                      );
+                                    },
+                                    child: Text(
+                                        'About Us',
+                                    style: TextStyle(
+                                      color: ColourTheme.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24
+                                    ),),),
+                                ),
+                              ))
                         ],
                       ),
                     ),

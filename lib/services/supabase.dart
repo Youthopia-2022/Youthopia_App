@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/services/sponsors.dart';
+import 'package:youthopia_2022_app/services/team.dart';
 import 'package:youthopia_2022_app/services/users.dart';
 import 'package:youthopia_2022_app/services/events.dart';
 
@@ -199,6 +200,38 @@ class Supa {
           .select();
       debugPrint(data.toString());
       LiveEvents.liveEvents = data.map((e) => toLive(e)).toList();
+    } on PostgrestException catch (error) {
+      debugPrint(error.toString());
+    }
+  }
+
+  Person toPerson(result) {
+
+    debugPrint(result.toString());
+    return Person(
+      result['name'],
+      result['branch'],
+      result['year'],
+      result['url']
+    );
+  }
+
+  Team toTeam(result) {
+    List heads = result['team_head'].map((e) => toPerson(e)).toList();
+    List members = result['team_members'].map((e) => toPerson(e)).toList();
+    return Team(
+      result['team_name'],
+      heads,
+      members
+    );
+  }
+
+  Future<void> getAboutDetails() async{
+    try {
+      final data = await supabase
+          .from('aboutus')
+          .select();
+      Team.teams = data.map((e) => toTeam(e)).toList();
     } on PostgrestException catch (error) {
       debugPrint(error.toString());
     }
