@@ -510,16 +510,19 @@ class _SignUpState extends State<SignUp> {
           });
           debugPrint(res.toString());
 
+          // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context)
               .showSnackBar(snackBarSignupSuccess)
               .toString();
 
+          // ignore: use_build_context_synchronously
           Navigator.pushAndRemoveUntil(
             context,
             CupertinoPageRoute(builder: (context) => const Login()),
             (Route<dynamic> route) => false,
           );
         } else {
+          // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context)
               .showSnackBar(snackBarEmailExists)
               .toString();

@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/services/sponsors.dart';
+import 'package:youthopia_2022_app/services/team.dart';
 import 'package:youthopia_2022_app/services/users.dart';
 import 'package:youthopia_2022_app/services/events.dart';
 
@@ -96,17 +96,15 @@ class Supa {
 
   Future<void> getRegisteredEvents() async {
     List regEvents = UserProfile.currentUser!.registeredEvents;
-    int eventCount = 0;
     String events = "";
     for (int i = 0; i < regEvents.length; i++) {
-      bool flag = false;
       final data = await supabase
           .from('events')
           .select(
             'event_id, event_name, event_venue, event_time',
           )
           .eq('event_id', regEvents[i]);
-      if(events.indexOf(data[0]['event_id']) == -1) {
+      if(!events.contains(data[0]['event_id'])) {
         RegisteredEvent.registeredEvents.add(registered(data[0]));
       }
       events = "${events + data[0]['event_id']}-" ;
@@ -202,6 +200,38 @@ class Supa {
           .select();
       debugPrint(data.toString());
       LiveEvents.liveEvents = data.map((e) => toLive(e)).toList();
+    } on PostgrestException catch (error) {
+      debugPrint(error.toString());
+    }
+  }
+
+  Person toPerson(result) {
+
+    debugPrint(result.toString());
+    return Person(
+      result['name'],
+      result['branch'],
+      result['year'],
+      result['url']
+    );
+  }
+
+  Team toTeam(result) {
+    List heads = result['team_head'].map((e) => toPerson(e)).toList();
+    List members = result['team_members'].map((e) => toPerson(e)).toList();
+    return Team(
+      result['team_name'],
+      heads,
+      members
+    );
+  }
+
+  Future<void> getAboutDetails() async{
+    try {
+      final data = await supabase
+          .from('aboutus')
+          .select();
+      Team.teams = data.map((e) => toTeam(e)).toList();
     } on PostgrestException catch (error) {
       debugPrint(error.toString());
     }

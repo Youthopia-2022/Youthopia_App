@@ -14,6 +14,7 @@ import 'package:youthopia_2022_app/constants/color_theme.dart';
 import '../constants/gradient_color.dart';
 import '../widgets/gradient_button.dart';
 import '../widgets/snack_bar.dart';
+import 'about_us_screen.dart';
 import 'college_screen.dart';
 
 class Login extends StatefulWidget {
@@ -29,22 +30,21 @@ class _LoginState extends State<Login> {
   String _email = "";
   String _password = "";
   bool _redirecting = false;
-  late final StreamSubscription<AuthState> _authStateSubscription;
   late bool _isPasswordVisible;
   Supa supa = Supa();
   bool isProcessing = false;
 
   @override
   void initState() {
-    _authStateSubscription =
         supabase.auth.onAuthStateChange.listen((data) async {
       if (_redirecting) return;
       final session = data.session;
       if (session != null) {
         _redirecting = true;
-        Navigator.push(
+        Navigator.pushAndRemoveUntil(
           context,
           CupertinoPageRoute(builder: (context) => const LoadingScreen()),
+              (Route<dynamic> route) => false,
         );
       }
     });
@@ -279,6 +279,27 @@ class _LoginState extends State<Login> {
                             gradientColor3: const Color(0xFF12C2E9),
                             hoverElv: 20,
                           ),
+                          Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 16.0),
+                                child: Align(
+                                  alignment: FractionalOffset.bottomCenter,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(builder: (context) => const AboutUsScreen()),
+                                      );
+                                    },
+                                    child: Text(
+                                        'About Us',
+                                    style: TextStyle(
+                                      color: ColourTheme.blue,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24
+                                    ),),),
+                                ),
+                              ))
                         ],
                       ),
                     ),

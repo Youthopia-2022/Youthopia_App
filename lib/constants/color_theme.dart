@@ -13,6 +13,12 @@ class ColourTheme{
 
   static Color background = const Color(0xFF252525);
 
+  static LinearGradient buttonGradient = const LinearGradient(colors: [
+    Color(0xFFF7797D),
+    Color(0xFFC471ED),
+    Color(0xFF12C2E9),
+  ]);
+
   static LinearGradient primaryGradient = LinearGradient(
       colors: <Color>[
         ColourTheme.pink,

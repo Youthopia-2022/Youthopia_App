@@ -40,6 +40,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       await supa.getLiveEvents();
       debugPrint("completed");
 
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
         CupertinoPageRoute(builder: (context) => const NavBarScreen(true)),
