@@ -37,6 +37,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
       (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false;
   bool isProcessing = false;
   File? image;
+  late final bytes ;
 
   @override
   void initState() {
@@ -239,7 +240,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                                         setState(() {
                                           this.image = File(image.path);
                                         });
-
+                                        bytes = await image.readAsBytes();
                                       } on PlatformException {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBarPermission)
@@ -288,6 +289,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                                         setState(() {
                                           this.image = File(image.path);
                                         });
+                                        bytes = await image.readAsBytes();
                                       } on PlatformException {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBarPermission)
@@ -496,9 +498,16 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
 
           if (check.toString() == '[]') {
             if (!isDIT) {
-              await supabase.storage
-                  .from('participant-identity-proof')
-                  .upload('$orderId.png', image!);
+
+              await supabase.storage.from('participant-identity-proof').uploadBinary(
+                '$orderId.png',
+                bytes,
+                fileOptions: const FileOptions(contentType: 'image/png'),
+              );
+
+              // await supabase.storage
+              //     .from('participant-identity-proof')
+              //     .upload('$orderId.png', image!);
             }
             await supabase.from('registrations').insert({
               'order_id': orderId,

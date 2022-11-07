@@ -18,9 +18,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   bool isDIT =
-  (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false;
+      (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false;
 
   @override
   Widget build(BuildContext context) {
@@ -131,10 +130,12 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   width: 15,
                 ),
-                Text(
-                  widget.event.eventVenue,
-                  style: TextStyle(color: ColourTheme.white, fontSize: 20),
-                ),
+                Flexible(
+                  child: Text(
+                    widget.event.eventVenue,
+                    style: TextStyle(color: ColourTheme.white, fontSize: 20),
+                  ),
+                )
               ],
             ),
             const SizedBox(
@@ -150,11 +151,41 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   width: 15,
                 ),
-                Text((isDIT)? widget.event.eventFeesDIT : widget.event.eventFeesOutsider,
-                  style: TextStyle(color: ColourTheme.white, fontSize: 20),
+                Flexible(
+                  child: Text(
+                    (isDIT)
+                        ? widget.event.eventFeesDIT
+                        : widget.event.eventFeesOutsider,
+                    style: TextStyle(color: ColourTheme.white, fontSize: 20),
+                  ),
                 ),
               ],
             ),
+            (widget.event.isTeamEvent)
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Minimum members: ${widget.event.eventMinMembers}',
+                        style:
+                            TextStyle(color: ColourTheme.white, fontSize: 20),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        'Maximum members: ${widget.event.eventMaxMembers}',
+                        style:
+                            TextStyle(color: ColourTheme.white, fontSize: 20),
+                      ),
+                    ],
+                  )
+                : const SizedBox(
+                    height: 0,
+                  ),
             const SizedBox(
               height: 40,
             ),
