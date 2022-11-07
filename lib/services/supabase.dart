@@ -105,7 +105,7 @@
         .from('event-posters')
         .getPublicUrl(result['event_id']);
     return RegisteredEvent(result['event_id'], result['event_name'],
-        result['event_venue'], result['event_startTime'], '$eventPosterUrl.png');
+        result['event_venue'], result['event_startTime'], '$eventPosterUrl.webp');
   }
 
     Future<void> getRegisteredEvents() async {
