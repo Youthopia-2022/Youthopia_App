@@ -1,4 +1,3 @@
-
 class UserProfile {
   final String userId;
   final String userEmail;
@@ -10,14 +9,6 @@ class UserProfile {
   List registeredEvents;
 
   static UserProfile? currentUser;
-  UserProfile(this.userId,
-      this.userEmail,
-      this.userName,
-      this.userPhone,
-      this.userGender,
-      this.userCollege,
-      this.userYear,
-      this.registeredEvents
-      );
-
+  UserProfile(this.userId, this.userEmail, this.userName, this.userPhone,
+      this.userGender, this.userCollege, this.userYear, this.registeredEvents);
 }

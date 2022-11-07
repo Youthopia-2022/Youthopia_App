@@ -104,8 +104,12 @@ class Supa {
     final String eventPosterUrl = Supabase.instance.client.storage
         .from('event-posters')
         .getPublicUrl(result['event_id']);
-    return RegisteredEvent(result['event_id'], result['event_name'],
-        result['event_venue'], result['event_startTime'], '$eventPosterUrl.png');
+    return RegisteredEvent(
+        result['event_id'],
+        result['event_name'],
+        result['event_venue'],
+        result['event_startTime'],
+        '$eventPosterUrl.png');
   }
 
   Future<void> getRegisteredEvents() async {
