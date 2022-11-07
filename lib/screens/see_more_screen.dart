@@ -101,9 +101,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                               width: 10,
                             ),
                             Text(
-                              widget.events[index].eventTime
-                                  .toString()
-                                  .substring(10, 15),
+                              widget.events[index].eventTime,
                               style: TextStyle(
                                   color: ColourTheme.white, fontSize: 15),
                             ),
@@ -123,9 +121,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                               width: 10,
                             ),
                             Text(
-                              DateFormat('dd-MM-yyyy')
-                                  .format(widget.events[index].eventDate)
-                                  .toString(),
+                              widget.events[index].eventDate,
                               style: TextStyle(
                                   color: ColourTheme.white, fontSize: 15),
                             ),

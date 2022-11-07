@@ -36,26 +36,14 @@
           .from('event-posters')
           .getPublicUrl(result['event_id']);
       debugPrint(result['event_startTime']);
-      int len = result['event_startTime'].length;
-      debugPrint(result['event_startTime']
-          .substring(0, result['event_startTime'].length - 2));
-      int hr = int.parse(result['event_startTime']
-          .substring(0, result['event_startTime'].length - 2));
+      debugPrint(result['event_date']);
 
-      hr = (result['event_startTime'].indexOf('a') == -1) ? hr + 12 : hr;
-
-      DateTime date = DateTime.utc(
-          int.parse(result['event_date'].substring(7)),
-          int.parse(result['event_date'].substring(3, 5)),
-          int.parse(result['event_date'].substring(0, 2)));
-
-    debugPrint(hr.toString());
     return Event(
         result['event_id'],
         result['event_name'],
         result['event_venue'],
-        TimeOfDay(hour: hr, minute: 00),
-        date,
+        result['event_startTime'],
+        result['event_date'],
         result['event_fees_dit'],
         result['event_fees_outsiders'],
         result['event_description'],
@@ -105,7 +93,7 @@
         .from('event-posters')
         .getPublicUrl(result['event_id']);
     return RegisteredEvent(result['event_id'], result['event_name'],
-        result['event_venue'], result['event_startTime'], '$eventPosterUrl.png');
+        result['event_venue'], result['event_startTime'], '$eventPosterUrl.webp');
   }
 
     Future<void> getRegisteredEvents() async {
