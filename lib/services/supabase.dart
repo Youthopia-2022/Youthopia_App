@@ -62,7 +62,7 @@ class Supa {
         result['event_isTeam'],
         result['event_min_members'],
         result['event_max_members'],
-        '$eventPosterUrl.png');
+        '$eventPosterUrl.webp');
   }
 
   Future<void> getEventData() async {
@@ -109,7 +109,7 @@ class Supa {
         result['event_name'],
         result['event_venue'],
         result['event_startTime'],
-        '$eventPosterUrl.png');
+        '$eventPosterUrl.webp');
   }
 
   Future<void> getRegisteredEvents() async {

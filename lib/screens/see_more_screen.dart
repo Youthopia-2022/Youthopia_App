@@ -50,7 +50,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
               physics: const ScrollPhysics(),
               shrinkWrap: true,
               crossAxisCount: 2,
-              childAspectRatio: 0.57,
+              childAspectRatio: 0.50,
               children: List.generate(totalItems, (index) {
                 return Container(
                   decoration: const BoxDecoration(
