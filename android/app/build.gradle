@@ -40,7 +40,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.youthopia"
+        applicationId "com.example.youthopia_2022_app"
         multiDexEnabled true
         minSdkVersion 21
         targetSdkVersion 31

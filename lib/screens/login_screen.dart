@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/loading_screen.dart';
 import 'package:email_validator/email_validator.dart';
@@ -12,7 +11,6 @@ import 'package:youthopia_2022_app/services/supabase.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 
 import '../constants/gradient_color.dart';
-import '../widgets/gradient_button.dart';
 import '../widgets/snack_bar.dart';
 import 'about_us_screen.dart';
 import 'college_screen.dart';
@@ -61,14 +59,14 @@ class _LoginState extends State<Login> {
           child: Image.asset(
             "assets/bottomimg.png",
             fit: BoxFit.fitWidth,
-            alignment: Alignment.bottomLeft,
+            alignment: Alignment.bottomCenter,
           ),
         ),
         Form(
           key: _formKey,
           child: SingleChildScrollView(
             child: SizedBox(
-              height: 800,
+              height: MediaQuery.of(context).size.height * 0.999,
               child: Stack(
                 children: [
                   Positioned.fill(
