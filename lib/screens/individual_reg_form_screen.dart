@@ -34,6 +34,7 @@ class _DITIndividualRegFormScreenState
   String eventId = "";
   bool isProcessing = false;
   File? image;
+  late final bytes ;
 
   @override
   void initState() {
@@ -195,7 +196,7 @@ class _DITIndividualRegFormScreenState
                                         setState(() {
                                           this.image = File(image.path);
                                         });
-
+                                        bytes = await image.readAsBytes();
                                       } on PlatformException {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBarPermission)
@@ -244,6 +245,7 @@ class _DITIndividualRegFormScreenState
                                         setState(() {
                                           this.image = File(image.path);
                                         });
+                                        bytes = await image.readAsBytes();
                                       } on PlatformException {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBarPermission)
@@ -372,9 +374,16 @@ class _DITIndividualRegFormScreenState
 
           if (check.toString() == '[]') {
             if (!isDIT) {
-              await supabase.storage
-                  .from('participant-identity-proof')
-                  .upload('$orderId.png', image!);
+              // await supabase.storage
+              //     .from('participant-identity-proof')
+              //     .upload('$orderId.png', image!);
+              //
+
+              await supabase.storage.from('participant-identity-proof').uploadBinary(
+                '$orderId.png',
+                bytes,
+                fileOptions: const FileOptions(contentType: 'image/png'),
+              );
             }
 
             await supabase.from('registrations').insert({
@@ -395,7 +404,7 @@ class _DITIndividualRegFormScreenState
                 .eq('event_id', widget.event.eventId);
 
             List participants = resParticipants[0]['registered_participant'];
-            participants.add(uuid);
+            participants.add(orderId);
             await supabase
                 .from('events')
                 .update({'registered_participant': participants}).eq(

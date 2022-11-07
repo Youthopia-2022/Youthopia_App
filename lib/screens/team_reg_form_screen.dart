@@ -37,6 +37,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
       (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false;
   bool isProcessing = false;
   File? image;
+  late final bytes ;
 
   @override
   void initState() {
@@ -239,7 +240,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                                         setState(() {
                                           this.image = File(image.path);
                                         });
-
+                                        bytes = await image.readAsBytes();
                                       } on PlatformException {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBarPermission)
@@ -288,6 +289,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                                         setState(() {
                                           this.image = File(image.path);
                                         });
+                                        bytes = await image.readAsBytes();
                                       } on PlatformException {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBarPermission)
@@ -468,8 +470,17 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
       ScaffoldMessenger.of(context).showSnackBar(snackBarImage).toString();
     } else {
       if (_formKey.currentState!.validate()) {
+        int memCount = 1;
         for (int i = 0; i < members.length; i++) {
           (members[i] == '') ? null : members[i];
+          if(members[i] != null) memCount++;
+        }
+        if(memCount < widget.event.eventMinMembers) {
+          setState(() {
+            isProcessing = false;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(snackBarMinMembers).toString();
+          return;
         }
         debugPrint(teamName);
         debugPrint(leaderName);
@@ -487,9 +498,16 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
 
           if (check.toString() == '[]') {
             if (!isDIT) {
-              await supabase.storage
-                  .from('participant-identity-proof')
-                  .upload('$orderId.png', image!);
+
+              await supabase.storage.from('participant-identity-proof').uploadBinary(
+                '$orderId.png',
+                bytes,
+                fileOptions: const FileOptions(contentType: 'image/png'),
+              );
+
+              // await supabase.storage
+              //     .from('participant-identity-proof')
+              //     .upload('$orderId.png', image!);
             }
             await supabase.from('registrations').insert({
               'order_id': orderId,
@@ -509,7 +527,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                 .eq('event_id', widget.event.eventId);
 
             List participants = resParticipants[0]['registered_participant'];
-            participants.add(uuid);
+            participants.add(orderId);
             await supabase
                 .from('events')
                 .update({'registered_participant': participants}).eq(

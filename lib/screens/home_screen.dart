@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import 'package:youthopia_2022_app/screens/team_reg_form_screen.dart';
 import 'package:youthopia_2022_app/services/events.dart';
 import 'package:intl/intl.dart';
+import 'package:youthopia_2022_app/services/users.dart';
 import '../constants/color_theme.dart';
 import '../widgets/gradient_button.dart';
 import 'individual_reg_form_screen.dart';
@@ -17,6 +18,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool isDIT =
+      (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,10 +130,12 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   width: 15,
                 ),
-                Text(
-                  widget.event.eventVenue,
-                  style: TextStyle(color: ColourTheme.white, fontSize: 20),
-                ),
+                Flexible(
+                  child: Text(
+                    widget.event.eventVenue,
+                    style: TextStyle(color: ColourTheme.white, fontSize: 20),
+                  ),
+                )
               ],
             ),
             const SizedBox(
@@ -145,12 +151,41 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   width: 15,
                 ),
-                Text(
-                  widget.event.eventFeesDIT,
-                  style: TextStyle(color: ColourTheme.white, fontSize: 20),
+                Flexible(
+                  child: Text(
+                    (isDIT)
+                        ? widget.event.eventFeesDIT
+                        : widget.event.eventFeesOutsider,
+                    style: TextStyle(color: ColourTheme.white, fontSize: 20),
+                  ),
                 ),
               ],
             ),
+            (widget.event.isTeamEvent)
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Minimum members: ${widget.event.eventMinMembers}',
+                        style:
+                            TextStyle(color: ColourTheme.white, fontSize: 20),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        'Maximum members: ${widget.event.eventMaxMembers}',
+                        style:
+                            TextStyle(color: ColourTheme.white, fontSize: 20),
+                      ),
+                    ],
+                  )
+                : const SizedBox(
+                    height: 0,
+                  ),
             const SizedBox(
               height: 40,
             ),

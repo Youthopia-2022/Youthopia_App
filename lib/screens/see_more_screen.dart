@@ -50,7 +50,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
               physics: const ScrollPhysics(),
               shrinkWrap: true,
               crossAxisCount: 2,
-              childAspectRatio: 0.65,
+              childAspectRatio: 0.57,
               children: List.generate(totalItems, (index) {
                 return Container(
                   decoration: const BoxDecoration(
@@ -76,12 +76,14 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
-                              widget.events[index].eventName,
-                              style: TextStyle(
-                                  color: ColourTheme.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
+                            Flexible(
+                              child: Text(
+                                widget.events[index].eventName,
+                                style: TextStyle(
+                                    color: ColourTheme.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
                             ),
                           ],
                         ),

@@ -163,7 +163,9 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                width: 130,
+                                width:
+                            MediaQuery.of(context).size.width * 0.4,
+
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -179,21 +181,18 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                           fontSize: 22,
                                           color: ColourTheme.white),
                                     ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
                                     Padding(
                                       padding: const EdgeInsets.only(
-                                          bottom: 13.0, top: 15),
+                                          bottom: 13.0, top: 10),
                                       child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.start,
                                         children: [
                                           const Icon(FontAwesomeIcons.clock,
                                               size: 15,
                                               color: Color(0xFF666666)),
                                           Text(
-                                            eventTime,
+                                            '   ${eventTime}',
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 color: ColourTheme.lightGrey),
@@ -221,6 +220,8 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                   ),
                                   width:
                                       MediaQuery.of(context).size.width * 0.5,
+                                  height:
+                                  MediaQuery.of(context).size.width * 0.5,
                                 ),
                               )
                             ],
