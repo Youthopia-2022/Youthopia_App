@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/services/events.dart';
 import 'package:youthopia_2022_app/widgets/home_page_container.dart';
@@ -63,39 +62,11 @@ class _MainScreenState extends State<MainScreen> {
             children: [
               (MainEvents.starNight != null)
                   ? const HomePageContainer()
-                  : Stack(alignment: Alignment.center, children: [
-                      const Image(
-                          height: 220,
-                          image: AssetImage('assets/star_night_reveal.png')),
-                      Positioned(
-                          top: 30,
-                          child: Text(
-                            'Star Night',
-                            style: GoogleFonts.kaushanScript(
-                              color: ColourTheme.white,
-                              fontSize: 50
-                            ),
-                          )),
-                Positioned(
-                    top: 90,
-                    child: Text(
-                      '?',
-                      style: GoogleFonts.kaushanScript(
-                          color: ColourTheme.white,
-                          fontSize: 50
-                      ),
-                    )),
-                Positioned(
-                    top: 150,
-                    child: Text(
-                      'WILL BE REVEALED ON 15 NOV',
-                      style: GoogleFonts.merriweather(
-                          color: ColourTheme.white,
-                          fontSize: 20
-                      )
-                    )),
-                    ]),
-              const SizedBox(height: 10,),
+                  : const Image(
+                      height: 220, image: AssetImage('assets/secret.png')),
+              const SizedBox(
+                height: 10,
+              ),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 17),
                 child: Align(
