@@ -62,8 +62,11 @@ class _MainScreenState extends State<MainScreen> {
             children: [
               (MainEvents.starNight != null)
                   ? const HomePageContainer()
-                  : const Image(
-                      height: 220, image: AssetImage('assets/secret.png')),
+                  : Image(
+                      //height: MediaQuery.of(context).size.height * 0.3,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      image: const AssetImage('assets/secret.png'),
+                    ),
               const SizedBox(
                 height: 10,
               ),
@@ -73,7 +76,7 @@ class _MainScreenState extends State<MainScreen> {
                   alignment: Alignment.centerLeft,
                   child: GradientText(
                     "Sponsors",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
                   ),
                 ),
               ),
@@ -112,7 +115,7 @@ class _MainScreenState extends State<MainScreen> {
                   alignment: Alignment.centerLeft,
                   child: GradientText(
                     "Featured Events",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
                   ),
                 ),
               ),
@@ -126,8 +129,8 @@ class _MainScreenState extends State<MainScreen> {
                 loop: true,
                 height: MediaQuery.of(context).size.height * 0.3,
               ),
-              const SizedBox(
-                height: 50,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.01,
               )
             ],
           ),
