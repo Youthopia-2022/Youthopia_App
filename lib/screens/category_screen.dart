@@ -21,7 +21,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           //toolbarHeight: 70,
           automaticallyImplyLeading: false,
           leadingWidth: double.maxFinite,
-          title:  const GradientText(
+          title: const GradientText(
             'Event Categories',
             style: TextStyle(
               fontFamily: 'IBM Plex Sans',

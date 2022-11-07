@@ -179,6 +179,7 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 7, horizontal: 8),
                       child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
                         validator: (String? value) {
                           if (EmailValidator.validate(value!)) {
                             return null;
@@ -473,25 +474,26 @@ class _SignUpState extends State<SignUp> {
                           onTap: () async {
                             (isProcessing)
                                 ? const CircularProgressIndicator(
-                              color: Colors.white,
-                            )
+                                    color: Colors.white,
+                                  )
                                 : buttonPressed();
                           },
                           child: Center(
                               child: (isProcessing)
                                   ? const CircularProgressIndicator(
-                                color: Colors.white,
-                              )
-                                  :  const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 6),
-                                child: Text(
-                                  "Get Started",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: Colors.white),
-                                ),
-                              ))),
+                                      color: Colors.white,
+                                    )
+                                  : const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 6),
+                                      child: Text(
+                                        "Get Started",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            color: Colors.white),
+                                      ),
+                                    ))),
                     ),
                   ),
                   SizedBox(

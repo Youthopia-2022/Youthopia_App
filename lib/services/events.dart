@@ -32,8 +32,7 @@ class Event {
       this.isTeamEvent,
       this.eventMinMembers,
       this.eventMaxMembers,
-      this.eventPosterUrl
-  );
+      this.eventPosterUrl);
 }
 
 class RegisteredEvent {

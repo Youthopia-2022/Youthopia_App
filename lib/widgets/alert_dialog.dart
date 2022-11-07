@@ -11,9 +11,9 @@ class AlertUI extends StatelessWidget {
       content: Text(title),
       actions: [
         MaterialButton(
-            onPressed: () {
-          Navigator.of(context).pop();
-        },
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
           child: const Text('Okay'),
         )
       ],

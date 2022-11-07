@@ -125,15 +125,8 @@ class _CarouselState extends State<Carousel> {
                                               alignment:
                                                   PlaceholderAlignment.middle),
                                           TextSpan(
-                                            text: '  ${item.eventTime
-        .toString()
-        .substring
-    (
-    10
-    ,
-    15
-    )
-  }',
+                                            text:
+                                                '  ${item.eventTime.toString().substring(10, 15)}',
                                           )
                                         ],
                                         style: const TextStyle(

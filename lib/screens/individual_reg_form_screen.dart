@@ -34,7 +34,7 @@ class _DITIndividualRegFormScreenState
   String eventId = "";
   bool isProcessing = false;
   File? image;
-  late final bytes ;
+  late final bytes;
 
   @override
   void initState() {
@@ -153,23 +153,23 @@ class _DITIndividualRegFormScreenState
                             const SizedBox(
                               height: 10,
                             ),
-                            (image != null)? Column(
-                              children: [
-                                SizedBox(
-                                  height: 200,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Image(
-                                    image: FileImage(
-                                        image!
-                                    ),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                )
-                              ],
-                            )
+                            (image != null)
+                                ? Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 200,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Image(
+                                          image: FileImage(image!),
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      )
+                                    ],
+                                  )
                                 : const SizedBox(height: 0),
                             Container(
                               width: MediaQuery.of(context).size.width,
@@ -191,7 +191,7 @@ class _DITIndividualRegFormScreenState
                                       try {
                                         final image = await ImagePicker()
                                             .pickImage(
-                                            source: ImageSource.gallery);
+                                                source: ImageSource.gallery);
                                         if (image == null) return;
                                         setState(() {
                                           this.image = File(image.path);
@@ -205,16 +205,16 @@ class _DITIndividualRegFormScreenState
                                     },
                                     child: const Center(
                                         child: Padding(
-                                          padding:
+                                      padding:
                                           EdgeInsets.symmetric(vertical: 6),
-                                          child: Text(
-                                            "Upload from Gallery",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18,
-                                                color: Colors.white),
-                                          ),
-                                        ))),
+                                      child: Text(
+                                        "Upload from Gallery",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            color: Colors.white),
+                                      ),
+                                    ))),
                               ),
                             ),
                             const SizedBox(
@@ -240,7 +240,7 @@ class _DITIndividualRegFormScreenState
                                       try {
                                         final image = await ImagePicker()
                                             .pickImage(
-                                            source: ImageSource.camera);
+                                                source: ImageSource.camera);
                                         if (image == null) return;
                                         setState(() {
                                           this.image = File(image.path);
@@ -254,26 +254,26 @@ class _DITIndividualRegFormScreenState
                                     },
                                     child: const Center(
                                         child: Padding(
-                                          padding:
+                                      padding:
                                           EdgeInsets.symmetric(vertical: 6),
-                                          child: Text(
-                                            "Upload from Camera",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18,
-                                                color: Colors.white),
-                                          ),
-                                        ))),
+                                      child: Text(
+                                        "Upload from Camera",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            color: Colors.white),
+                                      ),
+                                    ))),
                               ),
                             ),
                             const SizedBox(
                               height: 30,
                             ),
                           ],
-                  )
+                        )
                       : const SizedBox(
-                    height: 30,
-                  ),
+                          height: 30,
+                        ),
                   Text(
                     'Phone Number',
                     style: TextStyle(fontSize: 24, color: ColourTheme.white),
@@ -379,11 +379,13 @@ class _DITIndividualRegFormScreenState
               //     .upload('$orderId.png', image!);
               //
 
-              await supabase.storage.from('participant-identity-proof').uploadBinary(
-                '$orderId.png',
-                bytes,
-                fileOptions: const FileOptions(contentType: 'image/png'),
-              );
+              await supabase.storage
+                  .from('participant-identity-proof')
+                  .uploadBinary(
+                    '$orderId.png',
+                    bytes,
+                    fileOptions: const FileOptions(contentType: 'image/png'),
+                  );
             }
 
             await supabase.from('registrations').insert({

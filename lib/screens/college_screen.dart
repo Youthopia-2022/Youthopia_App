@@ -101,7 +101,6 @@ class CollegeScreen extends StatelessWidget {
                       Color(0xFFC471ED),
                       Color(0xFF12C2E9)
                     ]),
-                    
                     border: Border.all(),
                     borderRadius: BorderRadius.circular(32),
                   ),

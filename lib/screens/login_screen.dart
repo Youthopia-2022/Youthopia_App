@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
 
   @override
   void initState() {
-        supabase.auth.onAuthStateChange.listen((data) async {
+    supabase.auth.onAuthStateChange.listen((data) async {
       if (_redirecting) return;
       final session = data.session;
       if (session != null) {
@@ -44,7 +44,7 @@ class _LoginState extends State<Login> {
         Navigator.pushAndRemoveUntil(
           context,
           CupertinoPageRoute(builder: (context) => const LoadingScreen()),
-              (Route<dynamic> route) => false,
+          (Route<dynamic> route) => false,
         );
       }
     });
@@ -275,48 +275,52 @@ class _LoginState extends State<Login> {
                                   onTap: () async {
                                     (isProcessing)
                                         ? const CircularProgressIndicator(
-                                      color: Colors.white,
-                                    )
+                                            color: Colors.white,
+                                          )
                                         : buttonPressed();
                                   },
                                   child: Center(
                                       child: (isProcessing)
                                           ? const CircularProgressIndicator(
-                                        color: Colors.white,
-                                      )
-                                          :  const Padding(
-                                        padding: EdgeInsets.symmetric(vertical: 6),
-                                        child: Text(
-                                          "LOGIN",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                              color: Colors.white),
-                                        ),
-                                      ))),
+                                              color: Colors.white,
+                                            )
+                                          : const Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 6),
+                                              child: Text(
+                                                "LOGIN",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18,
+                                                    color: Colors.white),
+                                              ),
+                                            ))),
                             ),
                           ),
                           Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.only(bottom: 16.0),
-                                child: Align(
-                                  alignment: FractionalOffset.bottomCenter,
-                                  child: TextButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        CupertinoPageRoute(builder: (context) => const AboutUsScreen()),
-                                      );
-                                    },
-                                    child: Text(
-                                        'About Us',
-                                    style: TextStyle(
+                            padding: const EdgeInsets.only(bottom: 16.0),
+                            child: Align(
+                              alignment: FractionalOffset.bottomCenter,
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                        builder: (context) =>
+                                            const AboutUsScreen()),
+                                  );
+                                },
+                                child: Text(
+                                  'About Us',
+                                  style: TextStyle(
                                       color: ColourTheme.blue,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 24
-                                    ),),),
+                                      fontSize: 24),
                                 ),
-                              ))
+                              ),
+                            ),
+                          ))
                         ],
                       ),
                     ),

@@ -4,22 +4,14 @@ class Team {
   final List members;
 
   static List teams = [];
-  Team(
-      this.teamName,
-      this.heads,
-      this.members
-      );
+  Team(this.teamName, this.heads, this.members);
 }
 
 class Person {
-   final String name;
-   final String branch;
-   final String year;
-   final String url;
+  final String name;
+  final String branch;
+  final String year;
+  final String url;
 
-   Person(
-       this.name,
-       this.branch,
-       this.year,
-       this.url);
+  Person(this.name, this.branch, this.year, this.url);
 }

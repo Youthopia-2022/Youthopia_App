@@ -37,7 +37,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
       (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false;
   bool isProcessing = false;
   File? image;
-  late final bytes ;
+  late final bytes;
 
   @override
   void initState() {
@@ -197,23 +197,23 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                             const SizedBox(
                               height: 10,
                             ),
-                            (image != null)? Column(
-                              children: [
-                                SizedBox(
-                                  height: 200,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Image(
-                                    image: FileImage(
-                                      image!
-                                    ),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                )
-                              ],
-                            )
+                            (image != null)
+                                ? Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 200,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Image(
+                                          image: FileImage(image!),
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      )
+                                    ],
+                                  )
                                 : const SizedBox(height: 0),
                             Container(
                               width: MediaQuery.of(context).size.width,
@@ -235,7 +235,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                                       try {
                                         final image = await ImagePicker()
                                             .pickImage(
-                                            source: ImageSource.gallery);
+                                                source: ImageSource.gallery);
                                         if (image == null) return;
                                         setState(() {
                                           this.image = File(image.path);
@@ -249,16 +249,16 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                                     },
                                     child: const Center(
                                         child: Padding(
-                                          padding:
+                                      padding:
                                           EdgeInsets.symmetric(vertical: 6),
-                                          child: Text(
-                                            "Upload from Gallery",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18,
-                                                color: Colors.white),
-                                          ),
-                                        ))),
+                                      child: Text(
+                                        "Upload from Gallery",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            color: Colors.white),
+                                      ),
+                                    ))),
                               ),
                             ),
                             const SizedBox(
@@ -473,13 +473,15 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
         int memCount = 1;
         for (int i = 0; i < members.length; i++) {
           (members[i] == '') ? null : members[i];
-          if(members[i] != null) memCount++;
+          if (members[i] != null) memCount++;
         }
-        if(memCount < widget.event.eventMinMembers) {
+        if (memCount < widget.event.eventMinMembers) {
           setState(() {
             isProcessing = false;
           });
-          ScaffoldMessenger.of(context).showSnackBar(snackBarMinMembers).toString();
+          ScaffoldMessenger.of(context)
+              .showSnackBar(snackBarMinMembers)
+              .toString();
           return;
         }
         debugPrint(teamName);
@@ -498,12 +500,13 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
 
           if (check.toString() == '[]') {
             if (!isDIT) {
-
-              await supabase.storage.from('participant-identity-proof').uploadBinary(
-                '$orderId.png',
-                bytes,
-                fileOptions: const FileOptions(contentType: 'image/png'),
-              );
+              await supabase.storage
+                  .from('participant-identity-proof')
+                  .uploadBinary(
+                    '$orderId.png',
+                    bytes,
+                    fileOptions: const FileOptions(contentType: 'image/png'),
+                  );
 
               // await supabase.storage
               //     .from('participant-identity-proof')
