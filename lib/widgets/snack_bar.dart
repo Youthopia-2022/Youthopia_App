@@ -110,3 +110,14 @@ var snackBarImage = SnackBar(
     contentType: ContentType.failure,
   ),
 );
+
+var snackBarMinMembers = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  content: AwesomeSnackbarContent(
+    title: 'Error !!',
+    message: 'Add more members !',
+    contentType: ContentType.failure,
+  ),
+);

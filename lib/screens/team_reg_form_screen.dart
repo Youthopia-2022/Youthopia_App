@@ -468,8 +468,17 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
       ScaffoldMessenger.of(context).showSnackBar(snackBarImage).toString();
     } else {
       if (_formKey.currentState!.validate()) {
+        int memCount = 1;
         for (int i = 0; i < members.length; i++) {
           (members[i] == '') ? null : members[i];
+          if(members[i] != null) memCount++;
+        }
+        if(memCount < widget.event.eventMinMembers) {
+          setState(() {
+            isProcessing = false;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(snackBarMinMembers).toString();
+          return;
         }
         debugPrint(teamName);
         debugPrint(leaderName);
@@ -509,7 +518,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                 .eq('event_id', widget.event.eventId);
 
             List participants = resParticipants[0]['registered_participant'];
-            participants.add(uuid);
+            participants.add(orderId);
             await supabase
                 .from('events')
                 .update({'registered_participant': participants}).eq(

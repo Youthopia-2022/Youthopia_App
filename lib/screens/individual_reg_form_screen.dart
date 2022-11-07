@@ -395,7 +395,7 @@ class _DITIndividualRegFormScreenState
                 .eq('event_id', widget.event.eventId);
 
             List participants = resParticipants[0]['registered_participant'];
-            participants.add(uuid);
+            participants.add(orderId);
             await supabase
                 .from('events')
                 .update({'registered_participant': participants}).eq(
