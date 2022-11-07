@@ -91,7 +91,7 @@ class _HomeState extends State<Home> {
                   width: 15,
                 ),
                 Text(
-                  widget.event.eventTime.toString().substring(10, 15),
+                  widget.event.eventTime,
                   style: TextStyle(color: ColourTheme.white, fontSize: 20),
                 ),
               ],
@@ -110,9 +110,7 @@ class _HomeState extends State<Home> {
                   width: 15,
                 ),
                 Text(
-                  DateFormat('dd-MM-yyyy')
-                      .format(widget.event.eventDate)
-                      .toString(),
+                  widget.event.eventDate,
                   style: TextStyle(color: ColourTheme.white, fontSize: 20),
                 ),
               ],

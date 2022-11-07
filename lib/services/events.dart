@@ -4,8 +4,8 @@ class Event {
   final String eventId;
   final String eventName;
   final String eventVenue;
-  final TimeOfDay eventTime;
-  final DateTime eventDate;
+  final String eventTime;
+  final String eventDate;
   final String eventFeesDIT;
   final String eventFeesOutsider;
   final String eventDescription;
