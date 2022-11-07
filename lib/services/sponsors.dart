@@ -1,11 +1,8 @@
-class Sponsors{
+class Sponsors {
   final String name;
   final String iconUrl;
 
   static List? sponsors;
 
-  Sponsors(
-      this.name,
-      this.iconUrl
-      );
+  Sponsors(this.name, this.iconUrl);
 }

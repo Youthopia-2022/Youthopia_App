@@ -49,21 +49,21 @@
           int.parse(result['event_date'].substring(3, 5)),
           int.parse(result['event_date'].substring(0, 2)));
 
-      debugPrint(hr.toString());
-      return Event(
-          result['event_id'],
-          result['event_name'],
-          result['event_venue'],
-          TimeOfDay(hour: hr, minute: 00),
-          date,
-          result['event_fees_dit'],
-          result['event_fees_outsiders'],
-          result['event_description'],
-          result['event_isTeam'],
-          result['event_min_members'],
-          result['event_max_members'],
-          '$eventPosterUrl.png');
-    }
+    debugPrint(hr.toString());
+    return Event(
+        result['event_id'],
+        result['event_name'],
+        result['event_venue'],
+        TimeOfDay(hour: hr, minute: 00),
+        date,
+        result['event_fees_dit'],
+        result['event_fees_outsiders'],
+        result['event_description'],
+        result['event_isTeam'],
+        result['event_min_members'],
+        result['event_max_members'],
+        '$eventPosterUrl.webp');
+  }
 
     Future<void> getEventData() async {
       try {
@@ -100,13 +100,13 @@
       }
     }
 
-    RegisteredEvent registered(result) {
-      final String eventPosterUrl = Supabase.instance.client.storage
-          .from('event-posters')
-          .getPublicUrl(result['event_id']);
-      return RegisteredEvent(result['event_id'], result['event_name'],
-          result['event_venue'], result['event_startTime'], '$eventPosterUrl.png');
-    }
+  RegisteredEvent registered(result) {
+    final String eventPosterUrl = Supabase.instance.client.storage
+        .from('event-posters')
+        .getPublicUrl(result['event_id']);
+    return RegisteredEvent(result['event_id'], result['event_name'],
+        result['event_venue'], result['event_startTime'], '$eventPosterUrl.png');
+  }
 
     Future<void> getRegisteredEvents() async {
       List regEvents = UserProfile.currentUser!.registeredEvents;

@@ -163,9 +163,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                width:
-                            MediaQuery.of(context).size.width * 0.4,
-
+                                width: MediaQuery.of(context).size.width * 0.4,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -221,7 +219,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                   width:
                                       MediaQuery.of(context).size.width * 0.5,
                                   height:
-                                  MediaQuery.of(context).size.width * 0.5,
+                                      MediaQuery.of(context).size.width * 0.5,
                                 ),
                               )
                             ],
