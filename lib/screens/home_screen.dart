@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import 'package:youthopia_2022_app/screens/team_reg_form_screen.dart';
 import 'package:youthopia_2022_app/services/events.dart';
 import 'package:intl/intl.dart';
+import 'package:youthopia_2022_app/services/users.dart';
 import '../constants/color_theme.dart';
 import '../widgets/gradient_button.dart';
 import 'individual_reg_form_screen.dart';
@@ -17,6 +18,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  bool isDIT =
+  (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,8 +150,7 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   width: 15,
                 ),
-                Text(
-                  widget.event.eventFeesDIT,
+                Text((isDIT)? widget.event.eventFeesDIT : widget.event.eventFeesOutsider,
                   style: TextStyle(color: ColourTheme.white, fontSize: 20),
                 ),
               ],
