@@ -140,7 +140,7 @@ class _MainScreenState extends State<MainScreen> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: GradientText(
-                    "Live Events",
+                    "Featured Events",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
                   ),
                 ),

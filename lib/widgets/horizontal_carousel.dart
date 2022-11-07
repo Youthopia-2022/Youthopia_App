@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../constants/color_theme.dart';
 import '../screens/home_screen.dart';
@@ -80,7 +81,10 @@ class _CarouselState extends State<Carousel> {
                                               ),
                                               alignment:
                                                   PlaceholderAlignment.middle),
-                                          TextSpan(text: '  ${item.eventDate}')
+                                          TextSpan(
+                                            text:
+                                                '   ${DateFormat('dd-MM-yyyy').format(item.eventDate).toString()}',
+                                          )
                                         ],
                                         style: const TextStyle(
                                           color: Colors.white,
@@ -120,7 +124,17 @@ class _CarouselState extends State<Carousel> {
                                               ),
                                               alignment:
                                                   PlaceholderAlignment.middle),
-                                          TextSpan(text: ' ${item.eventTime}')
+                                          TextSpan(
+                                            text: '  ${item.eventTime
+        .toString()
+        .substring
+    (
+    10
+    ,
+    15
+    )
+  }',
+                                          )
                                         ],
                                         style: const TextStyle(
                                           color: Colors.white,
@@ -131,39 +145,39 @@ class _CarouselState extends State<Carousel> {
                                 ],
                               )),
                         ),
-                        Positioned(
-                          top: 00,
-                          right: 0,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 10.0),
-                            child: SizedBox(
-                              width: 60,
-                              child: TextButton(
-                                onPressed: () {},
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(5))),
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            const Color(0xFFFF0000)),
-                                    foregroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            ColourTheme.black)),
-                                child: const Text(
-                                  "LIVE",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: 14),
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
+                        // Positioned(
+                        //   top: 00,
+                        //   right: 0,
+                        //   child: Container(
+                        //     padding: const EdgeInsets.symmetric(
+                        //         vertical: 10.0, horizontal: 10.0),
+                        //     child: SizedBox(
+                        //       width: 60,
+                        //       child: TextButton(
+                        //         onPressed: () {},
+                        //         style: ButtonStyle(
+                        //             shape: MaterialStateProperty.all<
+                        //                     RoundedRectangleBorder>(
+                        //                 RoundedRectangleBorder(
+                        //                     borderRadius:
+                        //                         BorderRadius.circular(5))),
+                        //             backgroundColor:
+                        //                 MaterialStateProperty.all<Color>(
+                        //                     const Color(0xFFFF0000)),
+                        //             foregroundColor:
+                        //                 MaterialStateProperty.all<Color>(
+                        //                     ColourTheme.black)),
+                        //         child: const Text(
+                        //           "⭐",
+                        //           style: TextStyle(
+                        //               fontWeight: FontWeight.bold,
+                        //               color: Colors.white,
+                        //               fontSize: 14),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     ),
                   ),
