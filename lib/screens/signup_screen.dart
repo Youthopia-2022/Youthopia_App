@@ -179,6 +179,7 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 7, horizontal: 8),
                       child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
                         validator: (String? value) {
                           if (EmailValidator.validate(value!)) {
                             return null;
