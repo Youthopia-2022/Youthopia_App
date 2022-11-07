@@ -5,7 +5,6 @@ import 'package:youthopia_2022_app/services/events.dart';
 import 'package:intl/intl.dart';
 import 'package:youthopia_2022_app/services/users.dart';
 import '../constants/color_theme.dart';
-import '../widgets/gradient_button.dart';
 import 'individual_reg_form_screen.dart';
 
 class Home extends StatefulWidget {
