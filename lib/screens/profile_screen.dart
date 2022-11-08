@@ -7,6 +7,7 @@ import 'package:youthopia_2022_app/services/users.dart';
 import '../constants/color_theme.dart';
 import '../constants/gradient_color.dart';
 import '../services/supabase.dart';
+import 'about_us_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -191,6 +192,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: Align(
+                        alignment: FractionalOffset.bottomCenter,
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) => const AboutUsScreen()),
+                            );
+                          },
+                          child: GradientText(
+                            'About Us',
+                            style: TextStyle(
+                                color: ColourTheme.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24),
+                          ),
+                        ),
+                      ),
                     ),
                     Align(
                       alignment: Alignment.center,
