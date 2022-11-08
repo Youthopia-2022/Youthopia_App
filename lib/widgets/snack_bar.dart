@@ -121,3 +121,14 @@ var snackBarMinMembers = SnackBar(
     contentType: ContentType.failure,
   ),
 );
+
+var snackBarImageTooLarge = SnackBar(
+  elevation: 0,
+  behavior: SnackBarBehavior.floating,
+  backgroundColor: Colors.transparent,
+  content: AwesomeSnackbarContent(
+    title: 'Error !!',
+    message: 'Image should be less than 3 MB !',
+    contentType: ContentType.failure,
+  ),
+);

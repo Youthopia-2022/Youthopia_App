@@ -186,14 +186,11 @@
       }
 
       debugPrint(result['event_date'].toString());
-      TimeOfDay time = TimeOfDay(
-          hour: int.parse(result['event_time'].substring(0, 2)),
-          minute: int.parse(result['event_time'].substring(3, 5)));
       DateTime date = DateTime.utc(
           int.parse(result['event_date'].substring(0, 4)),
           int.parse(result['event_date'].substring(5, 7)),
           int.parse(result['event_date'].substring(8, 10)));
-      return LiveEvents(result['event_id'], result['event_name'], time, date,
+      return LiveEvents(result['event_id'], result['event_name'], result['event_time'], date,
           result['event_poster_url'], event!);
     }
 

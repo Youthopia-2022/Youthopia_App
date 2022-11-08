@@ -500,6 +500,20 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
 
           if (check.toString() == '[]') {
             if (!isDIT) {
+
+              int sizeInBytes = image!.lengthSync();
+              double sizeInMb = sizeInBytes/(1024 * 1024);
+              if(sizeInMb > 3) {
+                // ignore: use_build_context_synchronously
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(snackBarImageTooLarge)
+                    .toString();
+                setState(() {
+                  isProcessing = false;
+                });
+                return;
+              }
+
               await supabase.storage
                   .from('participant-identity-proof')
                   .uploadBinary(
