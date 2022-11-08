@@ -1,4 +1,4 @@
-package com.example.youthopia_2022_app
+package com.youthopia
 
 import io.flutter.embedding.android.FlutterActivity
 
