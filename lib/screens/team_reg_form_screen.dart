@@ -49,15 +49,13 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColourTheme.black,
+      backgroundColor: const Color(0xFF141414),
       appBar: AppBar(
         title: Text(
           'Registration Form',
-          style: TextStyle(
-            color: ColourTheme.white,
-          ),
+          style: TextStyle(color: ColourTheme.white, fontSize: 20),
         ),
-        backgroundColor: ColourTheme.black,
+        backgroundColor: const Color(0xFF232323),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -89,6 +87,9 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                     'Team Name',
                     style: TextStyle(fontSize: 24, color: ColourTheme.white),
                   ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.015,
+                  ),
                   TextFormField(
                     initialValue: teamName,
                     validator: (String? value) {
@@ -102,21 +103,24 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius: BorderRadius.circular(10)),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5))),
+                            borderRadius: BorderRadius.circular(10))),
                     style: const TextStyle(
                       fontSize: 20,
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.03,
                   ),
                   Text(
                     'Leader Name',
                     style: TextStyle(fontSize: 24, color: ColourTheme.white),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.015,
                   ),
                   TextFormField(
                     initialValue: leaderName,
@@ -134,11 +138,11 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius: BorderRadius.circular(10)),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5))),
+                            borderRadius: BorderRadius.circular(10))),
                     style: const TextStyle(
                       fontSize: 20,
                     ),
@@ -149,6 +153,9 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                   Text(
                     (isDIT) ? 'Leader Student ID' : 'Aadhaar card number',
                     style: TextStyle(fontSize: 24, color: ColourTheme.white),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.015,
                   ),
                   TextFormField(
                     onChanged: (String value) {
@@ -173,11 +180,11 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius: BorderRadius.circular(10)),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5))),
+                            borderRadius: BorderRadius.circular(10))),
                     style: const TextStyle(
                       fontSize: 20,
                     ),
@@ -315,12 +322,15 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                             ),
                           ],
                         )
-                      : const SizedBox(
-                          height: 30,
+                      : SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.02,
                         ),
                   Text(
                     'Leader Phone Number',
                     style: TextStyle(fontSize: 24, color: ColourTheme.white),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.015,
                   ),
                   TextFormField(
                     initialValue: leaderPhone,
@@ -338,17 +348,17 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius: BorderRadius.circular(10)),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5))),
+                            borderRadius: BorderRadius.circular(10))),
                     style: const TextStyle(
                       fontSize: 20,
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   const Align(
                     alignment: Alignment.center,
@@ -358,8 +368,8 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                           TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.015,
                   ),
                   SizedBox(
                     height: ((widget.event.eventMaxMembers - 1) * 125),
@@ -376,6 +386,10 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                                 labelText,
                                 style: TextStyle(
                                     fontSize: 24, color: ColourTheme.white),
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.015,
                               ),
                               TextFormField(
                                 validator: (String? value) {
@@ -396,19 +410,21 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                                         borderSide: BorderSide(
                                             width: 2,
                                             color: ColourTheme.lightGrey),
-                                        borderRadius: BorderRadius.circular(5)),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                             width: 2,
                                             color: ColourTheme.lightGrey),
                                         borderRadius:
-                                            BorderRadius.circular(5))),
+                                            BorderRadius.circular(10))),
                                 style: const TextStyle(
                                   fontSize: 20,
                                 ),
                               ),
-                              const SizedBox(
-                                height: 30,
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.015,
                               ),
                             ],
                           );
@@ -500,10 +516,9 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
 
           if (check.toString() == '[]') {
             if (!isDIT) {
-
               int sizeInBytes = image!.lengthSync();
-              double sizeInMb = sizeInBytes/(1024 * 1024);
-              if(sizeInMb > 3) {
+              double sizeInMb = sizeInBytes / (1024 * 1024);
+              if (sizeInMb > 3) {
                 // ignore: use_build_context_synchronously
                 ScaffoldMessenger.of(context)
                     .showSnackBar(snackBarImageTooLarge)
