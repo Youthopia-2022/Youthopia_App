@@ -65,7 +65,7 @@ class MainEvents {
 class LiveEvents {
   final String eventId;
   final String eventName;
-  final TimeOfDay eventTime;
+  final String eventTime;
   final DateTime eventDate;
   final String eventPosterUrl;
   Event event;
