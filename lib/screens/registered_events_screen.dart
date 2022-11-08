@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:youthopia_2022_app/constants/gradient_color.dart';
 import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
 import 'package:youthopia_2022_app/services/supabase.dart';
@@ -216,7 +217,44 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                           style: TextStyle(
                                               fontSize: 17,
                                               color: ColourTheme.lightGrey),
-                                        )
+                                        ),
+                                         Expanded(
+                                          child: Align(
+                                            alignment:
+                                                FractionalOffset.bottomLeft,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 30, left: 10),
+                                              child: GestureDetector(
+                                                onTap: () async {
+                                                  String orderId =
+                                                      await supa.getOrderId(
+                                                          UserProfile
+                                                              .currentUser!
+                                                              .userEmail,
+                                                          RegisteredEvent
+                                                              .registeredEvents[
+                                                                  index]
+                                                              .eventId,
+                                                          UserProfile
+                                                              .currentUser!
+                                                              .userName
+                                                      );
+                                                  debugPrint(orderId);
+                                                  String url = 'https://youthopia.dituniversity.co.in/#/ticket/$orderId';
+                                                  launchUrl(Uri.parse(url));
+                                                },
+                                                child: const GradientText(
+                                                  'See Ticket',
+                                                  style: TextStyle(
+                                                    fontFamily: 'IBM Plex Sans',
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
