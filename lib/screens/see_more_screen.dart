@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../constants/color_theme.dart';
 import 'home_screen.dart';
@@ -52,43 +51,51 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
               crossAxisCount: 2,
               childAspectRatio: 0.50,
               children: List.generate(totalItems, (index) {
-                return Container(
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF101010),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  padding: const EdgeInsets.all(5),
-                  margin: const EdgeInsets.all(10),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                              builder: (context) =>
-                                  Home(widget.events[index])));
-                    },
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => Home(widget.events[index]),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF101010),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    padding: const EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(10),
                     child: Column(
                       children: [
-                        Image(
-                          image:
-                              NetworkImage(widget.events[index].eventPosterUrl),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                widget.events[index].eventName,
-                                style: TextStyle(
-                                    color: ColourTheme.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
-                              ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image(
+                              image: NetworkImage(
+                                  widget.events[index].eventPosterUrl),
                             ),
-                          ],
+                          ),
                         ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.01,
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 12.0, left: 8, bottom: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  widget.events[index].eventName,
+                                  style: TextStyle(
+                                      color: ColourTheme.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Row(
                           children: [
@@ -108,7 +115,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                           ],
                         ),
                         const SizedBox(
-                          height: 5,
+                          height: 10,
                         ),
                         Row(
                           children: [
@@ -128,7 +135,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                           ],
                         ),
                         const SizedBox(
-                          height: 5,
+                          height: 10,
                         ),
                         Row(
                           children: [
