@@ -484,6 +484,9 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
 
     if (!isDIT && image == null) {
       ScaffoldMessenger.of(context).showSnackBar(snackBarImage).toString();
+      setState(() {
+        isProcessing = false;
+      });
     } else {
       if (_formKey.currentState!.validate()) {
         int memCount = 1;
@@ -513,6 +516,21 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
               .from('registrations')
               .select('order_id')
               .eq('order_id', orderId);
+          final dat = await supabase.from('registrations').select().match({
+            'participant_email': leaderEmail,
+            'participant_name': leaderName,
+            'event_id': eventId
+          });
+
+          if (dat.toString() != '[]') {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(snackBarAlreadyRegistered)
+                .toString();
+            setState(() {
+              isProcessing = false;
+            });
+            return;
+          }
 
           if (check.toString() == '[]') {
             if (!isDIT) {
