@@ -200,24 +200,24 @@ class _DITIndividualRegFormScreenState
                               child: Material(
                                 color: Colors.transparent,
                                 child: InkWell(
-                                    onTap: () async {
-                                      try {
-                                        final image = await ImagePicker()
-                                            .pickImage(
-                                                source: ImageSource.gallery);
-                                        if (image == null) return;
-                                        setState(() {
-                                          this.image = File(image.path);
-                                        });
-                                        bytes = await image.readAsBytes();
-                                      } on PlatformException {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBarPermission)
-                                            .toString();
-                                      }
-                                    },
-                                    child: const Center(
-                                        child: Padding(
+                                  onTap: () async {
+                                    try {
+                                      final image = await ImagePicker()
+                                          .pickImage(
+                                              source: ImageSource.gallery);
+                                      if (image == null) return;
+                                      setState(() {
+                                        this.image = File(image.path);
+                                      });
+                                      bytes = await image.readAsBytes();
+                                    } on PlatformException {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBarPermission)
+                                          .toString();
+                                    }
+                                  },
+                                  child: const Center(
+                                    child: Padding(
                                       padding:
                                           EdgeInsets.symmetric(vertical: 6),
                                       child: Text(
@@ -227,11 +227,24 @@ class _DITIndividualRegFormScreenState
                                             fontSize: 18,
                                             color: Colors.white),
                                       ),
-                                    ))),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 10,
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.09,
+                              child: const Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'OR',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontFamily: 'IBM Plex Sans',
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width,
@@ -249,24 +262,24 @@ class _DITIndividualRegFormScreenState
                               child: Material(
                                 color: Colors.transparent,
                                 child: InkWell(
-                                    onTap: () async {
-                                      try {
-                                        final image = await ImagePicker()
-                                            .pickImage(
-                                                source: ImageSource.camera);
-                                        if (image == null) return;
-                                        setState(() {
-                                          this.image = File(image.path);
-                                        });
-                                        bytes = await image.readAsBytes();
-                                      } on PlatformException {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBarPermission)
-                                            .toString();
-                                      }
-                                    },
-                                    child: const Center(
-                                        child: Padding(
+                                  onTap: () async {
+                                    try {
+                                      final image = await ImagePicker()
+                                          .pickImage(
+                                              source: ImageSource.camera);
+                                      if (image == null) return;
+                                      setState(() {
+                                        this.image = File(image.path);
+                                      });
+                                      bytes = await image.readAsBytes();
+                                    } on PlatformException {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBarPermission)
+                                          .toString();
+                                    }
+                                  },
+                                  child: const Center(
+                                    child: Padding(
                                       padding:
                                           EdgeInsets.symmetric(vertical: 6),
                                       child: Text(
@@ -276,7 +289,9 @@ class _DITIndividualRegFormScreenState
                                             fontSize: 18,
                                             color: Colors.white),
                                       ),
-                                    ))),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                             const SizedBox(
