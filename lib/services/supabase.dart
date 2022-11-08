@@ -35,8 +35,8 @@
       final String eventPosterUrl = Supabase.instance.client.storage
           .from('event-posters')
           .getPublicUrl(result['event_id']);
-      debugPrint(result['event_startTime']);
-      debugPrint(result['event_date']);
+    /*   debugPrint(result['event_startTime']);
+      debugPrint(result['event_date']); */
 
     return Event(
         result['event_id'],
@@ -185,7 +185,7 @@
         }
       }
 
-      debugPrint(result['event_date'].toString());
+      //debugPrint(result['event_date'].toString());
       DateTime date = DateTime.utc(
           int.parse(result['event_date'].substring(0, 4)),
           int.parse(result['event_date'].substring(5, 7)),
@@ -222,6 +222,14 @@
       } on PostgrestException catch (error) {
         debugPrint(error.toString());
       }
+    }
+        Future<String> getOrderId(String email, String eventId, String name) async {
+      final data = await supabase
+          .from('registrations')
+          .select('order_id')
+      .match({ 'event_id': eventId, 'participant_email': email , 'participant_name' : name});
+      debugPrint(data[0]['order_id'].toString());
+      return data[0]['order_id'];
     }
 
     Future<void> signOut() {
