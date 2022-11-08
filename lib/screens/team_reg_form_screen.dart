@@ -122,6 +122,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                   const SizedBox(height: 20,),
                   TextFormField(
                     initialValue: leaderName,
+                    enabled: false,
                     validator: (String? value) {
                       String name = value!.trim();
                       return (name.isEmpty ||
@@ -506,6 +507,20 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
               .select('order_id')
               .eq('order_id', orderId);
 
+          final dat = await supabase
+              .from('registrations')
+              .select()
+              .match({'participant_email': leaderEmail, 'participant_name': leaderName, 'event_id':eventId});
+
+          if(dat.toString() != '[]') {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(snackBarAlreadyRegistered)
+                .toString();
+            setState(() {
+              isProcessing = false;
+            });
+            return;
+          }
           if (check.toString() == '[]') {
             if (!isDIT) {
 

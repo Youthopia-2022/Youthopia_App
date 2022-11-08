@@ -77,6 +77,7 @@ class _DITIndividualRegFormScreenState
                   const SizedBox(height: 20,),
                   TextFormField(
                     initialValue: name,
+                    enabled: false,
                     validator: (String? value) {
                       String name = value!.trim();
                       return (name.isEmpty ||
@@ -377,6 +378,21 @@ class _DITIndividualRegFormScreenState
               .from('registrations')
               .select('order_id')
               .eq('order_id', orderId);
+          
+          final dat = await supabase
+              .from('registrations')
+              .select()
+          .match({'participant_email': email, 'participant_name': name, 'event_id' : eventId});
+
+          if(dat.toString() != '[]') {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(snackBarAlreadyRegistered)
+                .toString();
+            setState(() {
+              isProcessing = false;
+            });
+            return;
+          }
 
           if (check.toString() == '[]') {
             if (!isDIT) {
@@ -392,14 +408,15 @@ class _DITIndividualRegFormScreenState
                   isProcessing = false;
                 });
                 return;
+              } else {
+                await supabase.storage
+                    .from('participant-identity-proof')
+                    .uploadBinary(
+                  '$orderId.png',
+                  bytes,
+                  fileOptions: const FileOptions(contentType: 'image/png'),
+                ); 
               }
-              await supabase.storage
-                  .from('participant-identity-proof')
-                  .uploadBinary(
-                    '$orderId.png',
-                    bytes,
-                    fileOptions: const FileOptions(contentType: 'image/png'),
-                  );
             }
 
             await supabase.from('registrations').insert({
