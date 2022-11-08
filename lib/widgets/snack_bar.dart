@@ -62,7 +62,7 @@ var snackBarRegistrationSuccess = SnackBar(
   backgroundColor: Colors.transparent,
   content: AwesomeSnackbarContent(
     title: 'Success!',
-    message: 'Successfully registered!',
+    message: 'Successfully registered! You can now see your ticket in Events Tab',
     contentType: ContentType.success,
   ),
 );
