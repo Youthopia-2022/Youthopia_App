@@ -213,18 +213,19 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                         ),
                                         Text(
                                           eventVenue,
+                                          overflow: TextOverflow.ellipsis,
                                           //overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               fontSize: 17,
                                               color: ColourTheme.lightGrey),
                                         ),
-                                         Expanded(
+                                        Expanded(
                                           child: Align(
                                             alignment:
                                                 FractionalOffset.bottomLeft,
                                             child: Padding(
                                               padding: const EdgeInsets.only(
-                                                  bottom: 30, left: 10),
+                                                  bottom: 10, left: 10),
                                               child: GestureDetector(
                                                 onTap: () async {
                                                   String orderId =
@@ -238,10 +239,10 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                                               .eventId,
                                                           UserProfile
                                                               .currentUser!
-                                                              .userName
-                                                      );
+                                                              .userName);
                                                   debugPrint(orderId);
-                                                  String url = 'https://youthopia.dituniversity.co.in/#/ticket/$orderId';
+                                                  String url =
+                                                      'https://youthopia.dituniversity.co.in/#/ticket/$orderId';
                                                   launchUrl(Uri.parse(url));
                                                 },
                                                 child: const GradientText(
