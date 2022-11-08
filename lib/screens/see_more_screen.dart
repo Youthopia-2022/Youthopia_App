@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../constants/color_theme.dart';
 import 'home_screen.dart';
 
@@ -49,7 +49,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
               physics: const ScrollPhysics(),
               shrinkWrap: true,
               crossAxisCount: 2,
-              childAspectRatio: 0.50,
+              childAspectRatio: 0.45,
               children: List.generate(totalItems, (index) {
                 return GestureDetector(
                   onTap: () {
@@ -91,7 +91,7 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                                   style: TextStyle(
                                       color: ColourTheme.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 18),
+                                      fontSize: 16),
                                 ),
                               ),
                             ],

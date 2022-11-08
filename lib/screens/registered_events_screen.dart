@@ -5,7 +5,6 @@ import 'package:youthopia_2022_app/constants/gradient_color.dart';
 import 'package:youthopia_2022_app/screens/nav_bar_screen.dart';
 import 'package:youthopia_2022_app/services/supabase.dart';
 import 'package:youthopia_2022_app/services/users.dart';
-
 import '../constants/color_theme.dart';
 import '../services/events.dart';
 
@@ -160,7 +159,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.2,
+                              height: MediaQuery.of(context).size.height * 0.25,
                               color: const Color(0xFF1B1B1B),
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15),
@@ -216,13 +215,33 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                           style: TextStyle(
                                               fontSize: 17,
                                               color: ColourTheme.lightGrey),
-                                        )
+                                        ),
+                                        Expanded(
+                                          child: Align(
+                                            alignment: FractionalOffset.bottomLeft,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(bottom: 30, left: 10),
+                                              child: GestureDetector(
+                                                onTap: () {
+
+                                                },
+                                                child: const GradientText(
+                                                  'See Ticket',
+                                                  style: TextStyle(
+                                                    fontFamily: 'IBM Plex Sans',
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 8.0, bottom: 8),
+                                        top: 16.0, bottom: 8),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(15),
                                       child: SizedBox(

@@ -165,7 +165,7 @@ class _HomeState extends State<Home> {
               child: Row(
                 children: [
                   Icon(
-                    Icons.currency_rupee,
+                    Icons.payments,
                     color: ColourTheme.white,
                     size: 25,
                   ),
@@ -175,8 +175,8 @@ class _HomeState extends State<Home> {
                   Flexible(
                     child: Text(
                       (isDIT)
-                          ? widget.event.eventFeesDIT
-                          : widget.event.eventFeesOutsider,
+                          ? '₹${widget.event.eventFeesDIT}'
+                          : '₹${widget.event.eventFeesOutsider}',
                       style: TextStyle(color: ColourTheme.white, fontSize: 20),
                     ),
                   ),

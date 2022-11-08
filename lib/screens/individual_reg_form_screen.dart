@@ -74,6 +74,7 @@ class _DITIndividualRegFormScreenState
                     'Name',
                     style: TextStyle(fontSize: 24, color: ColourTheme.white),
                   ),
+                  const SizedBox(height: 20,),
                   TextFormField(
                     initialValue: name,
                     validator: (String? value) {
@@ -90,11 +91,11 @@ class _DITIndividualRegFormScreenState
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius: BorderRadius.circular(15)),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5))),
+                            borderRadius: BorderRadius.circular(15))),
                     style: const TextStyle(
                       fontSize: 20,
                     ),
@@ -106,6 +107,7 @@ class _DITIndividualRegFormScreenState
                     (isDIT) ? 'Student ID' : 'Aadhaar card number',
                     style: TextStyle(fontSize: 24, color: ColourTheme.white),
                   ),
+                  const SizedBox(height: 20,),
                   TextFormField(
                     onChanged: (String value) {
                       identity = value;
@@ -129,11 +131,11 @@ class _DITIndividualRegFormScreenState
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius: BorderRadius.circular(15)),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5))),
+                            borderRadius: BorderRadius.circular(15))),
                     style: const TextStyle(
                       fontSize: 20,
                     ),
@@ -151,7 +153,7 @@ class _DITIndividualRegFormScreenState
                                   fontSize: 24, color: ColourTheme.white),
                             ),
                             const SizedBox(
-                              height: 10,
+                              height: 20,
                             ),
                             (image != null)
                                 ? Column(
@@ -218,7 +220,7 @@ class _DITIndividualRegFormScreenState
                               ),
                             ),
                             const SizedBox(
-                              height: 10,
+                              height: 20,
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width,
@@ -278,6 +280,7 @@ class _DITIndividualRegFormScreenState
                     'Phone Number',
                     style: TextStyle(fontSize: 24, color: ColourTheme.white),
                   ),
+                  const SizedBox(height: 20,),
                   TextFormField(
                     initialValue: phone,
                     onChanged: (String value) {
@@ -294,11 +297,11 @@ class _DITIndividualRegFormScreenState
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius: BorderRadius.circular(15)),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5))),
+                            borderRadius: BorderRadius.circular(15))),
                     style: const TextStyle(
                       fontSize: 20,
                     ),
@@ -356,6 +359,9 @@ class _DITIndividualRegFormScreenState
     });
     if (!isDIT && image == null) {
       ScaffoldMessenger.of(context).showSnackBar(snackBarImage).toString();
+      setState(() {
+        isProcessing = false;
+      });
     } else {
       if (_formKey.currentState!.validate()) {
         debugPrint(identity);
