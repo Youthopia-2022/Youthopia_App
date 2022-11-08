@@ -356,6 +356,9 @@ class _DITIndividualRegFormScreenState
     });
     if (!isDIT && image == null) {
       ScaffoldMessenger.of(context).showSnackBar(snackBarImage).toString();
+      setState(() {
+        isProcessing = false;
+      });
     } else {
       if (_formKey.currentState!.validate()) {
         debugPrint(identity);
@@ -371,13 +374,27 @@ class _DITIndividualRegFormScreenState
               .from('registrations')
               .select('order_id')
               .eq('order_id', orderId);
+          final dat = await supabase.from('registrations').select().match({
+            'participant_email': email,
+            'participant_name': name,
+            'event_id': eventId
+          });
+
+          if (dat.toString() != '[]') {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(snackBarAlreadyRegistered)
+                .toString();
+            setState(() {
+              isProcessing = false;
+            });
+            return;
+          }
 
           if (check.toString() == '[]') {
             if (!isDIT) {
-
               int sizeInBytes = image!.lengthSync();
-              double sizeInMb = sizeInBytes/(1024 * 1024);
-              if(sizeInMb > 3) {
+              double sizeInMb = sizeInBytes / (1024 * 1024);
+              if (sizeInMb > 3) {
                 // ignore: use_build_context_synchronously
                 ScaffoldMessenger.of(context)
                     .showSnackBar(snackBarImageTooLarge)
@@ -386,14 +403,15 @@ class _DITIndividualRegFormScreenState
                   isProcessing = false;
                 });
                 return;
+              } else {
+                await supabase.storage
+                    .from('participant-identity-proof')
+                    .uploadBinary(
+                      '$orderId.png',
+                      bytes,
+                      fileOptions: const FileOptions(contentType: 'image/png'),
+                    );
               }
-              await supabase.storage
-                  .from('participant-identity-proof')
-                  .uploadBinary(
-                    '$orderId.png',
-                    bytes,
-                    fileOptions: const FileOptions(contentType: 'image/png'),
-                  );
             }
 
             await supabase.from('registrations').insert({
