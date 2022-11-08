@@ -37,6 +37,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
       (UserProfile.currentUser!.userCollege == 'DIT University') ? true : false;
   bool isProcessing = false;
   File? image;
+  // ignore: prefer_typing_uninitialized_variables
   late final bytes;
 
   @override
@@ -535,6 +536,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
           });
 
           if (dat.toString() != '[]') {
+            // ignore: use_build_context_synchronously
             ScaffoldMessenger.of(context)
                 .showSnackBar(snackBarAlreadyRegistered)
                 .toString();

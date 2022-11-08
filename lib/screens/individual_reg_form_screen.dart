@@ -34,6 +34,7 @@ class _DITIndividualRegFormScreenState
   String eventId = "";
   bool isProcessing = false;
   File? image;
+  // ignore: prefer_typing_uninitialized_variables
   late final bytes;
 
   @override
@@ -412,6 +413,7 @@ class _DITIndividualRegFormScreenState
           });
 
           if (dat.toString() != '[]') {
+            // ignore: use_build_context_synchronously
             ScaffoldMessenger.of(context)
                 .showSnackBar(snackBarAlreadyRegistered)
                 .toString();

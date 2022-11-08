@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:youthopia_2022_app/screens/login_screen.dart';
 import 'package:email_validator/email_validator.dart';
@@ -11,7 +10,6 @@ import 'package:youthopia_2022_app/services/supabase.dart';
 import 'package:youthopia_2022_app/widgets/snack_bar.dart';
 
 import '../constants/gradient_color.dart';
-import '../widgets/gradient_button.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp(

@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../constants/color_theme.dart';
 import '../screens/home_screen.dart';
 
 class Carousel extends StatefulWidget {
@@ -24,6 +23,7 @@ class Carousel extends StatefulWidget {
 }
 
 class _CarouselState extends State<Carousel> {
+  // ignore: unused_field
   int _current = 0;
   final CarouselController _controller = CarouselController();
 
@@ -125,8 +125,7 @@ class _CarouselState extends State<Carousel> {
                                               alignment:
                                                   PlaceholderAlignment.middle),
                                           TextSpan(
-                                            text:
-                                                '  ${item.eventTime}',
+                                            text: '  ${item.eventTime}',
                                           )
                                         ],
                                         style: const TextStyle(
