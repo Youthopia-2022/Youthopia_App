@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:youthopia_2022_app/constants/color_theme.dart';
 import 'package:youthopia_2022_app/screens/loading_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -29,19 +28,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(
-      builder: (BuildContext context, Orientation orientation, deviceType) {
-        return MaterialApp(
-          theme: ThemeData(
-            fontFamily: 'IBM Plex',
-            textTheme: TextTheme(
-              subtitle1: TextStyle(color: ColourTheme.white),
-            ),
-          ),
-          debugShowCheckedModeBanner: false,
-          home: const LoadingScreen(),
-        );
-      },
+    return MaterialApp(
+      theme: ThemeData(
+        fontFamily: 'IBM Plex',
+        textTheme: TextTheme(
+          subtitle1: TextStyle(color: ColourTheme.white),
+        ),
+      ),
+      debugShowCheckedModeBanner: false,
+      home: const LoadingScreen(),
     );
   }
 }
