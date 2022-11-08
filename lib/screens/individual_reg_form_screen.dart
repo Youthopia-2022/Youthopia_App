@@ -45,15 +45,16 @@ class _DITIndividualRegFormScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColourTheme.black,
+      backgroundColor: const Color(0xFF141414),
       appBar: AppBar(
         title: Text(
-          'Registration Form',
+          'Participation Details',
           style: TextStyle(
             color: ColourTheme.white,
+            fontSize: 20,
           ),
         ),
-        backgroundColor: ColourTheme.black,
+        backgroundColor: const Color(0xFF232323),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -70,11 +71,18 @@ class _DITIndividualRegFormScreenState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    'Name',
-                    style: TextStyle(fontSize: 24, color: ColourTheme.white),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Text(
+                      'Name',
+                      style: TextStyle(fontSize: 24, color: ColourTheme.white),
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.015,
                   ),
                   TextFormField(
+                    enabled: false,
                     initialValue: name,
                     validator: (String? value) {
                       String name = value!.trim();
@@ -90,21 +98,24 @@ class _DITIndividualRegFormScreenState
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius: BorderRadius.circular(10)),
                         enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                                 width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5))),
+                            borderRadius: BorderRadius.circular(10))),
                     style: const TextStyle(
                       fontSize: 20,
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.03,
                   ),
                   Text(
                     (isDIT) ? 'Student ID' : 'Aadhaar card number',
                     style: TextStyle(fontSize: 24, color: ColourTheme.white),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.015,
                   ),
                   TextFormField(
                     onChanged: (String value) {
@@ -127,13 +138,15 @@ class _DITIndividualRegFormScreenState
                     },
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5)),
+                          borderSide: BorderSide(
+                              width: 2, color: ColourTheme.lightGrey),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 2, color: ColourTheme.lightGrey),
-                            borderRadius: BorderRadius.circular(5))),
+                          borderSide: BorderSide(
+                              width: 2, color: ColourTheme.lightGrey),
+                          borderRadius: BorderRadius.circular(10),
+                        )),
                     style: const TextStyle(
                       fontSize: 20,
                     ),
@@ -142,8 +155,8 @@ class _DITIndividualRegFormScreenState
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            const SizedBox(
-                              height: 30,
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.03,
                             ),
                             Text(
                               'Upload Identity Proof',
@@ -271,12 +284,15 @@ class _DITIndividualRegFormScreenState
                             ),
                           ],
                         )
-                      : const SizedBox(
-                          height: 30,
+                      : SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.03,
                         ),
                   Text(
                     'Phone Number',
                     style: TextStyle(fontSize: 24, color: ColourTheme.white),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.015,
                   ),
                   TextFormField(
                     initialValue: phone,

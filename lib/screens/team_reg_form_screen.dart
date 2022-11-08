@@ -52,7 +52,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
       backgroundColor: const Color(0xFF141414),
       appBar: AppBar(
         title: Text(
-          'Registration Form',
+          'Participation Details',
           style: TextStyle(color: ColourTheme.white, fontSize: 20),
         ),
         backgroundColor: const Color(0xFF232323),
@@ -123,6 +123,7 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                     height: MediaQuery.of(context).size.height * 0.015,
                   ),
                   TextFormField(
+                    enabled: false,
                     initialValue: leaderName,
                     validator: (String? value) {
                       String name = value!.trim();
