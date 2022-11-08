@@ -269,8 +269,19 @@ class _DITTeamRegFormScreenState extends State<DITTeamRegFormScreen> {
                                     ))),
                               ),
                             ),
-                            const SizedBox(
-                              height: 10,
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.09,
+                              child: const Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  'OR',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontFamily: 'IBM Plex Sans',
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
                             ),
                             Container(
                               width: MediaQuery.of(context).size.width,
