@@ -151,7 +151,8 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                               flex: 1,
                               child: Text(
                                 widget.events[index].eventVenue,
-                                overflow: TextOverflow.ellipsis,  //fixes #119
+                                overflow: TextOverflow.ellipsis, //fixes #119
+                                maxLines: 2,
                                 style: TextStyle(
                                     color: ColourTheme.white, fontSize: 15),
                               ),

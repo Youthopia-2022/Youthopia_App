@@ -214,6 +214,7 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                         Text(
                                           eventVenue,
                                           overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
                                           //overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               fontSize: 17,
