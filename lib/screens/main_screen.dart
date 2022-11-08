@@ -62,10 +62,13 @@ class _MainScreenState extends State<MainScreen> {
             children: [
               (MainEvents.starNight != null)
                   ? const HomePageContainer()
-                  : Image(
-                      //height: MediaQuery.of(context).size.height * 0.3,
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      image: const AssetImage('assets/secret.png'),
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 4.0),
+                      child: Image(
+                        //height: MediaQuery.of(context).size.height * 0.3,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        image: const AssetImage('assets/secret.png'),
+                      ),
                     ),
               const SizedBox(
                 height: 10,
