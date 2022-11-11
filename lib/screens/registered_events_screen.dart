@@ -243,8 +243,12 @@ class _RegisteredEventsState extends State<RegisteredEvents> {
                                                               .userName);
                                                   debugPrint(orderId);
                                                   String url =
-                                                      'https://youthopia.dituniversity.co.in/#/ticket/$orderId';
-                                                  launchUrl(Uri.parse(url));
+                                                      'http://youthopia.dituniversity.co.in/#/ticket/$orderId';
+                                                  debugPrint(url);
+                                                  final uri = Uri.parse(url);
+                                                  if (await canLaunchUrl(uri)){
+                                                    await launchUrl(uri, mode: LaunchMode.externalApplication);
+                                                  }
                                                 },
                                                 child: const GradientText(
                                                   'See Ticket',

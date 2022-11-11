@@ -32,9 +32,9 @@
     }
 
     Event toEvent(Map<String, dynamic> result) {
-      final String eventPosterUrl = Supabase.instance.client.storage
-          .from('event-posters')
-          .getPublicUrl(result['event_id']);
+      // final String eventPosterUrl = Supabase.instance.client.storage
+      //     .from('event-posters')
+      //     .getPublicUrl(result['event_id']);
     /*   debugPrint(result['event_startTime']);
       debugPrint(result['event_date']); */
 
@@ -50,7 +50,7 @@
         result['event_isTeam'],
         result['event_min_members'],
         result['event_max_members'],
-        '$eventPosterUrl.webp');
+        result['event_image']);
   }
 
     Future<void> getEventData() async {
@@ -89,11 +89,8 @@
     }
 
   RegisteredEvent registered(result) {
-    final String eventPosterUrl = Supabase.instance.client.storage
-        .from('event-posters')
-        .getPublicUrl(result['event_id']);
     return RegisteredEvent(result['event_id'], result['event_name'],
-        result['event_venue'], result['event_startTime'], '$eventPosterUrl.webp');
+        result['event_venue'], result['event_startTime'], result['event_image']);
   }
 
     Future<void> getRegisteredEvents() async {
@@ -103,7 +100,7 @@
         final data = await supabase
             .from('events')
             .select(
-              'event_id, event_name, event_venue, event_startTime',
+              'event_id, event_name, event_venue, event_startTime, event_image',
             )
             .eq('event_id', regEvents[i]);
         if (!events.contains(data[0]['event_id'])) {
@@ -227,7 +224,8 @@
       final data = await supabase
           .from('registrations')
           .select('order_id')
-      .match({ 'event_id': eventId, 'participant_email': email , 'participant_name' : name});
+      .match({ 'event_id': eventId, 'participant_email': email});
+      debugPrint("orderId");
       debugPrint(data[0]['order_id'].toString());
       return data[0]['order_id'];
     }
