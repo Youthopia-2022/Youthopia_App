@@ -194,7 +194,6 @@
     Future<void> getLiveEvents() async {
       try {
         final data = await supabase.from('live-events').select();
-        debugPrint(data.toString());
         LiveEvents.liveEvents = data.map((e) => toLive(e)).toList();
       } on PostgrestException catch (error) {
         debugPrint(error.toString());
